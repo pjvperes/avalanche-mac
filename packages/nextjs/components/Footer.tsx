@@ -55,7 +55,12 @@ export const Footer = () => {
             </div>
             <span>·</span>
             <div className="text-center">
-              <a href="https://wa.me//5519997391955" target="_blank" rel="noreferrer" className="link">
+              <a
+                href="https://wa.me/5519997391955?text=Hi%2C%20Gustavo!%20I%20came%20from%20Starknet%20MAC%20and%20want%20to%20talk%20to%20you%20about%20your%20platform!"
+                target="_blank"
+                rel="noreferrer"
+                className="link"
+              >
                 Talk to us
               </a>
             </div>

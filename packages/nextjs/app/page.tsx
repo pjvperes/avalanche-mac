@@ -1,56 +1,49 @@
 import Link from "next/link";
 import type { NextPage } from "next";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/20/solid";
+import creatorsData from "~~/utils/creatorsData.json";
 
 const Home: NextPage = () => {
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center mb-8">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
+        <div className="flex flex-col px-5">
+          <h1 className="text-left mb-10">
+            <span className="block text-5xl font-semibold mb-6">Find the perfect creator to advertise</span>
+            <span className="block text-xl">Check out creators with the ideal profile for your company</span>
           </h1>
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
         </div>
 
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contract
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
+        <div className="bg-base-300 w-full mt-2 px-8 py-12 flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl">
+            {/* Map over creatorsData to display each creator's information */}
+            {creatorsData.map((creator, index) => (
+              <div
+                key={index}
+                className="flex flex-col bg-base-100 p-10 text-center items-center max-w-xs rounded-xl transition-transform duration-300 hover:scale-105"
+              >
+                <p className="font-bold text-xl mb-0">{creator.name}</p>
+                <Link
+                  className="text-blue-500 hover:text-blue-800 visited:text-purple-600 text-md mt-0 mb-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={creator.channelLink}
+                  passHref
+                >
+                  {creator.channelName}
+                </Link>
+                <p className="italic text-sm mt-0 mb-1">{creator.expertise}</p>
+                <p className="text-sm mb-1">${creator.ratePerThousandClicks} per 1000 clicks</p>
+                <div className="flex flex-row items-center gap-2 my-1">
+                  <StarIcon className="h-4 w-4" />
+                  <p className="text-sm m-0">{creator.stars} / 5.0</p>
+                </div>
+                <p className="text-sm text-gray-500">{creator.description}</p>
+                <button className="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full">
+                  Book
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
