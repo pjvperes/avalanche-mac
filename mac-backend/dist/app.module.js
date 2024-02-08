@@ -24,6 +24,7 @@ const creators_service_1 = require("./creators/creators.service");
 const announcers_service_1 = require("./announcers/announcers.service");
 const announcements_service_1 = require("./announcements/announcements.service");
 const clicks_module_1 = require("./clicks/clicks.module");
+const references_module_1 = require("./references/references.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -42,6 +43,7 @@ exports.AppModule = AppModule = __decorate([
             announcers_module_1.AnnouncersModule,
             announcements_module_1.AnnouncementsModule,
             clicks_module_1.LinksModule,
+            references_module_1.ReferencesModule,
         ],
         controllers: [
             app_controller_1.AppController,

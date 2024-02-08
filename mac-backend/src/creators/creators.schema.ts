@@ -27,6 +27,9 @@ export class Creator {
 
   @Prop({ required: true })
   email: string;
+
+  @Prop({ required: true, type: mongoose.Schema.Types.Decimal128 })
+  CPM: number;
 }
 
 export const CreatorSchema = SchemaFactory.createForClass(Creator);
