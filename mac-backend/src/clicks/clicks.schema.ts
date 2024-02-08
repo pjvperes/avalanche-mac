@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 
 @Schema()
-export class Link {
+export class Click {
   @Prop({ type: mongoose.Schema.Types.ObjectId, required: true, auto: true })
   _id: mongoose.Schema.Types.ObjectId;
 
@@ -14,5 +14,5 @@ export class Link {
   ip: string;
 }
 
-export const LinkSchema = SchemaFactory.createForClass(Link);
-export type LinkDocument = Link & Document;
+export const ClickSchema = SchemaFactory.createForClass(Click);
+export type ClickDocument = Click & Document;

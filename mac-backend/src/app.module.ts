@@ -17,7 +17,7 @@ import { AnnouncementsController } from './announcements/announcements.controlle
 import { CreatorsService } from './creators/creators.service';
 import { AnnouncersService } from './announcers/announcers.service';
 import { AnnouncementsService } from './announcements/announcements.service';
-import { LinksModule } from './links/links.module';
+import { LinksModule } from './clicks/clicks.module';
 
 @Module({
   imports: [
