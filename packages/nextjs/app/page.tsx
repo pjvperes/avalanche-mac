@@ -39,7 +39,7 @@ const Home: NextPage = () => {
                   <p className="text-sm m-0">{creator.stars} / 5.0</p>
                 </div>
                 <p className="text-sm text-gray-500">{creator.description}</p>
-                <button className="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full">
+                <button className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded-full">
                   Book
                 </button>
               </div>
