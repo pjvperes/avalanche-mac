@@ -17,6 +17,7 @@ import { AnnouncementsController } from './announcements/announcements.controlle
 import { CreatorsService } from './creators/creators.service';
 import { AnnouncersService } from './announcers/announcers.service';
 import { AnnouncementsService } from './announcements/announcements.service';
+import { LinksModule } from './links/links.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { AnnouncementsService } from './announcements/announcements.service';
     CreatorsModule,
     AnnouncersModule,
     AnnouncementsModule,
+    LinksModule,
   ],
   controllers: [
     AppController,
