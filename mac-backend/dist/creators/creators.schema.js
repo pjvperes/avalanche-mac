@@ -47,6 +47,10 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Creator.prototype, "email", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true, type: mongoose.Schema.Types.Decimal128 }),
+    __metadata("design:type", Number)
+], Creator.prototype, "CPM", void 0);
 exports.Creator = Creator = __decorate([
     (0, mongoose_1.Schema)()
 ], Creator);
