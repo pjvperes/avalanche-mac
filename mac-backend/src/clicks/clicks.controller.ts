@@ -26,7 +26,7 @@ export class ClicksController {
     return this.clicksService.findAll();
   }
 
-  @Get('/unpaid')
+  @Post('/unpaid')
   async hasAtLeastThousandUnpaidClicks(
     @Body() countClickRequestDto: CountClickRequestDto,
   ) {
