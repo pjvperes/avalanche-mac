@@ -30,6 +30,7 @@ export declare class Announcer {
     stars: number;
     link: string;
     email: string;
+    walletAddress: string;
 }
 export declare const AnnouncerSchema: mongoose.Schema<Announcer, mongoose.Model<Announcer, any, any, any, mongoose.Document<unknown, any, Announcer> & Announcer & Required<{
     _id: mongoose.Schema.Types.ObjectId;

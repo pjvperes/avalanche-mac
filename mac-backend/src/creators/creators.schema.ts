@@ -30,6 +30,9 @@ export class Creator {
 
   @Prop({ required: true, type: mongoose.Schema.Types.Decimal128 })
   CPM: number;
+
+  @Prop({ required: true })
+  walletAddress: string;
 }
 
 export const CreatorSchema = SchemaFactory.createForClass(Creator);

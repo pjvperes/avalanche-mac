@@ -20,6 +20,9 @@ export class Announcer {
 
   @Prop({ required: true })
   email: string;
+
+  @Prop({ required: true })
+  walletAddress: string;
 }
 
 export const AnnouncerSchema = SchemaFactory.createForClass(Announcer);

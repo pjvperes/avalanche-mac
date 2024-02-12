@@ -39,6 +39,10 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcer.prototype, "email", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Announcer.prototype, "walletAddress", void 0);
 exports.Announcer = Announcer = __decorate([
     (0, mongoose_1.Schema)()
 ], Announcer);
