@@ -25,6 +25,11 @@ export class ClicksController {
     return this.clicksService.findAll();
   }
 
+  @Get('unpaid')
+  async hasAtLeastThousandUnpaidClicks() {
+    return await this.clicksService.hasAtLeastThousandUnpaidClicks();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.clicksService.findOne(id);

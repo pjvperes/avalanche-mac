@@ -39,6 +39,16 @@ let ClicksService = class ClicksService {
     async remove(id) {
         return this.clickModel.findByIdAndDelete(id).exec();
     }
+    async hasAtLeastThousandUnpaidClicks() {
+        const count = await this.clickModel.countDocuments({ paid: false }).exec();
+        return {
+            hasAtLeastThousandUnpaidClicks: count >= 1000,
+            unpaidClicksCount: count,
+            message: count >= 1000
+                ? 'There are at least 1000 unpaid clicks'
+                : 'There are less than 1000 unpaid clicks',
+        };
+    }
 };
 exports.ClicksService = ClicksService;
 exports.ClicksService = ClicksService = __decorate([

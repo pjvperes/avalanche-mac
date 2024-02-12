@@ -26,6 +26,7 @@ import { Model } from 'mongoose';
 import { CreateLinkDto as CreateClickDto } from './dto/create-click.dto';
 import { UpdateLinkDto as UpdateClickDto } from './dto/update-click.dto';
 import { Click, ClickDocument } from './clicks.schema';
+import { UnpaidClicksResponseDto } from './dto/count-click.dto';
 export declare class ClicksService {
     private clickModel;
     constructor(clickModel: Model<ClickDocument>);
@@ -34,4 +35,5 @@ export declare class ClicksService {
     findOne(id: string): Promise<Click>;
     update(id: string, updateClickDto: UpdateClickDto): Promise<Click>;
     remove(id: string): Promise<Click>;
+    hasAtLeastThousandUnpaidClicks(): Promise<UnpaidClicksResponseDto>;
 }

@@ -28,6 +28,7 @@ export declare class Click {
     _id: mongoose.Schema.Types.ObjectId;
     link: string;
     ip: string;
+    paid: boolean;
 }
 export declare const ClickSchema: mongoose.Schema<Click, mongoose.Model<Click, any, any, any, Document<unknown, any, Click> & Click & Required<{
     _id: mongoose.Schema.Types.ObjectId;
