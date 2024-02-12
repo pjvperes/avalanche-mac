@@ -18,21 +18,25 @@ const clicks_service_1 = require("./clicks.service");
 const create_click_dto_1 = require("./dto/create-click.dto");
 const update_click_dto_1 = require("./dto/update-click.dto");
 const count_click_request_dto_1 = require("./dto/count-click-request-dto");
+const check_click_already_clicked_dto_1 = require("./dto/check-click-already-clicked-dto");
 let ClicksController = class ClicksController {
     constructor(clicksService) {
         this.clicksService = clicksService;
     }
-    create(createClickDto) {
-        return this.clicksService.create(createClickDto);
-    }
     findAll() {
         return this.clicksService.findAll();
     }
-    async hasAtLeastThousandUnpaidClicks(countClickRequestDto) {
-        return await this.clicksService.hasAtLeastThousandUnpaidClicks(countClickRequestDto.reference);
-    }
     findOne(id) {
         return this.clicksService.findOne(id);
+    }
+    create(createClickDto) {
+        return this.clicksService.create(createClickDto);
+    }
+    async ipAlreadyClicked(checkIpAlreadyClicked) {
+        return await this.clicksService.checkIfIpAlreadyClicked(checkIpAlreadyClicked.ip, checkIpAlreadyClicked.reference);
+    }
+    async hasAtLeastThousandUnpaidClicks(countClickRequestDto) {
+        return await this.clicksService.hasAtLeastThousandUnpaidClicks(countClickRequestDto.reference);
     }
     async markAllClicksAsPaid() {
         return await this.clicksService.markAllClicksAsPaid();
@@ -46,25 +50,11 @@ let ClicksController = class ClicksController {
 };
 exports.ClicksController = ClicksController;
 __decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_click_dto_1.CreateLinkDto]),
-    __metadata("design:returntype", void 0)
-], ClicksController.prototype, "create", null);
-__decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Post)('/unpaid'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [count_click_request_dto_1.CountClickRequestDto]),
-    __metadata("design:returntype", Promise)
-], ClicksController.prototype, "hasAtLeastThousandUnpaidClicks", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -72,6 +62,27 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_click_dto_1.CreateLinkDto]),
+    __metadata("design:returntype", void 0)
+], ClicksController.prototype, "create", null);
+__decorate([
+    (0, common_1.Post)('/ip-already-clicked'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [check_click_already_clicked_dto_1.CheckIpAlreadyClicked]),
+    __metadata("design:returntype", Promise)
+], ClicksController.prototype, "ipAlreadyClicked", null);
+__decorate([
+    (0, common_1.Post)('/unpaid'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [count_click_request_dto_1.CountClickRequestDto]),
+    __metadata("design:returntype", Promise)
+], ClicksController.prototype, "hasAtLeastThousandUnpaidClicks", null);
 __decorate([
     (0, common_1.Patch)('/reset-unpaid-count'),
     __metadata("design:type", Function),

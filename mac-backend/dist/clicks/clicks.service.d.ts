@@ -39,4 +39,5 @@ export declare class ClicksService {
     markAllClicksAsPaid(): Promise<{
         updatedCount: number;
     }>;
+    checkIfIpAlreadyClicked(ip: string, reference: string): Promise<boolean>;
 }

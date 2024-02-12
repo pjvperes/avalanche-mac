@@ -55,6 +55,12 @@ let ClicksService = class ClicksService {
         const result = await this.clickModel.updateMany({ paid: false }, { $set: { paid: true } });
         return { updatedCount: result.modifiedCount };
     }
+    async checkIfIpAlreadyClicked(ip, reference) {
+        const count = await this.clickModel
+            .countDocuments({ reference: reference, ip: ip })
+            .exec();
+        return count > 0;
+    }
 };
 exports.ClicksService = ClicksService;
 exports.ClicksService = ClicksService = __decorate([

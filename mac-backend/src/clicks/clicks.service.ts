@@ -59,4 +59,14 @@ export class ClicksService {
 
     return { updatedCount: result.modifiedCount };
   }
+
+  async checkIfIpAlreadyClicked(
+    ip: string,
+    reference: string,
+  ): Promise<boolean> {
+    const count = await this.clickModel
+      .countDocuments({ reference: reference, ip: ip })
+      .exec();
+    return count > 0;
+  }
 }

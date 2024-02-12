@@ -6,24 +6,39 @@ import {
   Patch,
   Param,
   Delete,
+  Ip,
 } from '@nestjs/common';
 import { ClicksService } from './clicks.service';
 import { CreateLinkDto as CreateClickDto } from './dto/create-click.dto';
 import { UpdateLinkDto as UpdateClickDto } from './dto/update-click.dto';
 import { CountClickRequestDto } from './dto/count-click-request-dto';
+import { CheckIpAlreadyClicked } from './dto/check-click-already-clicked-dto';
 
 @Controller('clicks')
 export class ClicksController {
   constructor(private readonly clicksService: ClicksService) {}
+
+  @Get()
+  findAll() {
+    return this.clicksService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.clicksService.findOne(id);
+  }
 
   @Post()
   create(@Body() createClickDto: CreateClickDto) {
     return this.clicksService.create(createClickDto);
   }
 
-  @Get()
-  findAll() {
-    return this.clicksService.findAll();
+  @Post('/ip-already-clicked')
+  async ipAlreadyClicked(@Body() checkIpAlreadyClicked: CheckIpAlreadyClicked) {
+    return await this.clicksService.checkIfIpAlreadyClicked(
+      checkIpAlreadyClicked.ip,
+      checkIpAlreadyClicked.reference,
+    );
   }
 
   @Post('/unpaid')
@@ -33,11 +48,6 @@ export class ClicksController {
     return await this.clicksService.hasAtLeastThousandUnpaidClicks(
       countClickRequestDto.reference,
     );
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.clicksService.findOne(id);
   }
 
   @Patch('/reset-unpaid-count')
