@@ -12,6 +12,9 @@ export class Click {
 
   @Prop({ required: true })
   ip: string;
+
+  @Prop({ default: false })
+  paid: boolean;
 }
 
 export const ClickSchema = SchemaFactory.createForClass(Click);
