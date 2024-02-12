@@ -56,7 +56,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)('/unpaid'),
+    (0, common_1.Post)('/unpaid'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [count_click_request_dto_1.CountClickRequestDto]),
