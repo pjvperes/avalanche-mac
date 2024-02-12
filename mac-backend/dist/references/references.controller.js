@@ -56,7 +56,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Post)('/getLinkByReference'),
+    (0, common_1.Post)('/get-link-by-reference'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [check_link_by_reference_dto_1.CheckLinkByReferenceDto]),

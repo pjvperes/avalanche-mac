@@ -26,7 +26,7 @@ export class ReferencesController {
     return this.referenceService.findAll();
   }
 
-  @Post('/getLinkByReference')
+  @Post('/get-link-by-reference')
   getLinkByReference(@Body() checkLinkByReferenceDto: CheckLinkByReferenceDto) {
     return this.referenceService.getLinkByReference(
       checkLinkByReferenceDto.reference,
