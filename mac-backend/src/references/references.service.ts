@@ -37,4 +37,13 @@ export class ReferencesService {
   async remove(id: string): Promise<Reference> {
     return this.referenceModel.findByIdAndDelete(id).exec();
   }
+
+  async getLinkByReference(reference: string): Promise<string> {
+    const result = await this.referenceModel
+      .findOne({ reference: reference })
+      .select('link')
+      .exec();
+
+    return result ? result.link : null;
+  }
 }

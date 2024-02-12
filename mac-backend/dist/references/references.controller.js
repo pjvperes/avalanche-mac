@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const references_service_1 = require("./references.service");
 const create_reference_dto_1 = require("./dto/create-reference.dto");
 const update_reference_dto_1 = require("./dto/update-reference.dto");
+const check_link_by_reference_dto_1 = require("./dto/check-link-by-reference.dto");
 let ReferencesController = class ReferencesController {
     constructor(referenceService) {
         this.referenceService = referenceService;
@@ -26,6 +27,9 @@ let ReferencesController = class ReferencesController {
     }
     findAll() {
         return this.referenceService.findAll();
+    }
+    getLinkByReference(checkLinkByReferenceDto) {
+        return this.referenceService.getLinkByReference(checkLinkByReferenceDto.reference);
     }
     findOne(id) {
         return this.referenceService.findOne(id);
@@ -51,6 +55,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Post)('/getLinkByReference'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [check_link_by_reference_dto_1.CheckLinkByReferenceDto]),
+    __metadata("design:returntype", void 0)
+], ReferencesController.prototype, "getLinkByReference", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

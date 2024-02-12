@@ -10,6 +10,7 @@ import {
 import { ReferencesService } from './references.service';
 import { CreateReferenceDto } from './dto/create-reference.dto';
 import { UpdateReferenceDto } from './dto/update-reference.dto';
+import { CheckLinkByReferenceDto } from './dto/check-link-by-reference.dto';
 
 @Controller('references')
 export class ReferencesController {
@@ -23,6 +24,13 @@ export class ReferencesController {
   @Get()
   findAll() {
     return this.referenceService.findAll();
+  }
+
+  @Post('/getLinkByReference')
+  getLinkByReference(@Body() checkLinkByReferenceDto: CheckLinkByReferenceDto) {
+    return this.referenceService.getLinkByReference(
+      checkLinkByReferenceDto.reference,
+    );
   }
 
   @Get(':id')

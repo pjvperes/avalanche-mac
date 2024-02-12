@@ -34,4 +34,5 @@ export declare class ReferencesService {
     findOne(id: string): Promise<Reference>;
     update(id: string, updateReferenceDto: UpdateReferenceDto): Promise<Reference>;
     remove(id: string): Promise<Reference>;
+    getLinkByReference(reference: string): Promise<string>;
 }

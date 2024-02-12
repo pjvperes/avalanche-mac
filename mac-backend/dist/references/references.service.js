@@ -39,6 +39,13 @@ let ReferencesService = class ReferencesService {
     async remove(id) {
         return this.referenceModel.findByIdAndDelete(id).exec();
     }
+    async getLinkByReference(reference) {
+        const result = await this.referenceModel
+            .findOne({ reference: reference })
+            .select('link')
+            .exec();
+        return result ? result.link : null;
+    }
 };
 exports.ReferencesService = ReferencesService;
 exports.ReferencesService = ReferencesService = __decorate([
