@@ -26,7 +26,7 @@ import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 export declare class Click {
     _id: mongoose.Schema.Types.ObjectId;
-    link: string;
+    reference: string;
     ip: string;
     paid: boolean;
 }

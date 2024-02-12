@@ -10,6 +10,7 @@ import {
 import { ClicksService } from './clicks.service';
 import { CreateLinkDto as CreateClickDto } from './dto/create-click.dto';
 import { UpdateLinkDto as UpdateClickDto } from './dto/update-click.dto';
+import { CountClickRequestDto } from './dto/count-click-request-dto';
 
 @Controller('clicks')
 export class ClicksController {
@@ -25,9 +26,13 @@ export class ClicksController {
     return this.clicksService.findAll();
   }
 
-  @Get('unpaid')
-  async hasAtLeastThousandUnpaidClicks() {
-    return await this.clicksService.hasAtLeastThousandUnpaidClicks();
+  @Get('/unpaid')
+  async hasAtLeastThousandUnpaidClicks(
+    @Body() countClickRequestDto: CountClickRequestDto,
+  ) {
+    return await this.clicksService.hasAtLeastThousandUnpaidClicks(
+      countClickRequestDto.reference,
+    );
   }
 
   @Get(':id')

@@ -8,7 +8,7 @@ export class Click {
   _id: mongoose.Schema.Types.ObjectId;
 
   @Prop({ required: true })
-  link: string;
+  reference: string;
 
   @Prop({ required: true })
   ip: string;

@@ -35,8 +35,12 @@ export class ClicksService {
     return this.clickModel.findByIdAndDelete(id).exec();
   }
 
-  async hasAtLeastThousandUnpaidClicks(): Promise<UnpaidClicksResponseDto> {
-    const count = await this.clickModel.countDocuments({ paid: false }).exec();
+  async hasAtLeastThousandUnpaidClicks(
+    reference: string,
+  ): Promise<UnpaidClicksResponseDto> {
+    const count = await this.clickModel
+      .countDocuments({ reference: reference, paid: false })
+      .exec();
     return {
       hasAtLeastThousandUnpaidClicks: count >= 1000,
       unpaidClicksCount: count,

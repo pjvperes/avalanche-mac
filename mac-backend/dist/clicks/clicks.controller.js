@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const clicks_service_1 = require("./clicks.service");
 const create_click_dto_1 = require("./dto/create-click.dto");
 const update_click_dto_1 = require("./dto/update-click.dto");
+const count_click_request_dto_1 = require("./dto/count-click-request-dto");
 let ClicksController = class ClicksController {
     constructor(clicksService) {
         this.clicksService = clicksService;
@@ -27,8 +28,8 @@ let ClicksController = class ClicksController {
     findAll() {
         return this.clicksService.findAll();
     }
-    async hasAtLeastThousandUnpaidClicks() {
-        return await this.clicksService.hasAtLeastThousandUnpaidClicks();
+    async hasAtLeastThousandUnpaidClicks(countClickRequestDto) {
+        return await this.clicksService.hasAtLeastThousandUnpaidClicks(countClickRequestDto.reference);
     }
     findOne(id) {
         return this.clicksService.findOne(id);
@@ -55,9 +56,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)('unpaid'),
+    (0, common_1.Get)('/unpaid'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [count_click_request_dto_1.CountClickRequestDto]),
     __metadata("design:returntype", Promise)
 ], ClicksController.prototype, "hasAtLeastThousandUnpaidClicks", null);
 __decorate([

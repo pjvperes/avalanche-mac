@@ -35,5 +35,5 @@ export declare class ClicksService {
     findOne(id: string): Promise<Click>;
     update(id: string, updateClickDto: UpdateClickDto): Promise<Click>;
     remove(id: string): Promise<Click>;
-    hasAtLeastThousandUnpaidClicks(): Promise<UnpaidClicksResponseDto>;
+    hasAtLeastThousandUnpaidClicks(reference: string): Promise<UnpaidClicksResponseDto>;
 }
