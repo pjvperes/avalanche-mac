@@ -51,6 +51,10 @@ let ClicksService = class ClicksService {
                 : 'There are less than 1000 unpaid clicks',
         };
     }
+    async markAllClicksAsPaid() {
+        const result = await this.clickModel.updateMany({ paid: false }, { $set: { paid: true } });
+        return { updatedCount: result.modifiedCount };
+    }
 };
 exports.ClicksService = ClicksService;
 exports.ClicksService = ClicksService = __decorate([

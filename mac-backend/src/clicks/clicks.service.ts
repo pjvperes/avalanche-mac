@@ -50,4 +50,13 @@ export class ClicksService {
           : 'There are less than 1000 unpaid clicks',
     };
   }
+
+  async markAllClicksAsPaid(): Promise<{ updatedCount: number }> {
+    const result = await this.clickModel.updateMany(
+      { paid: false },
+      { $set: { paid: true } },
+    );
+
+    return { updatedCount: result.modifiedCount };
+  }
 }

@@ -40,6 +40,11 @@ export class ClicksController {
     return this.clicksService.findOne(id);
   }
 
+  @Patch('/reset-unpaid-count')
+  async markAllClicksAsPaid() {
+    return await this.clicksService.markAllClicksAsPaid();
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateClickDto: UpdateClickDto) {
     return this.clicksService.update(id, updateClickDto);

@@ -9,6 +9,9 @@ export declare class ClicksController {
     findAll(): Promise<import("./clicks.schema").Click[]>;
     hasAtLeastThousandUnpaidClicks(countClickRequestDto: CountClickRequestDto): Promise<import("./dto/count-click.dto").UnpaidClicksResponseDto>;
     findOne(id: string): Promise<import("./clicks.schema").Click>;
+    markAllClicksAsPaid(): Promise<{
+        updatedCount: number;
+    }>;
     update(id: string, updateClickDto: UpdateClickDto): Promise<import("./clicks.schema").Click>;
     remove(id: string): Promise<import("./clicks.schema").Click>;
 }

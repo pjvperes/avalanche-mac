@@ -34,6 +34,9 @@ let ClicksController = class ClicksController {
     findOne(id) {
         return this.clicksService.findOne(id);
     }
+    async markAllClicksAsPaid() {
+        return await this.clicksService.markAllClicksAsPaid();
+    }
     update(id, updateClickDto) {
         return this.clicksService.update(id, updateClickDto);
     }
@@ -69,6 +72,12 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Patch)('/reset-unpaid-count'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ClicksController.prototype, "markAllClicksAsPaid", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
