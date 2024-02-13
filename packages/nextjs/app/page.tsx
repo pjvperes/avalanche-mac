@@ -13,10 +13,158 @@ const LoginPage: NextPage = () => {
 
   const router = useRouter();
 
-  // Handler for form submission
+  async function createNewCreator(email: string) {
+    const body = JSON.stringify({
+      name: "define", // Placeholder value
+      biography: "define", // Placeholder value
+      occupation: "define", // Placeholder value
+      targetAudience: "define", // Placeholder value
+      stars: 0, // Placeholder value or your default value
+      link: "define", // Placeholder value
+      email: email,
+      CPM: 0, // Placeholder value or your default value
+      walletAddress: "define", // Placeholder value
+    });
+
+    try {
+      const response = await fetch("https://mac-backend-six.vercel.app/creators", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+
+      const data = await response.json();
+      console.log("Response:", data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  async function checkCreator(email: string) {
+    try {
+      const response = await fetch("https://mac-backend-six.vercel.app/creators", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const creators = await response.json();
+      const filteredCreators = creators.filter((creator: { email: string }) => creator.email === email); //talvez tenha que resolver aqui
+
+      if (filteredCreators.length > 0) {
+        console.log("Creator found:", filteredCreators[0]);
+        return filteredCreators[0];
+      } else {
+        console.log("No creator found with that email.");
+        return []; // Return an empty array in case of an error
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      return []; // Return an empty array in case of an error
+    }
+  }
+
+  async function createNewAdvertiser(email: string) {
+    const body = JSON.stringify({
+      razaoSocial: "define", // Placeholder value
+      quantidadeAnunciosFeitos: 0, // Placeholder value or your default value
+      stars: 0, // Placeholder value or your default value
+      link: "define", // Placeholder value
+      email: email, // Placeholder value
+      walletAddress: "define", // Placeholder value
+    });
+
+    try {
+      const response = await fetch("https://mac-backend-six.vercel.app/announcers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+
+      const data = await response.json();
+      console.log("Response:", data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  async function checkAdvertiser(companyEmail: string) {
+    try {
+      const response = await fetch("https://mac-backend-six.vercel.app/announcers", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const advertisers = await response.json();
+      const filteredAdvertisers = advertisers.filter(
+        (advertiser: { email: string }) => advertiser.email === companyEmail, // talvez tenha erro aqui no tipo
+      );
+
+      if (filteredAdvertisers.length > 0) {
+        console.log("Advertiser found:", filteredAdvertisers[0]);
+        return filteredAdvertisers[0];
+      } else {
+        console.log("No advertiser found with that email.");
+        return [];
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      return [];
+    }
+  }
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    router.push("/");
+
+    try {
+      let userExists = false;
+
+      if (selectedType === "advertiser") {
+        const advertisers = await checkAdvertiser(email);
+        userExists = advertisers.length > 0;
+        if (!userExists) {
+          await createNewAdvertiser(email);
+          userExists = true; // Assuming the creation is always successful
+        }
+      } else if (selectedType === "creator") {
+        const creators = await checkCreator(email);
+        userExists = creators.length > 0;
+        if (!userExists) {
+          await createNewCreator(email);
+          userExists = true; // Assuming the creation is always successful
+        }
+      } else {
+        throw new Error("Invalid user type");
+      }
+
+      // Proceed with login if user exists or a new user has been created
+      if (userExists) {
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, type: selectedType }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Login request failed");
+        }
+
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        router.push("/home");
+      }
+    } catch (error) {
+      console.error("An error occurred during the login process: ", error);
+    }
   };
 
   return (
