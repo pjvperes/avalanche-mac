@@ -17,7 +17,7 @@ type HeaderMenuLink = {
 export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Home",
-    href: "/",
+    href: "/home",
     icon: <HomeIcon className="h-4 w-4" />,
   },
   {
@@ -31,8 +31,13 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <EnvelopeOpenIcon className="h-4 w-4" />,
   },
   {
-    label: "Profile",
+    label: "Creator Profile",
     href: "/creator-profile",
+    icon: <UserIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Advertiser Profile",
+    href: "/advertiser-profile",
     icon: <UserIcon className="h-4 w-4" />,
   },
 ];

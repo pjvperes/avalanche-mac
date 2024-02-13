@@ -42,7 +42,7 @@ const CreatorProfile: NextPage = () => {
 
         <div className="bg-base-300 w-full flex justify-center items-center pt-16 pb-20">
           <div
-            className="bg-base-100 py-10 px-10 text-center items-center rounded-xl mx-auto transition-transform duration-300 hover:scale-105"
+            className="bg-base-100 py-10 px-10 text-center items-center rounded-xl mx-auto shadow-lg transition-transform duration-300 hover:scale-105"
             style={{ width: "400px" }}
           >
             <div className="flex flex-grow justify-end">
@@ -142,7 +142,7 @@ const CreatorProfile: NextPage = () => {
             </div>
 
             <button
-              className="mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-10 rounded-full"
+              className="mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-10 shadow-md rounded-full"
               onClick={saveProfile}
             >
               Save Changes
