@@ -12,45 +12,73 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AnnouncementSchema = exports.Announcement = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose = require("mongoose");
+const swagger_1 = require("@nestjs/swagger");
 let Announcement = class Announcement {
 };
 exports.Announcement = Announcement;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Unique identifier',
+        example: '507f1f77bcf86cd799439011',
+    }),
     (0, mongoose_1.Prop)({ type: mongoose.Schema.Types.ObjectId, required: true, auto: true }),
     __metadata("design:type", mongoose.Schema.Types.ObjectId)
 ], Announcement.prototype, "_id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Description of the announcement',
+        example: 'New product launch',
+    }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcement.prototype, "descricao", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Unique token', example: '12345' }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcement.prototype, "token", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Cost per thousand impressions',
+        example: 20.5,
+        type: 'number',
+    }),
     (0, mongoose_1.Prop)({ required: true, type: mongoose.Schema.Types.Decimal128 }),
     __metadata("design:type", Number)
 ], Announcement.prototype, "CPM", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Advertiser', example: 'Advertiser Inc.' }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcement.prototype, "anunciante", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Content creator', example: 'Creator X' }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcement.prototype, "criadorConteudo", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Status of the announcement', example: 'Active' }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcement.prototype, "status", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Completion status', example: false }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Boolean)
 ], Announcement.prototype, "concluido", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Parameterized link',
+        example: 'https://example.com?ref=123',
+    }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcement.prototype, "linkParametrizado", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'StarkNet index', example: 'SN123456' }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Announcement.prototype, "starknetIndex", void 0);
 exports.Announcement = Announcement = __decorate([
     (0, mongoose_1.Schema)()
 ], Announcement);

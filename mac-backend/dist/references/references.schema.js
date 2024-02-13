@@ -12,18 +12,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReferenceSchema = exports.Reference = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose = require("mongoose");
+const swagger_1 = require("@nestjs/swagger");
 let Reference = class Reference {
 };
 exports.Reference = Reference;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Unique identifier',
+        example: '507f1f77bcf86cd799439011',
+    }),
     (0, mongoose_1.Prop)({ type: mongoose.Schema.Types.ObjectId, required: true, auto: true }),
     __metadata("design:type", mongoose.Schema.Types.ObjectId)
 ], Reference.prototype, "_id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Link associated with the reference',
+        example: 'https://example.com',
+    }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Reference.prototype, "link", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Reference identifier',
+        example: '/reference123',
+    }),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Reference.prototype, "reference", void 0);

@@ -14,11 +14,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClicksController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const clicks_service_1 = require("./clicks.service");
 const create_click_dto_1 = require("./dto/create-click.dto");
 const update_click_dto_1 = require("./dto/update-click.dto");
 const count_click_request_dto_1 = require("./dto/count-click-request-dto");
 const check_click_already_clicked_dto_1 = require("./dto/check-click-already-clicked-dto");
+const clicks_schema_1 = require("./clicks.schema");
 let ClicksController = class ClicksController {
     constructor(clicksService) {
         this.clicksService = clicksService;
@@ -50,12 +52,17 @@ let ClicksController = class ClicksController {
 };
 exports.ClicksController = ClicksController;
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Find all clicks' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Return all clicks.' }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "findAll", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Find a click by ID' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Return a single click.' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID of the click to find' }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -63,6 +70,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "findOne", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new click' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'The click has been created.' }),
+    (0, swagger_1.ApiBody)({ type: clicks_schema_1.Click, description: 'Data for creating a click' }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -70,6 +80,15 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "create", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Check if an IP has already clicked' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Returns whether the IP has already clicked.',
+    }),
+    (0, swagger_1.ApiBody)({
+        type: check_click_already_clicked_dto_1.CheckIpAlreadyClicked,
+        description: 'IP and reference to check',
+    }),
     (0, common_1.Post)('/ip-already-clicked'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -77,6 +96,17 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ClicksController.prototype, "ipAlreadyClicked", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Check if there are at least a thousand unpaid clicks',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Returns true if there are at least a thousand unpaid clicks.',
+    }),
+    (0, swagger_1.ApiBody)({
+        type: count_click_request_dto_1.CountClickRequestDto,
+        description: 'Reference to check for unpaid clicks',
+    }),
     (0, common_1.Post)('/unpaid'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -84,12 +114,18 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ClicksController.prototype, "hasAtLeastThousandUnpaidClicks", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Mark all clicks as paid' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Marks all clicks as paid.' }),
     (0, common_1.Patch)('/reset-unpaid-count'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ClicksController.prototype, "markAllClicksAsPaid", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Update a click' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'The click has been updated.' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID of the click to update' }),
+    (0, swagger_1.ApiBody)({ type: clicks_schema_1.Click, description: 'Data for updating a click' }),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -98,6 +134,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a click' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'The click has been deleted.' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID of the click to delete' }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -105,6 +144,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "remove", null);
 exports.ClicksController = ClicksController = __decorate([
+    (0, swagger_1.ApiTags)('clicks'),
     (0, common_1.Controller)('clicks'),
     __metadata("design:paramtypes", [clicks_service_1.ClicksService])
 ], ClicksController);

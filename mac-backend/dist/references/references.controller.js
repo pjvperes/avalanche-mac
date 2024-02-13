@@ -14,10 +14,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReferencesController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const references_service_1 = require("./references.service");
 const create_reference_dto_1 = require("./dto/create-reference.dto");
 const update_reference_dto_1 = require("./dto/update-reference.dto");
 const check_link_by_reference_dto_1 = require("./dto/check-link-by-reference.dto");
+const references_schema_1 = require("./references.schema");
 let ReferencesController = class ReferencesController {
     constructor(referenceService) {
         this.referenceService = referenceService;
@@ -43,6 +45,9 @@ let ReferencesController = class ReferencesController {
 };
 exports.ReferencesController = ReferencesController;
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Create Reference' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Reference created.' }),
+    (0, swagger_1.ApiBody)({ type: references_schema_1.Reference }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -50,12 +55,20 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "create", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Get All References' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'All references returned.' }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "findAll", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Get Link by Reference' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Link returned for given reference.',
+    }),
+    (0, swagger_1.ApiBody)({ type: check_link_by_reference_dto_1.CheckLinkByReferenceDto }),
     (0, common_1.Post)('/get-link-by-reference'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -63,6 +76,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "getLinkByReference", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Find Reference by ID' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Reference found.' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID of the reference' }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -70,6 +86,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "findOne", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Update Reference' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Reference updated.' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID of the reference to update' }),
+    (0, swagger_1.ApiBody)({ type: references_schema_1.Reference }),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -78,6 +98,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Delete Reference' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Reference deleted.' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID of the reference to delete' }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -85,6 +108,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "remove", null);
 exports.ReferencesController = ReferencesController = __decorate([
+    (0, swagger_1.ApiTags)('references'),
     (0, common_1.Controller)('references'),
     __metadata("design:paramtypes", [references_service_1.ReferencesService])
 ], ReferencesController);

@@ -26,20 +26,21 @@
 import { AnnouncersService } from './announcers.service';
 import { CreateAnnouncerDto } from './dto/create-announcer.dto';
 import { UpdateAnnouncerDto } from './dto/update-announcer.dto';
+import { Announcer } from './announcers.schema';
 export declare class AnnouncersController {
     private readonly announcersService;
     constructor(announcersService: AnnouncersService);
-    create(createAnnouncerDto: CreateAnnouncerDto): Promise<import("mongoose").Document<unknown, {}, import("./announcers.schema").AnnouncerDocument> & import("./announcers.schema").Announcer & import("mongoose").Document<any, any, any> & {
+    create(createAnnouncerDto: CreateAnnouncerDto): Promise<import("mongoose").Document<unknown, {}, import("./announcers.schema").AnnouncerDocument> & Announcer & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    findAll(): Promise<(import("mongoose").Document<unknown, {}, import("./announcers.schema").AnnouncerDocument> & import("./announcers.schema").Announcer & import("mongoose").Document<any, any, any> & {
+    findAll(): Promise<(import("mongoose").Document<unknown, {}, import("./announcers.schema").AnnouncerDocument> & Announcer & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
-    findOne(id: string): Promise<import("mongoose").Document<unknown, {}, import("./announcers.schema").AnnouncerDocument> & import("./announcers.schema").Announcer & import("mongoose").Document<any, any, any> & {
+    findOne(id: string): Promise<import("mongoose").Document<unknown, {}, import("./announcers.schema").AnnouncerDocument> & Announcer & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    update(id: string, updateAnnouncerDto: UpdateAnnouncerDto): Promise<import("./announcers.schema").Announcer>;
-    remove(id: string): Promise<import("mongoose").Document<unknown, {}, import("./announcers.schema").AnnouncerDocument> & import("./announcers.schema").Announcer & import("mongoose").Document<any, any, any> & {
+    update(id: string, updateAnnouncerDto: UpdateAnnouncerDto): Promise<Announcer>;
+    remove(id: string): Promise<import("mongoose").Document<unknown, {}, import("./announcers.schema").AnnouncerDocument> & Announcer & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
 }
