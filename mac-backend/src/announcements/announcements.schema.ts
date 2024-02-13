@@ -29,6 +29,9 @@ export class Announcement {
 
   @Prop({ required: true })
   linkParametrizado: string;
+
+  @Prop({ required: true })
+  starknetIndex: string;
 }
 
 export const AnnouncementSchema = SchemaFactory.createForClass(Announcement);
