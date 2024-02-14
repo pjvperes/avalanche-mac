@@ -4,12 +4,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { NextPage } from "next";
 import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
+import { useUser } from "~~/context/globalState";
 
 const LoginPage: NextPage = () => {
   // State to store email and password input
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [selectedType, setSelectedType] = useState("none");
+  const { setUser } = useUser();
 
   const router = useRouter();
 
@@ -36,7 +38,7 @@ const LoginPage: NextPage = () => {
       });
 
       const data = await response.json();
-      console.log("Response:", data);
+      console.log("Creator created:", data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -59,7 +61,8 @@ const LoginPage: NextPage = () => {
         return filteredCreators[0];
       } else {
         console.log("No creator found with that email.");
-        return []; // Return an empty array in case of an error
+        createNewCreator(email);
+        return [];
       }
     } catch (error) {
       console.error("Error:", error);
@@ -74,7 +77,7 @@ const LoginPage: NextPage = () => {
       stars: 0, // Placeholder value or your default value
       link: "define", // Placeholder value
       email: email, // Placeholder value
-      walletAddress: "define", // Placeholder value
+      walletAddress: "0xTeste", // Placeholder value
     });
 
     try {
@@ -87,7 +90,8 @@ const LoginPage: NextPage = () => {
       });
 
       const data = await response.json();
-      console.log("Response:", data);
+      console.log("Advertiser created:", data);
+      return data;
     } catch (error) {
       console.error("Error:", error);
     }
@@ -104,7 +108,7 @@ const LoginPage: NextPage = () => {
 
       const advertisers = await response.json();
       const filteredAdvertisers = advertisers.filter(
-        (advertiser: { email: string }) => advertiser.email === companyEmail, // talvez tenha erro aqui no tipo
+        (advertiser: { email: string }) => advertiser.email === companyEmail,
       );
 
       if (filteredAdvertisers.length > 0) {
@@ -112,7 +116,9 @@ const LoginPage: NextPage = () => {
         return filteredAdvertisers[0];
       } else {
         console.log("No advertiser found with that email.");
-        return [];
+        const newAdvertiser = createNewAdvertiser(companyEmail);
+        console.log("New Advertiser:", newAdvertiser);
+        return newAdvertiser;
       }
     } catch (error) {
       console.error("Error:", error);
@@ -124,44 +130,37 @@ const LoginPage: NextPage = () => {
     event.preventDefault();
 
     try {
-      let userExists = false;
+      let foundUser;
 
       if (selectedType === "advertiser") {
-        const advertisers = await checkAdvertiser(email);
-        userExists = advertisers.length > 0;
-        if (!userExists) {
-          await createNewAdvertiser(email);
-          userExists = true; // Assuming the creation is always successful
-        }
+        foundUser = await checkAdvertiser(email);
       } else if (selectedType === "creator") {
-        const creators = await checkCreator(email);
-        userExists = creators.length > 0;
-        if (!userExists) {
-          await createNewCreator(email);
-          userExists = true; // Assuming the creation is always successful
-        }
+        foundUser = await checkCreator(email);
       } else {
         throw new Error("Invalid user type");
       }
 
-      // Proceed with login if user exists or a new user has been created
-      if (userExists) {
-        const response = await fetch("/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, type: selectedType }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Login request failed");
-        }
-
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
-        router.push("/home");
+      if (foundUser) {
+        setUser({ id: foundUser._id, type: selectedType, email: foundUser.email }); // Update global user state
+        console.log("User id:", foundUser._id);
       }
+
+      // Proceed with login if user exists or a new user has been created
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, type: selectedType }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Login request failed");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      router.push("/home");
     } catch (error) {
       console.error("An error occurred during the login process: ", error);
     }

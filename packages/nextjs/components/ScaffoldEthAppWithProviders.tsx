@@ -8,6 +8,7 @@ import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { ProgressBar } from "~~/components/scaffold-eth/ProgressBar";
+import { UserProvider } from "~~/context/globalState";
 import { useNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
 import { useDarkMode } from "~~/hooks/scaffold-eth/useDarkMode";
 import { useGlobalState } from "~~/services/store/store";
@@ -47,7 +48,9 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
         avatar={BlockieAvatar}
         theme={isDarkMode ? darkTheme() : lightTheme()}
       >
-        <ScaffoldEthApp>{children}</ScaffoldEthApp>
+        <UserProvider>
+          <ScaffoldEthApp>{children}</ScaffoldEthApp>
+        </UserProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
