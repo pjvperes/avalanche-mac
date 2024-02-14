@@ -39,6 +39,7 @@ const LoginPage: NextPage = () => {
 
       const data = await response.json();
       console.log("Creator created:", data);
+      return data;
     } catch (error) {
       console.error("Error:", error);
     }
@@ -54,15 +55,16 @@ const LoginPage: NextPage = () => {
       });
 
       const creators = await response.json();
-      const filteredCreators = creators.filter((creator: { email: string }) => creator.email === email); //talvez tenha que resolver aqui
+      const filteredCreators = creators.filter((creator: { email: string }) => creator.email === email);
 
       if (filteredCreators.length > 0) {
         console.log("Creator found:", filteredCreators[0]);
         return filteredCreators[0];
       } else {
         console.log("No creator found with that email.");
-        createNewCreator(email);
-        return [];
+        const newCreator = createNewCreator(email);
+        console.log("New Creator:", newCreator);
+        return newCreator;
       }
     } catch (error) {
       console.error("Error:", error);
