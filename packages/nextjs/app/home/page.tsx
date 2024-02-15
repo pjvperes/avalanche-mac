@@ -131,7 +131,7 @@ const Home: NextPage = () => {
             {creators.map((creator, index) => (
               <div key={creator._id}>
                 <div
-                  className="flex flex-col bg-base-100 px-10 pt-4 pb-10 h-[400px] text-center items-center max-w-xs rounded-xl shadow-lg transition-transform duration-300"
+                  className="flex flex-col bg-base-100 px-10 pt-4 pb-10 min-h-[400px] text-center items-center max-w-xs rounded-xl shadow-lg transition-transform duration-300"
                   onMouseOver={e => (e.currentTarget.style.transform = "scale(1.03)")}
                   onMouseOut={e => (e.currentTarget.style.transform = "scale(1)")}
                 >
@@ -152,7 +152,7 @@ const Home: NextPage = () => {
                     <StarIcon className="h-4 w-4" />
                     <p className="text-sm m-0"> {parseFloat(creator.stars.$numberDecimal).toFixed(1)} / 5.0</p>
                   </div>
-                  <p className="text-sm text-gray-500 my-0 overflow-y-auto max-h-[7em] line-clamp-5">
+                  <p className="text-sm mb-4 text-gray-500 my-0 overflow-y-auto max-h-[7em] line-clamp-5">
                     {creator.biography}
                   </p>
                   {user && user.type === "advertiser" && (
