@@ -158,11 +158,15 @@ const AdvertiserProfile: NextPage = () => {
                 {isEditable ? (
                   <input
                     className="font-bold flex-grow text-3xl mb-0 text-center w-full py-2"
+                    placeholder="Insert your company name"
                     value={editable.razaoSocial}
                     onChange={e => handleChange(e, "razaoSocial")}
                   />
                 ) : (
-                  <div className="font-bold text-3xl mb-0 text-center w-full py-2">{editable.razaoSocial}</div>
+                  <div className="font-bold text-3xl mb-0 text-center w-full py-2">
+                    {" "}
+                    {editable.razaoSocial || "Insert your company name"}
+                  </div>
                 )}
               </div>
 
@@ -170,11 +174,12 @@ const AdvertiserProfile: NextPage = () => {
                 {isEditable ? (
                   <input
                     className="text-center text-lg w-full break-words"
+                    placeholder="Insert your company email"
                     value={editable.email}
                     onChange={e => handleChange(e, "email")}
                   />
                 ) : (
-                  <div className="text-lg w-full break-words">{editable.email}</div>
+                  <div className="text-lg w-full break-words"> {editable.email || "Insert your company email"}</div>
                 )}
               </div>
 
@@ -182,11 +187,15 @@ const AdvertiserProfile: NextPage = () => {
                 {isEditable ? (
                   <input
                     className="text-blue-500 hover:text-blue-800 text-center text-lg w-full break-words"
+                    placeholder="Insert your company link"
                     value={editable.link}
                     onChange={e => handleChange(e, "link")}
                   />
                 ) : (
-                  <div className="text-blue-500 hover:text-blue-800 text-lg w-full break-words">{editable.link}</div>
+                  <div className="text-blue-500 hover:text-blue-800 text-lg w-full break-words">
+                    {" "}
+                    {editable.link || "Insert your company link"}
+                  </div>
                 )}
               </div>
 
@@ -205,11 +214,14 @@ const AdvertiserProfile: NextPage = () => {
                 {isEditable ? (
                   <input
                     className="text-center text-md w-full break-words"
+                    placeholder="Insert your company wallet address"
                     value={editable.walletAddress}
                     onChange={e => handleChange(e, "walletAddress")}
                   />
                 ) : (
-                  <div className="text-md w-full break-words">Wallet Address: {editable.walletAddress}</div>
+                  <div className="text-md w-full break-words">
+                    Wallet Address: {editable.walletAddress || "Insert your company wallet address"}
+                  </div>
                 )}
               </div>
 

@@ -151,11 +151,14 @@ const CreatorProfile: NextPage = () => {
                 {isEditable ? (
                   <input
                     className="font-bold text-3xl mb-0 text-center w-full py-2"
+                    placeholder="Insert your name"
                     value={editable.name}
                     onChange={e => handleChange(e, "name")}
                   />
                 ) : (
-                  <div className="font-bold text-3xl mb-0 text-center w-full py-2">{editable.name}</div>
+                  <div className="font-bold text-3xl mb-0 text-center w-full py-2">
+                    {editable.name || "Insert your name"}
+                  </div>
                 )}
               </div>
 
@@ -163,11 +166,12 @@ const CreatorProfile: NextPage = () => {
                 {isEditable ? (
                   <input
                     className="text-center text-lg w-full break-words"
+                    placeholder="Insert your e-mail"
                     value={editable.email}
                     onChange={e => handleChange(e, "email")}
                   />
                 ) : (
-                  <div className="text-lg w-full break-words">{editable.email}</div>
+                  <div className="text-lg w-full break-words">{editable.email || "Insert your e-mail"}</div>
                 )}
               </div>
 
@@ -175,11 +179,14 @@ const CreatorProfile: NextPage = () => {
                 {isEditable ? (
                   <input
                     className="flex text-lg w-full flex-grow text-center"
+                    placeholder="Insert your channel name"
                     value={editable.occupation}
                     onChange={e => handleChange(e, "occupation")}
                   />
                 ) : (
-                  <div className="flex flex-grow text-lg w-full justify-center">{editable.occupation}</div>
+                  <div className="flex flex-grow text-lg w-full justify-center">
+                    {editable.occupation || "Insert your channel name"}
+                  </div>
                 )}
               </div>
 
@@ -188,11 +195,14 @@ const CreatorProfile: NextPage = () => {
                   {isEditable ? (
                     <input
                       className="text-blue-500 hover:text-blue-800 text-lg w-full break-words"
+                      placeholder="Insert your channel link"
                       value={editable.link}
                       onChange={e => handleChange(e, "link")}
                     />
                   ) : (
-                    <div className="text-blue-500 hover:text-blue-800 text-lg w-full break-words">{editable.link}</div>
+                    <div className="text-blue-500 hover:text-blue-800 text-lg w-full break-words">
+                      {editable.link || "Insert your channel link"}
+                    </div>
                   )}
                 </div>
               </div>
@@ -201,11 +211,14 @@ const CreatorProfile: NextPage = () => {
                 {isEditable ? (
                   <input
                     className="italic text-md w-full"
+                    placeholder="Insert your target audience"
                     value={editable.targetAudience}
                     onChange={e => handleChange(e, "targetAudience")}
                   />
                 ) : (
-                  <div className="italic text-md w-full">{editable.targetAudience}</div>
+                  <div className="italic text-md w-full">
+                    {editable.targetAudience || "Insert your target audience"}
+                  </div>
                 )}
               </div>
 
@@ -215,12 +228,15 @@ const CreatorProfile: NextPage = () => {
                     {isEditable ? (
                       <input
                         style={{ width: "40px" }} // Set the width as needed
+                        placeholder="Insert the cost per mille clicks"
                         className="text-md text-center"
                         value={editable.CPM}
                         onChange={e => handleChange(e, "CPM")}
                       />
                     ) : (
-                      <div className="text-md flex-grow text-center py-2 mr-2">{editable.CPM}</div>
+                      <div className="text-md flex-grow text-center py-2 mr-2">
+                        {editable.CPM || "Insert your name"}
+                      </div>
                     )}
                     <span className="text-gray-500 text-md ml-0 whitespace-nowrap">USD per 1,000 clicks</span>
                   </div>
@@ -236,12 +252,15 @@ const CreatorProfile: NextPage = () => {
                 {isEditable ? (
                   <textarea
                     className="text-md text-gray-500 text-center p-2 w-full"
+                    placeholder="Insert a short biography about yourself"
                     value={editable.biography}
                     rows={3}
                     onChange={e => handleChange(e, "biography")}
                   />
                 ) : (
-                  <div className="text-md text-gray-500 text-center p-2 w-full">{editable.biography}</div>
+                  <div className="text-md text-gray-500 text-center p-2 w-full">
+                    {editable.biography || "Insert your name"}
+                  </div>
                 )}
               </div>
 
