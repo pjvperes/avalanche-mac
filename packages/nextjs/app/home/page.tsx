@@ -73,8 +73,6 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    console.log("User type:", user?.type); // Check the user type
-
     // Function to fetch creators from the backend
     const fetchCreators = async () => {
       try {
