@@ -28,7 +28,6 @@ interface Creator {
   email: string;
   CPM: string | number;
   walletAddress: string;
-  // Add other properties as needed
 }
 
 const ProposalsMade: NextPage = () => {
@@ -192,7 +191,6 @@ const ProposalsMade: NextPage = () => {
                 >
                   <div className="grid md:grid-cols-2 gap-2 w-full">
                     <div className="flex flex-col items-center md:items-start gap-1 break-words w-full">
-                      {/* CORRIGIR PARA APARECER O NOME DO CRIADOR (vai ter que usar GET na API) */}
                       <div className="font-bold text-2xl text-left">{campaign.criadorConteudo}</div>
 
                       <div className="text-left items-center md:items-start">
