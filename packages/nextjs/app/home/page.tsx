@@ -119,6 +119,7 @@ const Home: NextPage = () => {
     }
   }
 
+  // BIRI: Insirer fazer proposta para criador de conteudo aqui
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, creator: Creator) => {
     e.preventDefault();
     const anunciante = user.email; // Assuming the user's email is the advertiser's name

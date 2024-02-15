@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { ConnectWallet } from "./ConnectWallet";
 import {
   ArrowLeftOnRectangleIcon,
   Bars3Icon,
@@ -157,7 +158,9 @@ export const Header = () => {
           {logoutLink.icon}
           <span>{logoutLink.label}</span>
         </button>
-        <RainbowKitCustomConnectButton />
+        {/* BIRI: Connect Wallet button */}
+        <ConnectWallet />
+        {/* <RainbowKitCustomConnectButton /> */}
         <FaucetButton />
       </div>
     </div>

@@ -120,6 +120,7 @@ const ProposalsMade: NextPage = () => {
     }
   }
 
+  // BIRI: Colocar a lógica de finishPartnership aqui
   const handleCancelProposal = async (campaignId: string) => {
     try {
       // Send a PATCH request to update the campaign
