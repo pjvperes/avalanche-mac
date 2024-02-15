@@ -250,126 +250,129 @@ const ProposalsReceived: NextPage = () => {
           ) : error ? (
             <p>Error: {error}</p>
           ) : (
-            campaigns.map((campaign, index) => (
-              <div
-                key={index}
-                className="bg-base-100 py-6 px-6 mx-6 my-2 items-center flex flex-col rounded-xl shadow-lg transition-transform duration-300 w-full max-w-4xl"
-                onMouseOver={e => (e.currentTarget.style.transform = "scale(1.03)")}
-                onMouseOut={e => (e.currentTarget.style.transform = "scale(1)")}
-              >
-                <div className="grid md:grid-cols-2 gap-2 w-full">
-                  <div className="flex flex-col items-center md:items-start gap-1 break-words">
-                    <div className="font-bold text-2xl text-left">{campaign.anunciante}</div>
+            campaigns
+              .slice()
+              .reverse()
+              .map((campaign, index) => (
+                <div
+                  key={index}
+                  className="bg-base-100 py-6 px-6 mx-6 my-2 items-center flex flex-col rounded-xl shadow-lg transition-transform duration-300 w-full max-w-4xl"
+                  onMouseOver={e => (e.currentTarget.style.transform = "scale(1.03)")}
+                  onMouseOut={e => (e.currentTarget.style.transform = "scale(1)")}
+                >
+                  <div className="grid md:grid-cols-2 gap-2 w-full">
+                    <div className="flex flex-col items-center md:items-start gap-1 break-words">
+                      <div className="font-bold text-2xl text-left">{campaign.anunciante}</div>
 
-                    <div className="text-left items-center md:items-start">
-                      <button
-                        className="text-blue-500 hover:text-blue-800"
-                        onClick={() => handleMoreInfoClick(campaign.anunciante)}
-                      >
-                        {expandedProposals[campaign.anunciante] ? "Less Info" : "More Info"}
-                      </button>
-                      {expandedProposals[campaign.anunciante] && advertiserDetails[campaign.anunciante] && (
-                        <div className="mt-2">
-                          {/* Adjust margin-top as needed for less gap */}
-                          <p className="font-bold my-1">
-                            Name:{" "}
-                            <span className="font-normal">{advertiserDetails[campaign.anunciante].razaoSocial}</span>
-                          </p>
-                          <p className="font-bold my-1">
-                            Email: <span className="font-normal">{advertiserDetails[campaign.anunciante].email}</span>
-                          </p>
-                          <p className="font-bold my-1">
-                            Company Link:{" "}
-                            <span className="font-normal">
-                              <Link
-                                href={advertiserDetails[campaign.anunciante].link}
-                                className="text-blue-500 hover:text-blue-800"
-                              >
-                                {advertiserDetails[campaign.anunciante].link}
-                              </Link>
-                            </span>
-                          </p>
-                          <p className="font-bold my-1">
-                            Deals Made:{" "}
-                            <span className="font-normal">
-                              {advertiserDetails[campaign.anunciante].quantidadeAnunciosFeitos}
-                            </span>
-                          </p>
-                          <p className="flex flex-row items-center gap-2 font-bold my-1">
-                            Stars: <StarIcon className="w-4 h-4" />
-                            <span className="font-normal">{advertiserDetails[campaign.anunciante].stars} / 5.0</span>
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-center md:items-end gap-3 mt-4 md:mt-0">
-                    <div className="text-md font-semibold bg-base-300 py-1 px-3 rounded-sm">
-                      {campaign.CPM} {campaign.token} / 1,000 clicks
-                    </div>
-
-                    <div className="text-md font-normal mt-1">
-                      {clickCounts[campaign._id] === "loading" ? (
-                        <span>Loading...</span>
-                      ) : typeof clickCounts[campaign._id] === "number" ? (
-                        <>
-                          <span className="font-bold">{clickCounts[campaign._id]}</span>
-                          <span className="font-normal"> clicks so far</span>
-                        </>
-                      ) : (
+                      <div className="text-left items-center md:items-start">
                         <button
                           className="text-blue-500 hover:text-blue-800"
-                          onClick={() => handleLinkClicks(campaign._id, campaign.linkParametrizado)}
+                          onClick={() => handleMoreInfoClick(campaign.anunciante)}
                         >
-                          Show clicks so far
+                          {expandedProposals[campaign.anunciante] ? "Less Info" : "More Info"}
                         </button>
-                      )}
+                        {expandedProposals[campaign.anunciante] && advertiserDetails[campaign.anunciante] && (
+                          <div className="mt-2">
+                            {/* Adjust margin-top as needed for less gap */}
+                            <p className="font-bold my-1">
+                              Name:{" "}
+                              <span className="font-normal">{advertiserDetails[campaign.anunciante].razaoSocial}</span>
+                            </p>
+                            <p className="font-bold my-1">
+                              Email: <span className="font-normal">{advertiserDetails[campaign.anunciante].email}</span>
+                            </p>
+                            <p className="font-bold my-1">
+                              Company Link:{" "}
+                              <span className="font-normal">
+                                <Link
+                                  href={advertiserDetails[campaign.anunciante].link}
+                                  className="text-blue-500 hover:text-blue-800"
+                                >
+                                  {advertiserDetails[campaign.anunciante].link}
+                                </Link>
+                              </span>
+                            </p>
+                            <p className="font-bold my-1">
+                              Deals Made:{" "}
+                              <span className="font-normal">
+                                {advertiserDetails[campaign.anunciante].quantidadeAnunciosFeitos}
+                              </span>
+                            </p>
+                            <p className="flex flex-row items-center gap-2 font-bold my-1">
+                              Stars: <StarIcon className="w-4 h-4" />
+                              <span className="font-normal">{advertiserDetails[campaign.anunciante].stars} / 5.0</span>
+                            </p>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
-                    <div>
-                      Status:{" "}
-                      <span
-                        className={`border py-1 px-2 rounded-sm font-semibold ${getStatusBgColor(campaign.status)}`}
+                    <div className="flex flex-col items-center md:items-end gap-3 mt-4 md:mt-0">
+                      <div className="text-md font-semibold bg-base-300 py-1 px-3 rounded-sm">
+                        {campaign.CPM} {campaign.token} / 1,000 clicks
+                      </div>
+
+                      <div className="text-md font-normal mt-1">
+                        {clickCounts[campaign._id] === "loading" ? (
+                          <span>Loading...</span>
+                        ) : typeof clickCounts[campaign._id] === "number" ? (
+                          <>
+                            <span className="font-bold">{clickCounts[campaign._id]}</span>
+                            <span className="font-normal"> clicks so far</span>
+                          </>
+                        ) : (
+                          <button
+                            className="text-blue-500 hover:text-blue-800"
+                            onClick={() => handleLinkClicks(campaign._id, campaign.linkParametrizado)}
+                          >
+                            Show clicks so far
+                          </button>
+                        )}
+                      </div>
+
+                      <div>
+                        Status:{" "}
+                        <span
+                          className={`border py-1 px-2 rounded-sm font-semibold ${getStatusBgColor(campaign.status)}`}
+                        >
+                          {campaign.status}
+                        </span>
+                      </div>
+
+                      <button
+                        className="bg-green-500 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded shadow-md"
+                        onClick={() => handleAcceptProposal(campaign._id)}
                       >
-                        {campaign.status}
-                      </span>
+                        Accept proposal
+                      </button>
+                      <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded shadow-md"
+                        onClick={() => handleDenyProposal(campaign._id)}
+                      >
+                        Deny proposal
+                      </button>
                     </div>
-
-                    <button
-                      className="bg-green-500 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded shadow-md"
-                      onClick={() => handleAcceptProposal(campaign._id)}
-                    >
-                      Accept proposal
-                    </button>
-                    <button
-                      className="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded shadow-md"
-                      onClick={() => handleDenyProposal(campaign._id)}
-                    >
-                      Deny proposal
-                    </button>
+                  </div>
+                  <div className="w-full items-start flex flex-col">
+                    {/* Parametric Link */}
+                    <div className="text-md font-bold">
+                      Parametric Link:{" "}
+                      <Link
+                        href={campaign.linkParametrizado}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-800"
+                      >
+                        <span className="font-normal"> {campaign.linkParametrizado} </span>
+                      </Link>
+                    </div>
+                    {/* Campaign Description */}
+                    <div className="bg-base-300 p-4 text-left justify-left rounded-md w-full mt-4">
+                      {campaign.descricao}
+                    </div>
                   </div>
                 </div>
-                <div className="w-full items-start flex flex-col">
-                  {/* Parametric Link */}
-                  <div className="text-md font-bold">
-                    Parametric Link:{" "}
-                    <Link
-                      href={campaign.linkParametrizado}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 hover:text-blue-800"
-                    >
-                      <span className="font-normal"> {campaign.linkParametrizado} </span>
-                    </Link>
-                  </div>
-                  {/* Campaign Description */}
-                  <div className="bg-base-300 p-4 text-left justify-left rounded-md w-full mt-4">
-                    {campaign.descricao}
-                  </div>
-                </div>
-              </div>
-            ))
+              ))
           )}
         </div>
       </div>
