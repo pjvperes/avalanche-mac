@@ -17,15 +17,15 @@ const LoginPage: NextPage = () => {
 
   async function createNewCreator(email: string) {
     const body = JSON.stringify({
-      name: "define", // Placeholder value
-      biography: "define", // Placeholder value
-      occupation: "define", // Placeholder value
-      targetAudience: "define", // Placeholder value
-      stars: 0, // Placeholder value or your default value
-      link: "define", // Placeholder value
+      name: "define",
+      biography: "define",
+      occupation: "define",
+      targetAudience: "define",
+      stars: 0,
+      link: "define",
       email: email,
-      CPM: 0, // Placeholder value or your default value
-      walletAddress: "define", // Placeholder value
+      CPM: 0,
+      walletAddress: "define",
     });
 
     try {
@@ -74,12 +74,12 @@ const LoginPage: NextPage = () => {
 
   async function createNewAdvertiser(email: string) {
     const body = JSON.stringify({
-      razaoSocial: "define", // Placeholder value
-      quantidadeAnunciosFeitos: 0, // Placeholder value or your default value
-      stars: 0, // Placeholder value or your default value
-      link: "define", // Placeholder value
-      email: email, // Placeholder value
-      walletAddress: "0xTeste", // Placeholder value
+      razaoSocial: "define",
+      quantidadeAnunciosFeitos: 0,
+      stars: 0,
+      link: "define",
+      email: email,
+      walletAddress: "0xTeste",
     });
 
     try {
@@ -179,7 +179,7 @@ const LoginPage: NextPage = () => {
             onClick={() => setSelectedType("advertiser")}
           >
             <BuildingStorefrontIcon className="w-4 h-4" />
-            <button>Im an advertiser</button>
+            <button>I am an advertiser</button>
           </div>
 
           <div
@@ -189,7 +189,7 @@ const LoginPage: NextPage = () => {
             onClick={() => setSelectedType("creator")}
           >
             <UserIcon className="w-4 h-4" />
-            <button>Im a creator</button>
+            <button>I am a creator</button>
           </div>
         </div>
 
