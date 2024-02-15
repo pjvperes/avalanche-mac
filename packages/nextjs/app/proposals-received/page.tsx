@@ -32,6 +32,7 @@ const ProposalsReceived: NextPage = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [clickCounts, setClickCounts] = useState<{ [key: string]: number | "loading" | null }>({});
 
   const [expandedProposals, setExpandedProposals] = useState<{ [key: string]: boolean }>({});
   const [advertiserDetails, setAdvertiserDetails] = useState<{ [key: string]: Advertiser }>({});
@@ -181,6 +182,45 @@ const ProposalsReceived: NextPage = () => {
     }
   };
 
+  const getLinkClicks = async (linkParametrizado: string) => {
+    try {
+      // Parse the URL and get the pathname
+      const url = new URL(linkParametrizado);
+      const reference = url.pathname; // Gets the part after the domain, e.g., "/reference"
+
+      // Check if the reference is valid
+      if (!reference.startsWith("/")) {
+        console.error("Invalid link format");
+        return "Error"; // Or any other error handling
+      }
+
+      const response = await fetch(
+        `https://mac-backend-six.vercel.app/clicks?reference=${encodeURIComponent(reference)}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      const data = await response.json();
+      const count = data.length;
+      return count;
+    } catch (error) {
+      console.error("Error:", error);
+      return "Error";
+    }
+  };
+
+  const handleLinkClicks = async (campaignId: string, linkParametrizado: string) => {
+    // Indicate loading state
+    setClickCounts(prevCounts => ({ ...prevCounts, [campaignId]: "loading" }));
+
+    const clicks = await getLinkClicks(linkParametrizado);
+    setClickCounts(prevCounts => ({ ...prevCounts, [campaignId]: clicks }));
+  };
+
   const getStatusBgColor = (status: string) => {
     switch (status) {
       case "accepted":
@@ -267,6 +307,24 @@ const ProposalsReceived: NextPage = () => {
                   <div className="flex flex-col items-center md:items-end gap-3 mt-4 md:mt-0">
                     <div className="text-md font-semibold bg-base-300 py-1 px-3 rounded-sm">
                       {campaign.CPM} {campaign.token} / 1,000 clicks
+                    </div>
+
+                    <div className="text-md font-normal mt-1">
+                      {clickCounts[campaign._id] === "loading" ? (
+                        <span>Loading...</span>
+                      ) : typeof clickCounts[campaign._id] === "number" ? (
+                        <>
+                          <span className="font-bold">{clickCounts[campaign._id]}</span>
+                          <span className="font-normal"> clicks so far</span>
+                        </>
+                      ) : (
+                        <button
+                          className="text-blue-500 hover:text-blue-800"
+                          onClick={() => handleLinkClicks(campaign._id, campaign.linkParametrizado)}
+                        >
+                          Show clicks so far
+                        </button>
+                      )}
                     </div>
 
                     <div>

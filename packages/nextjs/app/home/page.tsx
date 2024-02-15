@@ -91,11 +91,37 @@ const Home: NextPage = () => {
     setFormValues({ ...formValues, [field]: e.target.value });
   };
 
+  async function createReference(link: string, reference: string) {
+    const body = JSON.stringify({
+      link,
+      reference,
+    });
+
+    try {
+      const response = await fetch("https://mac-backend-six.vercel.app/references", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+
+      const data = await response.json();
+      console.log("Reference created:", data);
+    } catch (error) {
+      console.error("Error creating reference:", error);
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, creator: Creator) => {
     e.preventDefault();
     const anunciante = user.email; // Assuming the user's email is the advertiser's name
 
-    const linkParametrizado = `${formValues.link}/${formValues.parameter}`;
+    const linkParametrizado = `https://mac-url.vercel.app/${formValues.parameter}`;
+
+    const reference = "/" + formValues.parameter;
+
+    createReference(formValues.link, reference);
 
     try {
       await createCampaign(
