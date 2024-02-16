@@ -35,4 +35,6 @@ export declare class ReferencesService {
     update(id: string, updateReferenceDto: UpdateReferenceDto): Promise<Reference>;
     remove(id: string): Promise<Reference>;
     getLinkByReference(reference: string): Promise<string>;
+    getActiveReferences(): Promise<Reference[]>;
+    checkReferenceExists(reference: string): Promise<boolean>;
 }

@@ -39,6 +39,11 @@ __decorate([
     (0, mongoose_1.Prop)({ default: false }),
     __metadata("design:type", Boolean)
 ], Click.prototype, "paid", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment token', example: 'BTC' }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Click.prototype, "paymentToken", void 0);
 exports.Click = Click = __decorate([
     (0, mongoose_1.Schema)()
 ], Click);

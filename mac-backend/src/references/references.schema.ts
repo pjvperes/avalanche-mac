@@ -25,6 +25,13 @@ export class Reference {
   })
   @Prop({ required: true })
   reference: string;
+
+  @ApiProperty({
+    description: 'Is the reference active?',
+    example: 'true',
+  })
+  @Prop({ required: true })
+  active: boolean;
 }
 
 export const ReferenceSchema = SchemaFactory.createForClass(Reference);

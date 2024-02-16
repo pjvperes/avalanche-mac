@@ -19,6 +19,7 @@ import { AnnouncersService } from './announcers/announcers.service';
 import { AnnouncementsService } from './announcements/announcements.service';
 import { LinksModule } from './clicks/clicks.module';
 import { ReferencesModule } from './references/references.module';
+import { TokensModule } from './tokens/tokens.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { ReferencesModule } from './references/references.module';
     AnnouncementsModule,
     LinksModule,
     ReferencesModule,
+    TokensModule,
   ],
   controllers: [
     AppController,

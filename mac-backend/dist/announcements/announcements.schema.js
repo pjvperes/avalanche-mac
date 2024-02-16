@@ -79,6 +79,14 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcement.prototype, "starknetIndex", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Total amount to be paid',
+        example: 200.5,
+    }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], Announcement.prototype, "totalAmount", void 0);
 exports.Announcement = Announcement = __decorate([
     (0, mongoose_1.Schema)()
 ], Announcement);

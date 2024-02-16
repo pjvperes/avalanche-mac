@@ -46,6 +46,15 @@ let ReferencesService = class ReferencesService {
             .exec();
         return result ? result.link : null;
     }
+    async getActiveReferences() {
+        return this.referenceModel.find({ active: true }).exec();
+    }
+    async checkReferenceExists(reference) {
+        const result = await this.referenceModel
+            .findOne({ reference: reference })
+            .exec();
+        return result ? true : false;
+    }
 };
 exports.ReferencesService = ReferencesService;
 exports.ReferencesService = ReferencesService = __decorate([

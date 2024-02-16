@@ -34,6 +34,7 @@ export declare class Announcement {
     concluido: boolean;
     linkParametrizado: string;
     starknetIndex: string;
+    totalAmount: number;
 }
 export declare const AnnouncementSchema: mongoose.Schema<Announcement, mongoose.Model<Announcement, any, any, any, mongoose.Document<unknown, any, Announcement> & Announcement & Required<{
     _id: mongoose.Schema.Types.ObjectId;

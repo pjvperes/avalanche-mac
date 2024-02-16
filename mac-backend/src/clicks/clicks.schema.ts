@@ -23,6 +23,10 @@ export class Click {
   @ApiProperty({ description: 'Paid status', example: false })
   @Prop({ default: false })
   paid: boolean;
+
+  @ApiProperty({ description: 'Payment token', example: 'BTC' })
+  @Prop({ required: true })
+  paymentToken: string;
 }
 
 export const ClickSchema = SchemaFactory.createForClass(Click);

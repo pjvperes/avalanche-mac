@@ -29,6 +29,7 @@ export declare class Click {
     reference: string;
     ip: string;
     paid: boolean;
+    paymentToken: string;
 }
 export declare const ClickSchema: mongoose.Schema<Click, mongoose.Model<Click, any, any, any, Document<unknown, any, Click> & Click & Required<{
     _id: mongoose.Schema.Types.ObjectId;

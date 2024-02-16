@@ -35,6 +35,7 @@ export declare class Creator {
     email: string;
     CPM: number;
     walletAddress: string;
+    paymentToken: string;
 }
 export declare const CreatorSchema: mongoose.Schema<Creator, mongoose.Model<Creator, any, any, any, Document<unknown, any, Creator> & Creator & Required<{
     _id: mongoose.Schema.Types.ObjectId;

@@ -42,6 +42,12 @@ let ReferencesController = class ReferencesController {
     remove(id) {
         return this.referenceService.remove(id);
     }
+    getActiveReferences() {
+        return this.referenceService.getActiveReferences();
+    }
+    checkReferenceExists(reference) {
+        return this.referenceService.checkReferenceExists(reference);
+    }
 };
 exports.ReferencesController = ReferencesController;
 __decorate([
@@ -107,6 +113,24 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "remove", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Get Active References' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'All active references returned.' }),
+    (0, common_1.Get)('/active'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ReferencesController.prototype, "getActiveReferences", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Check if Reference Exists' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Reference exists.' }),
+    (0, swagger_1.ApiParam)({ name: 'reference', description: 'Reference to check' }),
+    (0, common_1.Get)('/check-reference-exists/:reference'),
+    __param(0, (0, common_1.Param)('reference')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ReferencesController.prototype, "checkReferenceExists", null);
 exports.ReferencesController = ReferencesController = __decorate([
     (0, swagger_1.ApiTags)('references'),
     (0, common_1.Controller)('references'),

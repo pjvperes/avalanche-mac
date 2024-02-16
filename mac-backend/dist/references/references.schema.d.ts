@@ -28,6 +28,7 @@ export declare class Reference {
     _id: mongoose.Schema.Types.ObjectId;
     link: string;
     reference: string;
+    active: boolean;
 }
 export declare const ReferenceSchema: mongoose.Schema<Reference, mongoose.Model<Reference, any, any, any, Document<unknown, any, Reference> & Reference & Required<{
     _id: mongoose.Schema.Types.ObjectId;

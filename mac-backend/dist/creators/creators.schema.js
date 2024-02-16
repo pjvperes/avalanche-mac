@@ -88,6 +88,14 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Creator.prototype, "walletAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Payment token of the creator',
+        example: 'BTC',
+    }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Creator.prototype, "paymentToken", void 0);
 exports.Creator = Creator = __decorate([
     (0, mongoose_1.Schema)()
 ], Creator);

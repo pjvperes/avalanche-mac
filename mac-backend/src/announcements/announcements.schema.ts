@@ -56,6 +56,13 @@ export class Announcement {
   @ApiProperty({ description: 'StarkNet index', example: 'SN123456' })
   @Prop({ required: true })
   starknetIndex: string;
+
+  @ApiProperty({
+    description: 'Total amount to be paid',
+    example: 200.5,
+  })
+  @Prop({ required: true })
+  totalAmount: number;
 }
 
 export const AnnouncementSchema = SchemaFactory.createForClass(Announcement);

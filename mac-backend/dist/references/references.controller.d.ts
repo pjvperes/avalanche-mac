@@ -12,4 +12,6 @@ export declare class ReferencesController {
     findOne(id: string): Promise<Reference>;
     update(id: string, updateReferenceDto: UpdateReferenceDto): Promise<Reference>;
     remove(id: string): Promise<Reference>;
+    getActiveReferences(): Promise<Reference[]>;
+    checkReferenceExists(reference: string): Promise<boolean>;
 }

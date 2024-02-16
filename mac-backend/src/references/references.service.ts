@@ -46,4 +46,16 @@ export class ReferencesService {
 
     return result ? result.link : null;
   }
+
+  async getActiveReferences(): Promise<Reference[]> {
+    return this.referenceModel.find({ active: true }).exec();
+  }
+
+  async checkReferenceExists(reference: string): Promise<boolean> {
+    const result = await this.referenceModel
+      .findOne({ reference: reference })
+      .exec();
+
+    return result ? true : false;
+  }
 }

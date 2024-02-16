@@ -66,6 +66,13 @@ export class Creator {
   })
   @Prop({ required: true })
   walletAddress: string;
+
+  @ApiProperty({
+    description: 'Payment token of the creator',
+    example: 'BTC',
+  })
+  @Prop({ required: true })
+  paymentToken: string;
 }
 
 export const CreatorSchema = SchemaFactory.createForClass(Creator);

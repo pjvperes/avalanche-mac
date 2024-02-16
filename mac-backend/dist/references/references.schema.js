@@ -40,6 +40,14 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Reference.prototype, "reference", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Is the reference active?',
+        example: 'true',
+    }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Boolean)
+], Reference.prototype, "active", void 0);
 exports.Reference = Reference = __decorate([
     (0, mongoose_1.Schema)()
 ], Reference);

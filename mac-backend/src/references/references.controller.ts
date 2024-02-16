@@ -80,4 +80,19 @@ export class ReferencesController {
   remove(@Param('id') id: string) {
     return this.referenceService.remove(id);
   }
+
+  @ApiOperation({ summary: 'Get Active References' })
+  @ApiResponse({ status: 200, description: 'All active references returned.' })
+  @Get('/active')
+  getActiveReferences() {
+    return this.referenceService.getActiveReferences();
+  }
+
+  @ApiOperation({ summary: 'Check if Reference Exists' })
+  @ApiResponse({ status: 200, description: 'Reference exists.' })
+  @ApiParam({ name: 'reference', description: 'Reference to check' })
+  @Get('/check-reference-exists/:reference')
+  checkReferenceExists(@Param('reference') reference: string) {
+    return this.referenceService.checkReferenceExists(reference);
+  }
 }
