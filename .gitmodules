@@ -1,0 +1,7 @@
+[submodule "packages/madara-app-chain-template"]
+	path = packages/madara-app-chain-template
+	url = https://github.com/keep-starknet-strange/madara-app-chain-template.git
+
+[submodule "mac-redirect-service"]
+	path = mac-redirect-service
+	url = https://github.com/ryanviana/mac-redirect-service.git
