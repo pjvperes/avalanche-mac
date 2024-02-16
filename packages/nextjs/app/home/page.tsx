@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import PayPerClickABI from "../../abis/PayPerClick_abi.json";
+import paymentTokenABI from "../../abis/erc20_abi.json";
 import type { NextPage } from "next";
 import { set } from "nprogress";
+import { Contract, defaultProvider } from "starknet";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
-import paymentTokenABI from "../../abis/erc20_abi.json";
-import PayPerClickABI from "../../abis/PayPerClick_abi.json";
-import {Contract, defaultProvider} from 'starknet';
 
 interface Creator {
   _id: string;
@@ -20,7 +20,8 @@ interface Creator {
   link: string;
   email: string;
   CPM: { $numberDecimal: string };
-  walletAddress?: string;
+  walletAddress: string;
+  paymentToken: string;
 }
 
 const Home: NextPage = () => {
@@ -46,7 +47,9 @@ const Home: NextPage = () => {
     anunciante: string,
     criadorConteudo: string,
     linkParametrizado: string,
-    starknetIndex: string,
+    totalAmount: number,
+    advertiserWalletAddress: string,
+    creatorWalletAddress: string,
   ) {
     const body = JSON.stringify({
       descricao,
@@ -57,7 +60,10 @@ const Home: NextPage = () => {
       status: "pending", // Assuming this is always "pending" initially
       concluido: false, // Assuming this is always "false" initially
       linkParametrizado,
-      starknetIndex, // Placeholder value
+      starknetIndex: "-1", // Placeholder value
+      totalAmount,
+      advertiserWalletAddress,
+      creatorWalletAddress,
     });
 
     console.log("Creating campaign with body:", body);
@@ -74,6 +80,7 @@ const Home: NextPage = () => {
 
       const data = await response.json();
       console.log("Campaign created:", data);
+      return data._id;
     } catch (error) {
       console.error("Error creating campaign:", error);
     }
@@ -102,10 +109,12 @@ const Home: NextPage = () => {
     setFormValues({ ...formValues, [field]: e.target.value });
   };
 
-  async function createReference(link: string, reference: string) {
+  async function createReference(link: string, reference: string, announcementId: string) {
     const body = JSON.stringify({
       link,
       reference,
+      active: false,
+      announcementId,
     });
 
     try {
@@ -121,6 +130,31 @@ const Home: NextPage = () => {
       console.log("Reference created:", data);
     } catch (error) {
       console.error("Error creating reference:", error);
+    }
+  }
+
+  async function checkAdvertiser(companyEmail: string) {
+    try {
+      const response = await fetch("https://mac-backend-six.vercel.app/announcers", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const advertisers = await response.json();
+      const filteredAdvertisers = advertisers.filter(
+        (advertiser: { email: string }) => advertiser.email === companyEmail,
+      );
+
+      if (filteredAdvertisers.length > 0) {
+        console.log("Advertiser found:", filteredAdvertisers[0]);
+        return filteredAdvertisers[0];
+      } else {
+        console.log("No advertiser found with that email.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   }
 
@@ -149,44 +183,31 @@ const Home: NextPage = () => {
 
     const linkParametrizado = `https://mac-url.vercel.app/${formValues.parameter}`;
 
-    const reference = "/" + formValues.parameter;
-
-    createReference(formValues.link, reference);
-
     try {
+      const advertiserData = await checkAdvertiser(anunciante);
 
-      await createCampaign(
+      const idCampanha = await createCampaign(
         formValues.description,
-        "USDT", // Replace with actual token
+        creator.paymentToken,
         parseFloat(formValues.cpm),
         anunciante,
         creator.email,
         linkParametrizado,
-        "-1", // Replace with actual Starknet index
+        parseInt(formValues.totalDollars),
+        advertiserData.walletAddress,
+        creator.walletAddress,
       );
 
       console.log("Form submitted with values:", formValues);
+      console.log("Created campaign id:", idCampanha);
+
+      const reference = "/" + formValues.parameter;
+      createReference(formValues.link, reference, idCampanha);
+
       setIsFormSubmitted(true); // Set the form submission status to true
 
-      // const paymentContract = new Contract(paymentTokenABI, paymentTokenAddress, provider);
-
-      // await paymentContract.transfer(paymentTokenAddress, formValues.totalDollars);
-
-      // const feeEstimate = await provider.estimateInvokeFee([call]);
-      // console.log('Estimated fee:', feeEstimate);
-
-      // Se a estimativa de taxa for bem-sucedida, invoque a função createPartnership
-      // const transactionResponse = await PPCContract.createPartnership(
-      //   creator.walletAddress,
-      //   3,
-      //   cpmBlockchainAmount,
-      //   totalDollarsBlockchainAmount,
-      //   { maxFee: feeEstimate.maxFee }  // Passando a taxa máxima estimada se necessário
-      // );
-      
       await PPCContract.createPartnership(creator.walletAddress, 1, cpmBlockchainAmount, totalDollarsBlockchainAmount);
       //  await PPCContract.createPartnership("0x0684e73232a2a3C66f8678Ff9450C8D8CF1Fe17BF73B45a8Db21a5a2EfF9e51a", 3, 20, 40);
-
     } catch (error) {
       console.error("Error creating campaign:", error);
     }
