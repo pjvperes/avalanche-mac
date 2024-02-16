@@ -13,6 +13,13 @@ export class Reference {
   _id: mongoose.Schema.Types.ObjectId;
 
   @ApiProperty({
+    description: 'Announcement identifier',
+    example: '507f1f77bcf86cd799439011',
+  })
+  @Prop({ required: true })
+  announcementId: string;
+
+  @ApiProperty({
     description: 'Link associated with the reference',
     example: 'https://example.com',
   })

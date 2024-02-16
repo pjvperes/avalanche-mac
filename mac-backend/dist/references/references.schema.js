@@ -26,6 +26,14 @@ __decorate([
 ], Reference.prototype, "_id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
+        description: 'Announcement identifier',
+        example: '507f1f77bcf86cd799439011',
+    }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Reference.prototype, "announcementId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
         description: 'Link associated with the reference',
         example: 'https://example.com',
     }),

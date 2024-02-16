@@ -26,6 +26,7 @@ import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 export declare class Reference {
     _id: mongoose.Schema.Types.ObjectId;
+    announcementId: string;
     link: string;
     reference: string;
     active: boolean;
