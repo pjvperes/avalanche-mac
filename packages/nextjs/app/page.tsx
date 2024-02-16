@@ -12,6 +12,7 @@ const LoginPage: NextPage = () => {
   const [password, setPassword] = useState("");
   const [selectedType, setSelectedType] = useState("none");
   const { setUser } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -130,6 +131,7 @@ const LoginPage: NextPage = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
 
     try {
       let foundUser;
@@ -165,6 +167,8 @@ const LoginPage: NextPage = () => {
       router.push("/home");
     } catch (error) {
       console.error("An error occurred during the login process: ", error);
+    } finally {
+      setIsLoading(false); // Reset loading status
     }
   };
 
@@ -232,11 +236,12 @@ const LoginPage: NextPage = () => {
             />
             <button
               type="submit"
-              className="w-full py-3 mt-10 bg-indigo-600 rounded-md
-                font-medium text-white uppercase
-                focus:outline-none hover:bg-indigo-700 hover:shadow-none"
+              className={`w-full py-3 mt-10 ${isLoading ? "bg-indigo-300" : "bg-indigo-600"} rounded-md
+              font-medium text-white uppercase
+              focus:outline-none hover:bg-indigo-700 hover:shadow-none`}
+              disabled={isLoading} // Disable button when loading
             >
-              Login
+              {isLoading ? "LOADING..." : "Login"}
             </button>
             <div className="sm:flex sm:flex-wrap mt-8 sm:mb-4 text-sm text-center">
               <div className="flex-2 underline text-indigo-600 hover:text-indigo-800">Forgot password</div>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { ConnectWallet } from "./ConnectWallet";
 import {
   ArrowLeftOnRectangleIcon,
   Bars3Icon,
@@ -13,7 +14,7 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
+import { FaucetButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
 type HeaderMenuLink = {
@@ -141,7 +142,7 @@ export const Header = () => {
         </div>
         <Link href="/home" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
           <div className="flex relative w-10 h-10">
-            <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
+            <Image alt="MAC logo" className="cursor-pointer" fill src="/favicon.png" />
           </div>
           <div className="flex flex-col">
             <span className="font-bold leading-tight">Starknet MAC</span>
@@ -157,7 +158,7 @@ export const Header = () => {
           {logoutLink.icon}
           <span>{logoutLink.label}</span>
         </button>
-        <RainbowKitCustomConnectButton />
+        <ConnectWallet />
         <FaucetButton />
       </div>
     </div>
