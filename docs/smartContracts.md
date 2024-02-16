@@ -10,7 +10,7 @@ The PayPerClick smart contract, designed for the Starknet platform using Cairo, 
 - **End Partnership:** Allows either party to terminate the partnership agreement.
 - **Announcement Management:** Functions to check the activity status of announcements, view announcement details, and calculate remaining payment amounts.
 - **Index Tracking:** Retrieve the current index of announcements for specific advertiser-creator pairs.
-- **Price Conversion:** Functions to obtain current Bitcoin (BTC) and Ethereum (ETH) prices in USD.
+- **Price Conversion:** Functions to obtain current Bitcoin (BTC) and Ethereum (ETH) prices in USD by using Pragma Oracles.
 
 ## Contract Structure
 ### Traits and Interfaces
