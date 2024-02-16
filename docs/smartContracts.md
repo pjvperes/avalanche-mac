@@ -1,6 +1,6 @@
 # PayPerClick Smart Contract 🖥
 
-[Take a look in our contract!](https://github.com/gugasanchez/starknet-mac/tree/main/packages/madara).
+[Take a look in our smartcontract!](https://github.com/gugasanchez/starknet-mac/tree/main/packages/madara).
 
 [Goerli Contract Address:](https://goerli.voyager.online/contract/0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308#writeContract): 0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308
 
