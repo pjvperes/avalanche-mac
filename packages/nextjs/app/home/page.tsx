@@ -3,10 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import PayPerClickABI from "../../abis/PayPerClick_abi.json";
-import paymentTokenABI from "../../abis/erc20_abi.json";
 import type { NextPage } from "next";
-import { set } from "nprogress";
-import { Contract, defaultProvider } from "starknet";
+import { Contract } from "starknet";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
 
@@ -165,7 +163,7 @@ const Home: NextPage = () => {
     const cpmBlockchainAmount = Math.round(parseFloat(formValues.cpm) * 100);
     const totalDollarsBlockchainAmount = Math.round(parseFloat(formValues.totalDollars) * 100);
 
-    const paymentTokenAddress = "0x049e5c0e9fbb072d7f908e77e117c76d026b8daf9720fe1d74fa3309645eabce"; //Insert the address according to CC Token
+    //const paymentTokenAddress = "0x049e5c0e9fbb072d7f908e77e117c76d026b8daf9720fe1d74fa3309645eabce"; //Insert the address according to CC Token
     const payPerClickAddress = "0x02aa201c09f47146f54f1ab593f520a6b66672b6a99b6f2f082a148e7e9b1483";
 
     const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);

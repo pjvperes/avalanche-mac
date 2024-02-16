@@ -126,7 +126,7 @@ const ProposalsMade: NextPage = () => {
 
   const handleCancelProposal = async (campaignId: string) => {
     const payPerClickAddress = "0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308";
-    const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
+    //const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
 
     try {
       const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);

@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { connect, AccountInterface } from 'get-starknet';
-import { useUser } from '~~/context/globalState'; // Adjust the import path
+import React, { useEffect, useState } from "react";
+import { connect } from "get-starknet";
+import { useUser } from "~~/context/globalState";
+
+// Adjust the import path
 
 export const ConnectWallet = () => {
   const { provider, setProvider } = useUser(); // Use setProvider from UserContext
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     if (address) {
-      console.log('Address:', address);
+      console.log("Address:", address);
     }
   }, [address]);
 
-    // useEffect para o provider
-    useEffect(() => {
-      if (provider) {
-        console.log('Provider:', provider);
-      }
-    }, [provider]);
+  // useEffect para o provider
+  useEffect(() => {
+    if (provider) {
+      console.log("Provider:", provider);
+    }
+  }, [provider]);
 
   const connectWallet = async () => {
     try {
@@ -44,7 +46,7 @@ export const ConnectWallet = () => {
       if (error instanceof Error) {
         alert(error.message);
       } else {
-        alert('An unknown error occurred');
+        alert("An unknown error occurred");
       }
     }
   };
@@ -52,7 +54,7 @@ export const ConnectWallet = () => {
   return (
     <div>
       <button className="btn" onClick={connectWallet}>
-        {isConnected ? `Connected: ${address}` : 'Connect Wallet'}
+        {isConnected ? `Connected: ${address}` : "Connect Wallet"}
       </button>
     </div>
   );
