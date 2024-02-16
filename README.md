@@ -48,3 +48,13 @@ Hence, we offer Smart Contracts and APIs for banks, which will deliver a **simpl
 
 ## 📼 Presentation Video
 [Youtube Link](https://www.youtube.com/watch?v=csabs5zONOE)
+
+## Contract Address:
+
+## MAC: https://mac-three.vercel.app/
+
+## MAC-R: https://mac-url.vercel.app/test
+
+## Backend Base Endpoint: https://mac-backend-six.vercel.app/
+
+## Swagger: https://mac-backend-six.vercel.app/swagger
