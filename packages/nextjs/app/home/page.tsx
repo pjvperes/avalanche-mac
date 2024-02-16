@@ -184,7 +184,7 @@ const Home: NextPage = () => {
       //   { maxFee: feeEstimate.maxFee }  // Passando a taxa máxima estimada se necessário
       // );
       
-      await PPCContract.createPartnership(creator.walletAddress, 3, cpmBlockchainAmount, totalDollarsBlockchainAmount);
+      await PPCContract.createPartnership(creator.walletAddress, 1, cpmBlockchainAmount, totalDollarsBlockchainAmount);
       //  await PPCContract.createPartnership("0x0684e73232a2a3C66f8678Ff9450C8D8CF1Fe17BF73B45a8Db21a5a2EfF9e51a", 3, 20, 40);
 
     } catch (error) {
