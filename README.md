@@ -49,7 +49,7 @@ Hence, we offer Smart Contracts and APIs for banks, which will deliver a **simpl
 ## 📼 Presentation Video
 [Youtube Link](https://www.youtube.com/watch?v=csabs5zONOE)
 
-## Userful Links
+## 🧑‍💻 Userful Links
 
 ### Contract Address (Goerli): 0x02e414cfde8917cc44beeb8e2a6f49d466c021b8bce744e19063727323be292d
 
