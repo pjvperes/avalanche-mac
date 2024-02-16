@@ -10,8 +10,8 @@ const creators_schema_1 = require("./creators/creators.schema");
 const announcers_schema_1 = require("./announcers/announcers.schema");
 const clicks_schema_1 = require("./clicks/clicks.schema");
 const references_schema_1 = require("./references/references.schema");
-const path_1 = require("path");
 const fs_1 = require("fs");
+const http_1 = require("http");
 async function bootstrap() {
     const cors = require('cors');
     const serverUrl = 'https://mac-backend-six.vercel.app';
@@ -31,11 +31,22 @@ async function bootstrap() {
     app.useGlobalPipes(new common_1.ValidationPipe());
     await app.listen(3000);
     if (process.env.NODE_ENV === 'development') {
-        const pathToSwaggerStaticFolder = (0, path_1.resolve)(process.cwd(), 'swagger-static');
-        const pathToSwaggerJson = (0, path_1.resolve)(pathToSwaggerStaticFolder, 'swagger.json');
-        const swaggerJson = JSON.stringify(document, null, 2);
-        (0, fs_1.writeFileSync)(pathToSwaggerJson, swaggerJson);
-        console.log(`Swagger JSON file written to: '/swagger-static/swagger.json'`);
+        (0, http_1.get)(`${serverUrl}/swagger/swagger-ui-bundle.js`, function (response) {
+            response.pipe((0, fs_1.createWriteStream)('swagger-static/swagger-ui-bundle.js'));
+            console.log(`Swagger UI bundle file written to: '/swagger-static/swagger-ui-bundle.js'`);
+        });
+        (0, http_1.get)(`${serverUrl}/swagger/swagger-ui-init.js`, function (response) {
+            response.pipe((0, fs_1.createWriteStream)('swagger-static/swagger-ui-init.js'));
+            console.log(`Swagger UI init file written to: '/swagger-static/swagger-ui-init.js'`);
+        });
+        (0, http_1.get)(`${serverUrl}/swagger/swagger-ui-standalone-preset.js`, function (response) {
+            response.pipe((0, fs_1.createWriteStream)('swagger-static/swagger-ui-standalone-preset.js'));
+            console.log(`Swagger UI standalone preset file written to: '/swagger-static/swagger-ui-standalone-preset.js'`);
+        });
+        (0, http_1.get)(`${serverUrl}/swagger/swagger-ui.css`, function (response) {
+            response.pipe((0, fs_1.createWriteStream)('swagger-static/swagger-ui.css'));
+            console.log(`Swagger UI css file written to: '/swagger-static/swagger-ui.css'`);
+        });
     }
 }
 bootstrap();
