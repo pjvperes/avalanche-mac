@@ -158,9 +158,7 @@ export const Header = () => {
           {logoutLink.icon}
           <span>{logoutLink.label}</span>
         </button>
-        {/* BIRI: Connect Wallet button */}
         <ConnectWallet />
-        {/* <RainbowKitCustomConnectButton /> */}
         <FaucetButton />
       </div>
     </div>
