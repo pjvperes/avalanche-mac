@@ -49,12 +49,14 @@ Hence, we offer Smart Contracts and APIs for banks, which will deliver a **simpl
 ## 📼 Presentation Video
 [Youtube Link](https://www.youtube.com/watch?v=csabs5zONOE)
 
-## Contract Address (Goerli): 0x02e414cfde8917cc44beeb8e2a6f49d466c021b8bce744e19063727323be292d
+## Userful Links
 
-## MAC: https://mac-three.vercel.app/
+### Contract Address (Goerli): 0x02e414cfde8917cc44beeb8e2a6f49d466c021b8bce744e19063727323be292d
 
-## MAC-R: https://mac-url.vercel.app/test
+### MAC: https://mac-three.vercel.app/
 
-## Backend Base Endpoint: https://mac-backend-six.vercel.app/
+### MAC-R: https://mac-url.vercel.app/test
 
-## Swagger: https://mac-backend-six.vercel.app/swagger
+### Backend Base Endpoint: https://mac-backend-six.vercel.app/
+
+### Swagger: https://mac-backend-six.vercel.app/swagger
