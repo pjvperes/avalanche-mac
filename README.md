@@ -30,11 +30,11 @@ Welcome to MAC - Marketplace for Advertisers and Creators. Our platform, deploye
 
 ### 💻 Robust and Innovative Technology
 
-- Smart Contracts in Cairo for functional and complete tokenization of treasury bonds and the Brazilian Real, simulating Drex solutions;
-- Smart Contracts for payments and credit operations with TPFt's on blockchain;
-- Backend for storing relevant off-chain data.
-- API deployed and **[available](https://xrpl-api.vercel.app/overnight)** in the cloud.
-- Functional and integrated frontend for simulation and benchmarking with an extremely simple user experience;
+- **Smart Contracts in Cairo** for functional and complete solution deployed on Goerli (**integrated with Pragma Oracles**, allowing BTC and ETH payments!);
+- **Back-end** for storing relevant off-chain data.
+- Functional and integrated **Front-end** for simulation and benchmarking with an extremely simple user experience;
+- **MAC Redirect Service (MAC-R)** deployed and working. **[For example this is how you can be redirected for Google!](https://mac-url.vercel.app/test)**
+- **Madara** app chain, allowing scalable payments.
 
 ### 😌 Easy to use
 
