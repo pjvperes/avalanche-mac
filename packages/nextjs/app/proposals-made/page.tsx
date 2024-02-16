@@ -5,6 +5,10 @@ import Link from "next/link";
 import type { NextPage } from "next";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
+import PayPerClickABI from "../../abis/PayPerClick_abi.json";
+import { Contract } from "starknet";
+
+
 
 interface Campaign {
   _id: string;
@@ -36,6 +40,8 @@ const ProposalsMade: NextPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [clickCounts, setClickCounts] = useState<{ [key: string]: number | "loading" | null }>({});
+
+  const { provider } = useUser(); // Call useUser at the top level
 
   const [expandedProposals, setExpandedProposals] = useState<{ [key: string]: boolean }>({});
   const [creatorDetails, setCreatorDetails] = useState<{ [key: string]: Creator }>({});
@@ -120,34 +126,50 @@ const ProposalsMade: NextPage = () => {
     }
   }
 
-  // BIRI: Colocar a lógica de finishPartnership aqui
-  const handleCancelProposal = async (campaignId: string) => {
+  const handleCancelProposal = async (campaignId: string, campaignCriadorConteudo : string) => {
+
+    const payPerClickAddress = "0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308";
+    const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
+
     try {
+       const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
+
+
+      console.log('Provider:', provider); // Adiciona o console.log para o provider
+
+
       // Send a PATCH request to update the campaign
-      const response = await fetch(`https://mac-backend-six.vercel.app/announcements/${campaignId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          status: "finished",
-          concluido: true,
-        }),
-      });
+      // const response = await fetch(`https://mac-backend-six.vercel.app/announcements/${campaignId}`, {
+      //   method: "PATCH",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     status: "finished",
+      //     concluido: true,
+      //   }),
+      // });
 
-      if (!response.ok) {
-        throw new Error("Failed to update campaign");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to update campaign");
+      // }
 
-      // Update the campaign in local state
-      setCampaigns(
-        campaigns.map(campaign => {
-          if (campaign._id === campaignId) {
-            return { ...campaign, status: "finished", concluido: true };
-          }
-          return campaign;
-        }),
-      );
+      // // Update the campaign in local state
+      // setCampaigns(
+      //   campaigns.map(campaign => {
+      //     if (campaign._id === campaignId) {
+      //       return { ...campaign, status: "finished", concluido: true };
+      //     }
+      //     return campaign;
+      //   }),
+      // );
+
+      // const creator = await checkCreator(campaignCriadorConteudo);
+      // const creatorWalletAddress = creator?.walletAddress;
+
+      // const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
+
+      await PPCContract.endPartnership("0x0386d2a70fb9a5c816eea4eec900a6f1aa56a8ea1246edd1e99565a4d2dc407e", "0x0684e73232a2a3c66f8678ff9450c8d8cf1fe17bf73b45a8db21a5a2eff9e51a", 1);
     } catch (error) {
       console.error("Error updating campaign:", error);
       // Handle error (e.g., show a message to the user)
@@ -329,7 +351,7 @@ const ProposalsMade: NextPage = () => {
                       </button>
                       <button
                         className="bg-red-500 hover:bg-red-700 text-sm text-white font-semibold py-1 px-3 rounded shadow-md"
-                        onClick={() => handleCancelProposal(campaign._id)}
+                        onClick={() => handleCancelProposal(campaign._id, campaign.criadorConteudo)}
                       >
                         Cancel proposal
                       </button>

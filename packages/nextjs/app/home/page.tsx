@@ -6,6 +6,9 @@ import type { NextPage } from "next";
 import { set } from "nprogress";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
+import paymentTokenABI from "../../abis/erc20_abi.json";
+import PayPerClickABI from "../../abis/PayPerClick_abi.json";
+import {Contract, defaultProvider} from 'starknet';
 
 interface Creator {
   _id: string;
@@ -33,6 +36,8 @@ const Home: NextPage = () => {
     link: "",
     parameter: "",
   });
+
+  const { provider } = useUser(); // Call useUser at the top level
 
   async function createCampaign(
     descricao: string,
@@ -119,10 +124,28 @@ const Home: NextPage = () => {
     }
   }
 
-  // BIRI: Insirer fazer proposta para criador de conteudo aqui
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, creator: Creator) => {
     e.preventDefault();
     const anunciante = user.email; // Assuming the user's email is the advertiser's name
+
+    const cpmBlockchainAmount = Math.round(parseFloat(formValues.cpm) * 100);
+    const totalDollarsBlockchainAmount = Math.round(parseFloat(formValues.totalDollars) * 100);
+
+    const paymentTokenAddress = "0x049e5c0e9fbb072d7f908e77e117c76d026b8daf9720fe1d74fa3309645eabce"; //Insert the address according to CC Token
+    const payPerClickAddress = "0x02aa201c09f47146f54f1ab593f520a6b66672b6a99b6f2f082a148e7e9b1483";
+
+    const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
+
+    // const call = {
+    //   contractAddress: payPerClickAddress,
+    //   entrypoint: 'createPartnership',
+    //   calldata: [
+    //     creator.walletAddress,
+    //     3,
+    //     cpmBlockchainAmount,
+    //     totalDollarsBlockchainAmount
+    //   ]
+    // };
 
     const linkParametrizado = `https://mac-url.vercel.app/${formValues.parameter}`;
 
@@ -131,6 +154,7 @@ const Home: NextPage = () => {
     createReference(formValues.link, reference);
 
     try {
+
       await createCampaign(
         formValues.description,
         "USDT", // Replace with actual token
@@ -143,6 +167,26 @@ const Home: NextPage = () => {
 
       console.log("Form submitted with values:", formValues);
       setIsFormSubmitted(true); // Set the form submission status to true
+
+      // const paymentContract = new Contract(paymentTokenABI, paymentTokenAddress, provider);
+
+      // await paymentContract.transfer(paymentTokenAddress, formValues.totalDollars);
+
+      // const feeEstimate = await provider.estimateInvokeFee([call]);
+      // console.log('Estimated fee:', feeEstimate);
+
+      // Se a estimativa de taxa for bem-sucedida, invoque a função createPartnership
+      // const transactionResponse = await PPCContract.createPartnership(
+      //   creator.walletAddress,
+      //   3,
+      //   cpmBlockchainAmount,
+      //   totalDollarsBlockchainAmount,
+      //   { maxFee: feeEstimate.maxFee }  // Passando a taxa máxima estimada se necessário
+      // );
+      
+      await PPCContract.createPartnership(creator.walletAddress, 3, cpmBlockchainAmount, totalDollarsBlockchainAmount);
+      //  await PPCContract.createPartnership("0x0684e73232a2a3C66f8678Ff9450C8D8CF1Fe17BF73B45a8Db21a5a2EfF9e51a", 3, 20, 40);
+
     } catch (error) {
       console.error("Error creating campaign:", error);
     }
