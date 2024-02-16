@@ -37,5 +37,5 @@ export declare class ReferencesService {
     getLinkByReference(reference: string): Promise<string>;
     getActiveReferences(): Promise<Reference[]>;
     checkReferenceExists(reference: string): Promise<boolean>;
-    getIdByReference(reference: string): Promise<string>;
+    getReferenceByReference(reference: string): Promise<Reference>;
 }

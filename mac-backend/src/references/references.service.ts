@@ -60,6 +60,6 @@ export class ReferencesService {
   }
 
   async getReferenceByReference(reference: string): Promise<Reference> {
-    return this.referenceModel.findOne({ reference: reference }).exec();
+    return this.referenceModel.findOne({ reference: '/' + reference }).exec();
   }
 }

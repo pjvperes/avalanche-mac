@@ -49,7 +49,7 @@ let ReferencesController = class ReferencesController {
         return this.referenceService.checkReferenceExists(reference);
     }
     getIdByReference(reference) {
-        return this.referenceService.getIdByReference(reference);
+        return this.referenceService.getReferenceByReference(reference);
     }
 };
 exports.ReferencesController = ReferencesController;

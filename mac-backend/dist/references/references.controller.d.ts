@@ -14,5 +14,5 @@ export declare class ReferencesController {
     remove(id: string): Promise<Reference>;
     getActiveReferences(): Promise<Reference[]>;
     checkReferenceExists(reference: string): Promise<boolean>;
-    getIdByReference(reference: string): Promise<string>;
+    getIdByReference(reference: string): Promise<Reference>;
 }
