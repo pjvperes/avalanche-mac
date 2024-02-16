@@ -4,7 +4,7 @@
   <a href="https://mac-backend-six.vercel.app/swagger">Back-end Docs</a> |
   <a href="https://github.com/gugasanchez/starknet-mac/blob/main/docs/MAC-Redirect-Service.md">MAC-R Docs</a> |
   <a href="https://github.com/gugasanchez/starknet-mac/blob/main/docs/smartContracts.md">Smart Contracts Docs</a> |
-  <a href="https://scaffoldeth.io">Website</a>
+  <a href="https://mac-three.vercel.app/">Website</a>
 </h4>
 
 Welcome to MAC - Marketplace for Advertisers and Creators. Our platform, deployed on Starknet's blockchain, revolutionizes the way advertisers and content creators collaborate. By using our service, creators get paid in cryptocurrencies for generating traffic, while advertisers benefit from a transparent and fraud-proof system.
