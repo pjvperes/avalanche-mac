@@ -1,5 +1,7 @@
 # PayPerClick Smart Contract 🖥
 
+Goerli Contract Address: 0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308
+
 ## Overview
 The PayPerClick smart contract, designed for the Starknet platform using Cairo, establishes a collaborative ecosystem between advertisers and content creators. It enables advertisers to partner with creators for product promotion, ensuring transparent and decentralized transactions.
 
@@ -16,8 +18,8 @@ The PayPerClick smart contract, designed for the Starknet platform using Cairo, 
 - IPayPerClick<TContractState>: Defines the contract's main functionalities like creating partnerships, payments, and managing announcements.
 
 ### Main Module: PayPerClick
-- Constructor: Initializes the contract with cryptocurrency addresses and the Pragma oracle address for price feeds.
-- Storage: Manages announcements, indices, token addresses, and the Pragma contract.
+- Constructor: Initializes the contract with cryptocurrency addresses and the **Pragma oracle** address for price feeds.
+- Storage: Manages announcements, indices, token addresses, and the **Pragma contract**.
 - Announcement and Partnership Structures: Holds details about each advertising agreement.
 - Token Management: Functions to handle token transfers and conversions.
 ### Private and Utility Functions
