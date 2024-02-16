@@ -1,7 +1,6 @@
 # PayPerClick Smart Contract 🖥
 
-Goerli Contract Address: 0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308
-
+[Goerli Contract Address:](https://goerli.voyager.online/contract/0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308#writeContract): 0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308
 ## Overview
 The PayPerClick smart contract, designed for the Starknet platform using Cairo, establishes a collaborative ecosystem between advertisers and content creators. It enables advertisers to partner with creators for product promotion, ensuring transparent and decentralized transactions.
 
