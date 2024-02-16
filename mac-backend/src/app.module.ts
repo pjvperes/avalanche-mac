@@ -20,6 +20,8 @@ import { AnnouncementsService } from './announcements/announcements.service';
 import { LinksModule } from './clicks/clicks.module';
 import { ReferencesModule } from './references/references.module';
 import { TokensModule } from './tokens/tokens.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -40,6 +42,10 @@ import { TokensModule } from './tokens/tokens.module';
     LinksModule,
     ReferencesModule,
     TokensModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'swagger-static'),
+      serveRoot: process.env.NODE_ENV === 'development' ? '/' : '/swagger',
+    }),
   ],
   controllers: [
     AppController,

@@ -19,6 +19,8 @@ const CreatorProfile: NextPage = () => {
     biography: "",
     stars: 0,
     email: "",
+    walletAddress: "",
+    paymentToken: "",
   });
 
   async function checkCreatorById(creatorId: string) {
@@ -210,7 +212,7 @@ const CreatorProfile: NextPage = () => {
               <div className="flex items-center py-1 flex-grow px-4 min-w-0">
                 {isEditable ? (
                   <input
-                    className="italic text-md w-full"
+                    className="italic text-md text-center w-full"
                     placeholder="Insert your target audience"
                     value={editable.targetAudience}
                     onChange={e => handleChange(e, "targetAudience")}
@@ -218,6 +220,22 @@ const CreatorProfile: NextPage = () => {
                 ) : (
                   <div className="italic text-md w-full">
                     {editable.targetAudience || "Insert your target audience"}
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center py-1 flex-grow px-4 min-w-0">
+                {isEditable ? (
+                  <input
+                    className="text-md text-center w-full"
+                    placeholder="Insert token to receive payments (USDT, BTC, ETH)"
+                    value={editable.paymentToken}
+                    onChange={e => handleChange(e, "paymentToken")}
+                  />
+                ) : (
+                  <div className="text-md w-full">
+                    <span className="font-semibold">Payment token: </span>{" "}
+                    {editable.paymentToken || "Insert token to receive payments (USDT, BTC, ETH)"}
                   </div>
                 )}
               </div>
@@ -241,6 +259,23 @@ const CreatorProfile: NextPage = () => {
                     <span className="text-gray-500 text-md ml-0 whitespace-nowrap">USD per 1,000 clicks</span>
                   </div>
                 </div>
+              </div>
+
+              <div className="flex items-center py-1 flex-grow px-4 min-w-0">
+                {isEditable ? (
+                  <input
+                    className="text-md text-center w-full"
+                    placeholder="Insert your wallet address"
+                    value={editable.walletAddress}
+                    onChange={e => handleChange(e, "walletAddress")}
+                  />
+                ) : (
+                  <div className="text-md w-full">
+                    {" "}
+                    <span className="font-semibold">Wallet Address: </span>{" "}
+                    {editable.walletAddress || "Insert your wallet address"}
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-row justify-center gap-2 my-2 w-full py-1">

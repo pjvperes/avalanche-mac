@@ -26,6 +26,8 @@ const announcements_service_1 = require("./announcements/announcements.service")
 const clicks_module_1 = require("./clicks/clicks.module");
 const references_module_1 = require("./references/references.module");
 const tokens_module_1 = require("./tokens/tokens.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -46,6 +48,10 @@ exports.AppModule = AppModule = __decorate([
             clicks_module_1.LinksModule,
             references_module_1.ReferencesModule,
             tokens_module_1.TokensModule,
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'swagger-static'),
+                serveRoot: process.env.NODE_ENV === 'development' ? '/' : '/swagger',
+            }),
         ],
         controllers: [
             app_controller_1.AppController,

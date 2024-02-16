@@ -1,6 +1,9 @@
 # PayPerClick Smart Contract 🖥
 
+[Take a look in our smartcontract!](https://github.com/gugasanchez/starknet-mac/tree/main/packages/madara).
+
 [Goerli Contract Address:](https://goerli.voyager.online/contract/0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308#writeContract): 0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308
+
 ## Overview
 The PayPerClick smart contract, designed for the Starknet platform using Cairo, establishes a collaborative ecosystem between advertisers and content creators. It enables advertisers to partner with creators for product promotion, ensuring transparent and decentralized transactions.
 
@@ -10,7 +13,7 @@ The PayPerClick smart contract, designed for the Starknet platform using Cairo, 
 - **End Partnership:** Allows either party to terminate the partnership agreement.
 - **Announcement Management:** Functions to check the activity status of announcements, view announcement details, and calculate remaining payment amounts.
 - **Index Tracking:** Retrieve the current index of announcements for specific advertiser-creator pairs.
-- **Price Conversion:** Functions to obtain current Bitcoin (BTC) and Ethereum (ETH) prices in USD.
+- **Price Conversion:** Functions to obtain current Bitcoin (BTC) and Ethereum (ETH) prices in USD by using Pragma Oracles.
 
 ## Contract Structure
 ### Traits and Interfaces

@@ -1,80 +1,50 @@
-# 🏗 Scaffold-ETH 2
+# 📽 MAC - Marketplace for Advertisers and Creators
 
 <h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
+  <a href="https://mac-backend-six.vercel.app/swagger">Back-end Docs</a> |
+  <a href="https://github.com/gugasanchez/starknet-mac/blob/main/docs/MAC-Redirect-Service.md">MAC-R Docs</a> |
+  <a href="https://github.com/gugasanchez/starknet-mac/blob/main/docs/smartContracts.md">Smart Contracts Docs</a> |
+  <a href="https://mac-three.vercel.app/">Website</a>
 </h4>
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+Welcome to MAC - Marketplace for Advertisers and Creators. Our platform, deployed on Starknet's blockchain, revolutionizes the way advertisers and content creators collaborate. By using our service, creators get paid in cryptocurrencies for generating traffic, while advertisers benefit from a transparent and fraud-proof system.
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+## 🎯 Challenges
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+**1. Receiving payment:** defaults, high cross-border fees, and non-streaming payments (not spread out over all days).
 
-## Requirements
+**2. Negotiation and agreements:** remuneration far from expected.
 
-Before you begin, you need to install the following tools:
+**3. Drafting a contract:** lack of predictability, need for legal knowledge, uncertainty about fulfillment.
 
-- [Node (>= v18.17)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+**4. Prospecting advertisers:** difficulty in finding, uncertainty about responses.
 
-## Quickstart
+## 🚀 Our solution
 
-To get started with Scaffold-ETH 2, follow the steps below:
+### 📈 Business Model
 
-1. Clone this repo & install dependencies
+- Technology provided by the National Treasury and Central Bank together, ensuring **alignment of interests and completeness** in the operation of tokenizing national treasury bonds;
+- **Strategic partnerships** with banks and financial institutions, to scale usage and promote the network effect for this solution;
+- System developed with **interoperability**, so that holders of government bonds can use them as collateral **at any financial institution**.
 
-```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
-yarn install
-```
+### 💻 Robust and Innovative Technology
 
-2. Run a local network in the first terminal:
+- **Smart Contracts in Cairo** for functional and complete solution deployed on Goerli (**integrated with Pragma Oracles**, allowing BTC and ETH payments!);
+- **Back-end** for storing relevant off-chain data.
+- Functional and integrated **Front-end** for simulation and benchmarking with an extremely simple user experience;
+- **MAC Redirect Service (MAC-R)** deployed and working. **For example this is how you can be redirected for Google: https://mac-url.vercel.app/test**
+- **Madara** app chain, allowing scalable payments.
 
-```
-yarn chain
-```
+### 😌 Easy to use
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `hardhat.config.ts`.
+Despite the robust technology provided by our solution, we believe that mass adoption of this solution can only occur if it is simple for the end-user. Therefore, we have adopted a traditional Web2/3 login model, which users make a traditional Web2 login and the connect their wallets (Argent X or Braavos).
 
-3. On a second terminal, deploy the test contract:
+- **No need to understand Web 3**;
+- **No red tape**;
+- **No need to keep your private keys on your own**.
 
-```
-yarn deploy
-```
+Hence, we offer Smart Contracts and APIs for banks, which will deliver a **simple journey** to obtain credit and manage these operations.
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
-
-4. On a third terminal, start your NextJS app:
-
-```
-yarn start
-```
-
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-
-Run smart contract test with `yarn hardhat:test`
-
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
-- Edit your frontend in `packages/nextjs/pages`
-- Edit your deployment scripts in `packages/hardhat/deploy`
-
-## Documentation
-
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
-
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+## 📼 Presentation Video
+[Youtube Link](https://www.youtube.com/watch?v=csabs5zONOE)
