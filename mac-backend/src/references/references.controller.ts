@@ -95,4 +95,12 @@ export class ReferencesController {
   checkReferenceExists(@Param('reference') reference: string) {
     return this.referenceService.checkReferenceExists(reference);
   }
+
+  @ApiOperation({ summary: 'Get ID by Reference' })
+  @ApiResponse({ status: 200, description: 'ID returned for given reference.' })
+  @ApiParam({ name: 'reference', description: 'Reference to get ID for' })
+  @Get('/get-id-by-reference/:reference')
+  getIdByReference(@Param('reference') reference: string) {
+    return this.referenceService.getIdByReference(reference);
+  }
 }

@@ -87,6 +87,22 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Announcement.prototype, "totalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Wallet Address of the Advertiser',
+        example: '0x1234567890',
+    }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Announcement.prototype, "advertiserWalletAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Wallet Address of the Content Creator',
+        example: '0x1234567890',
+    }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Announcement.prototype, "creatorWalletAddress", void 0);
 exports.Announcement = Announcement = __decorate([
     (0, mongoose_1.Schema)()
 ], Announcement);

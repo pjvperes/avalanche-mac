@@ -55,6 +55,13 @@ let ReferencesService = class ReferencesService {
             .exec();
         return result ? true : false;
     }
+    async getIdByReference(reference) {
+        const result = await this.referenceModel
+            .findOne({ reference: reference })
+            .select('_id')
+            .exec();
+        return result ? result._id : null;
+    }
 };
 exports.ReferencesService = ReferencesService;
 exports.ReferencesService = ReferencesService = __decorate([

@@ -48,6 +48,9 @@ let ReferencesController = class ReferencesController {
     checkReferenceExists(reference) {
         return this.referenceService.checkReferenceExists(reference);
     }
+    getIdByReference(reference) {
+        return this.referenceService.getIdByReference(reference);
+    }
 };
 exports.ReferencesController = ReferencesController;
 __decorate([
@@ -131,6 +134,16 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ReferencesController.prototype, "checkReferenceExists", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Get ID by Reference' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'ID returned for given reference.' }),
+    (0, swagger_1.ApiParam)({ name: 'reference', description: 'Reference to get ID for' }),
+    (0, common_1.Get)('/get-id-by-reference/:reference'),
+    __param(0, (0, common_1.Param)('reference')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ReferencesController.prototype, "getIdByReference", null);
 exports.ReferencesController = ReferencesController = __decorate([
     (0, swagger_1.ApiTags)('references'),
     (0, common_1.Controller)('references'),

@@ -63,6 +63,20 @@ export class Announcement {
   })
   @Prop({ required: true })
   totalAmount: number;
+
+  @ApiProperty({
+    description: 'Wallet Address of the Advertiser',
+    example: '0x1234567890',
+  })
+  @Prop({ required: true })
+  advertiserWalletAddress: string;
+
+  @ApiProperty({
+    description: 'Wallet Address of the Content Creator',
+    example: '0x1234567890',
+  })
+  @Prop({ required: true })
+  creatorWalletAddress: string;
 }
 
 export const AnnouncementSchema = SchemaFactory.createForClass(Announcement);

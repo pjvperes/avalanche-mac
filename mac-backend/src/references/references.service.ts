@@ -58,4 +58,13 @@ export class ReferencesService {
 
     return result ? true : false;
   }
+
+  async getIdByReference(reference: string): Promise<string> {
+    const result = await this.referenceModel
+      .findOne({ reference: reference })
+      .select('_id')
+      .exec();
+
+    return result ? result._id : null;
+  }
 }
