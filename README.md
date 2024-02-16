@@ -1,7 +1,7 @@
-# 🏗 Scaffold-ETH 2
+# 📽 MAC - Marketplace for Advertisers and Creators
 
 <h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
+  <a href="https://github.com/gugasanchez/starknet-mac/blob/main/docs/smartContracts.md">Smart Contracts Docs</a> |
   <a href="https://scaffoldeth.io">Website</a>
 </h4>
 
