@@ -101,6 +101,6 @@ export class ReferencesController {
   @ApiParam({ name: 'reference', description: 'Reference to get ID for' })
   @Get('/get-id-by-reference/:reference')
   getIdByReference(@Param('reference') reference: string) {
-    return this.referenceService.getIdByReference(reference);
+    return this.referenceService.getReferenceByReference(reference);
   }
 }
