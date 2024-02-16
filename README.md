@@ -28,10 +28,17 @@ Welcome to MAC - Marketplace for Advertisers and Creators. Our platform, deploye
 - **Strategic partnerships** with banks and financial institutions, to scale usage and promote the network effect for this solution;
 - System developed with **interoperability**, so that holders of government bonds can use them as collateral **at any financial institution**.
 
+#### MAC <-> MAC-R <-> Starknet
+![image](https://github.com/gugasanchez/starknet-mac/assets/94409219/c73a4eb0-e950-4ed9-9110-0f733d809fa7)
+
+#### Starknet <-> Backend <-> MAC-R <-> User
+![image](https://github.com/gugasanchez/starknet-mac/assets/94409219/ca56ae66-78fe-4004-a6b5-efca46e65215)
+
+
 ### 💻 Robust and Innovative Technology
 
-- **Smart Contracts in Cairo** for functional and complete solution deployed on Goerli (**integrated with Pragma Oracles**, allowing BTC and ETH payments!);
-- **Back-end** for storing relevant off-chain data.
+- **Smart Contracts in Cairo** for functional and complete solution deployed on Goerli Starknet (**integrated with Pragma Oracles**, allowing BTC and ETH payments!);
+- **Back-end** for storing relevant off-chain data (All docs available on [Swagger](https://mac-backend-six.vercel.app/swagger))
 - Functional and integrated **Front-end** for simulation and benchmarking with an extremely simple user experience;
 - **MAC Redirect Service (MAC-R)** deployed and working. **For example this is how you can be redirected for Google: https://mac-url.vercel.app/test**
 - **Madara** app chain, allowing scalable payments.
@@ -40,11 +47,7 @@ Welcome to MAC - Marketplace for Advertisers and Creators. Our platform, deploye
 
 Despite the robust technology provided by our solution, we believe that mass adoption of this solution can only occur if it is simple for the end-user. Therefore, we have adopted a traditional Web2/3 login model, which users make a traditional Web2 login and the connect their wallets (Argent X or Braavos).
 
-- **No need to understand Web 3**;
-- **No red tape**;
-- **No need to keep your private keys on your own**.
-
-Hence, we offer Smart Contracts and APIs for banks, which will deliver a **simple journey** to obtain credit and manage these operations.
+You can make a deal with just a few clicks!
 
 ## 📼 Presentation Video
 [Youtube Link](https://www.youtube.com/watch?v=csabs5zONOE)
@@ -57,6 +60,6 @@ Hence, we offer Smart Contracts and APIs for banks, which will deliver a **simpl
 
 ### MAC-R: https://mac-url.vercel.app/test
 
-### Backend Base Endpoint: https://mac-backend-six.vercel.app/
+### Back-end Base Endpoint: https://mac-backend-six.vercel.app/
 
-### Swagger: https://mac-backend-six.vercel.app/swagger
+### Swagger (Back-end docs): https://mac-backend-six.vercel.app/swagger
