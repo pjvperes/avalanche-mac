@@ -27,3 +27,4 @@ The service can be integrated into your platform by importing the required funct
 - starknet: For interacting with StarkNet contracts.
 - fetch: For making HTTP requests to the API endpoints.
 - PayPerClick.json: A JSON file located in the abis folder, containing the ABI for the PayPerClick contract.
+
