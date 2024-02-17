@@ -1,6 +1,0 @@
-[submodule "mac-redirect-service"]
-	path = mac-redirect-service
-	url = https://github.com/ryanviana/mac-redirect-service.git
-[submodule "madara-app-chain-template"]
-	path = madara-app-chain-template
-	url = https://github.com/pjvperes/madara-app-chain-template.git
