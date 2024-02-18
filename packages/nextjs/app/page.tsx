@@ -1,7 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AAWrapProvider, SendTransactionMode, SmartAccount } from "@particle-network/aa";
+import { Avalanche } from "@particle-network/chains";
+import { ConnectButton, useAccountInfo, useParticleConnect } from "@particle-network/connectkit";
+import { isEVMProvider } from "@particle-network/connectors";
+import { notification } from "antd";
+import { ethers } from "ethers";
 import type { NextPage } from "next";
 import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
@@ -15,6 +21,9 @@ const LoginPage: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+
+  const { account } = useAccountInfo();
+  const { disconnect } = useParticleConnect();
 
   async function createNewCreator(email: string) {
     const body = JSON.stringify({
@@ -30,7 +39,7 @@ const LoginPage: NextPage = () => {
     });
 
     try {
-      const response = await fetch("https://mac-backend-six.vercel.app/creators", {
+      const response = await fetch("https://backend-mac.vercel.app/creators", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +57,7 @@ const LoginPage: NextPage = () => {
 
   async function checkCreator(email: string) {
     try {
-      const response = await fetch("https://mac-backend-six.vercel.app/creators", {
+      const response = await fetch("https://backend-mac.vercel.app/creators", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +93,7 @@ const LoginPage: NextPage = () => {
     });
 
     try {
-      const response = await fetch("https://mac-backend-six.vercel.app/announcers", {
+      const response = await fetch("https://backend-mac.vercel.app/announcers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -102,7 +111,7 @@ const LoginPage: NextPage = () => {
 
   async function checkAdvertiser(companyEmail: string) {
     try {
-      const response = await fetch("https://mac-backend-six.vercel.app/announcers", {
+      const response = await fetch("https://backend-mac.vercel.app/announcers", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -252,6 +261,16 @@ const LoginPage: NextPage = () => {
             </div>
           </form>
         </div>
+        {!account ? (
+          <div className="connect-button mt-5">
+            <ConnectButton />
+          </div>
+        ) : (
+          <div>
+            <p>Connected as: {account}</p>
+            <button onClick={disconnect}>Disconnect Wallet</button>
+          </div>
+        )}
       </div>
     </div>
   );

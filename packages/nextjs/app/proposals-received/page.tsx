@@ -39,7 +39,7 @@ const ProposalsReceived: NextPage = () => {
 
   async function getCampaignsByCreator(creatorEmail: string) {
     try {
-      const response = await fetch("https://mac-backend-six.vercel.app/announcements", {
+      const response = await fetch("https://backend-mac.vercel.app/announcements", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const ProposalsReceived: NextPage = () => {
 
   async function checkAdvertiser(email: string): Promise<Advertiser | null> {
     try {
-      const response = await fetch(`https://mac-backend-six.vercel.app/announcers?email=${encodeURIComponent(email)}`, {
+      const response = await fetch(`https://backend-mac.vercel.app/announcers?email=${encodeURIComponent(email)}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +120,7 @@ const ProposalsReceived: NextPage = () => {
   const handleAcceptProposal = async (campaignId: string) => {
     try {
       // Send a PATCH request to update the campaign
-      const response = await fetch(`https://mac-backend-six.vercel.app/announcements/${campaignId}`, {
+      const response = await fetch(`https://backend-mac.vercel.app/announcements/${campaignId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -152,7 +152,7 @@ const ProposalsReceived: NextPage = () => {
   const handleDenyProposal = async (campaignId: string) => {
     try {
       // Send a PATCH request to update the campaign
-      const response = await fetch(`https://mac-backend-six.vercel.app/announcements/${campaignId}`, {
+      const response = await fetch(`https://backend-mac.vercel.app/announcements/${campaignId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -194,15 +194,12 @@ const ProposalsReceived: NextPage = () => {
         return "Error"; // Or any other error handling
       }
 
-      const response = await fetch(
-        `https://mac-backend-six.vercel.app/clicks?reference=${encodeURIComponent(reference)}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      const response = await fetch(`https://backend-mac.vercel.app/clicks?reference=${encodeURIComponent(reference)}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+      });
 
       const data = await response.json();
       const count = data.length;

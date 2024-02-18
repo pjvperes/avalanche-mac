@@ -68,7 +68,7 @@ const Home: NextPage = () => {
     console.log("Anunciante:", anunciante); // Check the user type (optional)
 
     try {
-      const response = await fetch("https://mac-backend-six.vercel.app/announcements", {
+      const response = await fetch("https://backend-mac.vercel.app/announcements", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch("https://mac-backend-six.vercel.app/creators");
+        const response = await fetch("https://backend-mac.vercel.app/creators");
         const data = await response.json();
         setCreators(data); // Update state with fetched creators
       } catch (error) {
@@ -116,7 +116,7 @@ const Home: NextPage = () => {
     });
 
     try {
-      const response = await fetch("https://mac-backend-six.vercel.app/references", {
+      const response = await fetch("https://backend-mac.vercel.app/references", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +133,7 @@ const Home: NextPage = () => {
 
   async function checkAdvertiser(companyEmail: string) {
     try {
-      const response = await fetch("https://mac-backend-six.vercel.app/announcers", {
+      const response = await fetch("https://backend-mac.vercel.app/announcers", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

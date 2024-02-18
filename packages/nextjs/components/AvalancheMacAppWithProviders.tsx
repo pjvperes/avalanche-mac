@@ -1,5 +1,8 @@
 "use client";
 
+import { Avalanche } from "@particle-network/chains";
+import { ModalProvider } from "@particle-network/connectkit";
+import "@particle-network/connectkit/dist/index.css";
 import { Toaster } from "react-hot-toast";
 import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
@@ -20,8 +23,18 @@ const AvalancheMacApp = ({ children }: { children: React.ReactNode }) => {
 
 export const AvalancheMacAppWithProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <UserProvider>
-      <AvalancheMacApp>{children}</AvalancheMacApp>
-    </UserProvider>
+    <ModalProvider
+      options={{
+        projectId: process.env.NEXT_PUBLIC_PARTICLE_PROJECT_ID as string,
+        clientKey: process.env.NEXT_PUBLIC_PARTICLE_CLIENT_KEY as string,
+        appId: process.env.NEXT_PUBLIC_PARTICLE_APP_ID as string,
+        chains: [Avalanche],
+        // ... (other options as needed)
+      }}
+    >
+      <UserProvider>
+        <AvalancheMacApp>{children}</AvalancheMacApp>
+      </UserProvider>
+    </ModalProvider>
   );
 };
