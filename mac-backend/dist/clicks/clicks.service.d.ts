@@ -27,6 +27,7 @@ import { CreateLinkDto as CreateClickDto } from './dto/create-click.dto';
 import { UpdateLinkDto as UpdateClickDto } from './dto/update-click.dto';
 import { Click, ClickDocument } from './clicks.schema';
 import { UnpaidClicksResponseDto } from './dto/count-click.dto';
+import { ClickCountDto } from './dto/count-click-proposal-dto';
 export declare class ClicksService {
     private clickModel;
     constructor(clickModel: Model<ClickDocument>);
@@ -40,5 +41,5 @@ export declare class ClicksService {
         updatedCount: number;
     }>;
     checkIfIpAlreadyClicked(ip: string, reference: string): Promise<boolean>;
-    countClicksByProposalId(proposalId: number): Promise<number>;
+    countClicksByProposalId(proposalId: number): Promise<ClickCountDto>;
 }

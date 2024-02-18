@@ -17,5 +17,5 @@ export declare class ClicksController {
     }>;
     update(id: string, updateClickDto: UpdateClickDto): Promise<Click>;
     remove(id: string): Promise<Click>;
-    countClicks(proposalId: number): Promise<number>;
+    countClicks(proposalId: number): Promise<import("./dto/count-click-proposal-dto").ClickCountDto>;
 }

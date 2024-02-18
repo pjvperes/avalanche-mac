@@ -62,7 +62,13 @@ let ClicksService = class ClicksService {
         return count > 0;
     }
     async countClicksByProposalId(proposalId) {
-        return this.clickModel.countDocuments({ proposalId: proposalId }).exec();
+        const count = await this.clickModel
+            .countDocuments({ proposalId: proposalId })
+            .exec();
+        return {
+            clicks: count,
+            proposalId: proposalId,
+        };
     }
 };
 exports.ClicksService = ClicksService;

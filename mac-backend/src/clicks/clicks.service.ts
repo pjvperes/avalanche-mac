@@ -5,6 +5,7 @@ import { CreateLinkDto as CreateClickDto } from './dto/create-click.dto';
 import { UpdateLinkDto as UpdateClickDto } from './dto/update-click.dto';
 import { Click, ClickDocument } from './clicks.schema';
 import { UnpaidClicksResponseDto } from './dto/count-click.dto';
+import { ClickCountDto } from './dto/count-click-proposal-dto';
 
 @Injectable()
 export class ClicksService {
@@ -70,7 +71,13 @@ export class ClicksService {
     return count > 0;
   }
 
-  async countClicksByProposalId(proposalId: number): Promise<number> {
-    return this.clickModel.countDocuments({ proposalId: proposalId }).exec();
+  async countClicksByProposalId(proposalId: number): Promise<ClickCountDto> {
+    const count = await this.clickModel
+      .countDocuments({ proposalId: proposalId })
+      .exec();
+    return {
+      clicks: count,
+      proposalId: proposalId,
+    };
   }
 }

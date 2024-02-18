@@ -112,8 +112,8 @@ export class ClicksController {
 
   @ApiOperation({ summary: 'Get click count by proposalId' })
   @ApiResponse({ status: 200, description: 'Return click count.' })
-  @Post('/count')
-  countClicks(@Body('proposalId') proposalId: number) {
+  @Get('/count/:proposalId')
+  countClicks(@Param('proposalId') proposalId: number) {
     return this.clicksService.countClicksByProposalId(proposalId);
   }
 }

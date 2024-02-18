@@ -50,7 +50,6 @@ let ClicksController = class ClicksController {
         return this.clicksService.remove(id);
     }
     countClicks(proposalId) {
-        console.log(proposalId);
         return this.clicksService.countClicksByProposalId(proposalId);
     }
 };
@@ -150,8 +149,8 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Get click count by proposalId' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Return click count.' }),
-    (0, common_1.Post)('/count'),
-    __param(0, (0, common_1.Body)('proposalId')),
+    (0, common_1.Get)('/count/:proposalId'),
+    __param(0, (0, common_1.Param)('proposalId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
