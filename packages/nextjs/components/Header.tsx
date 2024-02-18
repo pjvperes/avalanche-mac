@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,8 +14,6 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { FaucetButton } from "~~/components/scaffold-eth";
-import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
 type HeaderMenuLink = {
   label: string;
@@ -97,10 +95,6 @@ export const HeaderMenuLinks = () => {
 export const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(
-    burgerMenuRef,
-    useCallback(() => setIsDrawerOpen(false), []),
-  );
 
   const router = useRouter();
 
@@ -145,7 +139,7 @@ export const Header = () => {
             <Image alt="MAC logo" className="cursor-pointer" fill src="/favicon.png" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Starknet MAC</span>
+            <span className="font-bold leading-tight">Avalanche MAC</span>
             <span className="text-xs">Marketplace for Advertisers and Creators</span>
           </div>
         </Link>
@@ -159,7 +153,6 @@ export const Header = () => {
           <span>{logoutLink.label}</span>
         </button>
         <ConnectWallet />
-        <FaucetButton />
       </div>
     </div>
   );
