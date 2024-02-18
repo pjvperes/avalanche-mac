@@ -44,6 +44,11 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Click.prototype, "paymentToken", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Proposal ID', example: '123' }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], Click.prototype, "proposalId", void 0);
 exports.Click = Click = __decorate([
     (0, mongoose_1.Schema)()
 ], Click);

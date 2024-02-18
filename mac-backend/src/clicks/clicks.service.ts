@@ -69,4 +69,8 @@ export class ClicksService {
       .exec();
     return count > 0;
   }
+
+  async countClicksByProposalId(proposalId: number): Promise<number> {
+    return this.clickModel.countDocuments({ proposalId: proposalId }).exec();
+  }
 }

@@ -53,9 +53,9 @@ export class Announcement {
   @Prop({ required: true })
   linkParametrizado: string;
 
-  @ApiProperty({ description: 'StarkNet index', example: 'SN123456' })
+  @ApiProperty({ description: 'Proposal Id', example: 'SN123456' })
   @Prop({ required: true })
-  starknetIndex: string;
+  proposalId: number;
 
   @ApiProperty({
     description: 'Total amount to be paid',

@@ -109,4 +109,11 @@ export class ClicksController {
   remove(@Param('id') id: string) {
     return this.clicksService.remove(id);
   }
+
+  @ApiOperation({ summary: 'Get click count by proposalId' })
+  @ApiResponse({ status: 200, description: 'Return click count.' })
+  @Post('/count')
+  countClicks(@Body('proposalId') proposalId: number) {
+    return this.clicksService.countClicksByProposalId(proposalId);
+  }
 }

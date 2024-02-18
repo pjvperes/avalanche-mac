@@ -61,6 +61,9 @@ let ClicksService = class ClicksService {
             .exec();
         return count > 0;
     }
+    async countClicksByProposalId(proposalId) {
+        return this.clickModel.countDocuments({ proposalId: proposalId }).exec();
+    }
 };
 exports.ClicksService = ClicksService;
 exports.ClicksService = ClicksService = __decorate([

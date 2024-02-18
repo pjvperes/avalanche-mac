@@ -40,4 +40,5 @@ export declare class ClicksService {
         updatedCount: number;
     }>;
     checkIfIpAlreadyClicked(ip: string, reference: string): Promise<boolean>;
+    countClicksByProposalId(proposalId: number): Promise<number>;
 }

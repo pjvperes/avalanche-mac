@@ -33,7 +33,7 @@ export declare class Announcement {
     status: string;
     concluido: boolean;
     linkParametrizado: string;
-    starknetIndex: string;
+    proposalId: number;
     totalAmount: number;
     advertiserWalletAddress: string;
     creatorWalletAddress: string;

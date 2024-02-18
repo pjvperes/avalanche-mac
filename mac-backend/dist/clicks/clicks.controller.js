@@ -49,6 +49,10 @@ let ClicksController = class ClicksController {
     remove(id) {
         return this.clicksService.remove(id);
     }
+    countClicks(proposalId) {
+        console.log(proposalId);
+        return this.clicksService.countClicksByProposalId(proposalId);
+    }
 };
 exports.ClicksController = ClicksController;
 __decorate([
@@ -143,6 +147,15 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ClicksController.prototype, "remove", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Get click count by proposalId' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Return click count.' }),
+    (0, common_1.Post)('/count'),
+    __param(0, (0, common_1.Body)('proposalId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ClicksController.prototype, "countClicks", null);
 exports.ClicksController = ClicksController = __decorate([
     (0, swagger_1.ApiTags)('clicks'),
     (0, common_1.Controller)('clicks'),

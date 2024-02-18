@@ -27,7 +27,7 @@ import { join } from 'path';
   imports: [
     MongooseModule.forRoot(
       'mongodb+srv://rgb:admin@nodeexpress.ps2xp1a.mongodb.net/?retryWrites=true&w=majority',
-      { dbName: 'MAC' },
+      { dbName: 'MAC_AVALANCHE' },
     ),
     MongooseModule.forFeature([
       { name: Announcer.name, schema: AnnouncerSchema },

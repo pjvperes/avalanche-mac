@@ -75,10 +75,10 @@ __decorate([
     __metadata("design:type", String)
 ], Announcement.prototype, "linkParametrizado", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'StarkNet index', example: 'SN123456' }),
+    (0, swagger_1.ApiProperty)({ description: 'Proposal Id', example: 'SN123456' }),
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], Announcement.prototype, "starknetIndex", void 0);
+    __metadata("design:type", Number)
+], Announcement.prototype, "proposalId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Total amount to be paid',
