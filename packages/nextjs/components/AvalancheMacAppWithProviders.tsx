@@ -3,6 +3,7 @@
 import { Avalanche } from "@particle-network/chains";
 import { ModalProvider } from "@particle-network/connectkit";
 import "@particle-network/connectkit/dist/index.css";
+import { evmWallets } from "@particle-network/connectors";
 import { Toaster } from "react-hot-toast";
 import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
@@ -29,7 +30,6 @@ export const AvalancheMacAppWithProviders = ({ children }: { children: React.Rea
         clientKey: process.env.NEXT_PUBLIC_PARTICLE_CLIENT_KEY as string,
         appId: process.env.NEXT_PUBLIC_PARTICLE_APP_ID as string,
         chains: [Avalanche],
-        // ... (other options as needed)
       }}
     >
       <UserProvider>

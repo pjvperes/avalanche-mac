@@ -2113,10 +2113,51 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@particle-network/auth@npm:>=1.2.2, @particle-network/auth@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "@particle-network/auth@npm:1.3.1"
+  dependencies:
+    "@particle-network/analytics": ^1.0.1
+    "@particle-network/chains": "*"
+    "@particle-network/crypto": ^1.0.1
+    buffer: ^6.0.3
+    draggabilly: ^3.0.0
+  checksum: 3c136df9e5514ac31be2fd28a3c12f2b5dbad389ff710a3356c70bd824b2273097e1c0b306e5ea9dd092557da4af17373a47b337279a08a29cca0a6f857b86b1
+  languageName: node
+  linkType: hard
+
 "@particle-network/chains@npm:*, @particle-network/chains@npm:>=1.3.8, @particle-network/chains@npm:^1.3.17":
   version: 1.3.17
   resolution: "@particle-network/chains@npm:1.3.17"
   checksum: 0cea007dc3d9afdab0cdfc74064189716bcc4fff75c8d77addeec2e40536be7642c59a03e57e0b7e89d3451ae56b6c02e9b0c9758e4220ec3edd7d7fbe713291
+  languageName: node
+  linkType: hard
+
+"@particle-network/connect-react-ui@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@particle-network/connect-react-ui@npm:1.2.1"
+  dependencies:
+    "@particle-network/connect": ^1.2.1
+    i18next: ^22.0.6
+    qrcode: ^1.5.1
+    react-i18next: ^12.0.0
+    react-svg: ^16.1.6
+  checksum: b38ed4b2ccf519b4024aded55b0be838df45484fe88c3ddf5441f711ba9b020d2852c7644cb47af4eac3dc2e08338f433fc45136bf31c65c8a9f44dd209d4688
+  languageName: node
+  linkType: hard
+
+"@particle-network/connect@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@particle-network/connect@npm:1.2.1"
+  dependencies:
+    "@coinbase/wallet-sdk": ^3.7.1
+    "@particle-network/auth": ">=1.2.2"
+    "@particle-network/provider": ">=1.2.1"
+    "@particle-network/solana-wallet": ">=1.2.1"
+    "@walletconnect/ethereum-provider": ~2.9.1
+    "@walletconnect/modal": ~2.6.0
+    eventemitter3: ^4.0.0
+  checksum: 3779e608b81f282241363c7f527306112c6960ed3c8fbb66fadb4be831ae2f83aaadd0eb162ebe1f0180689cdc28c53b7208db7617dcced454f46ef64f52e9f8
   languageName: node
   linkType: hard
 
@@ -2147,7 +2188,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@particle-network/provider@npm:^1.3.2":
+"@particle-network/crypto@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@particle-network/crypto@npm:1.0.1"
+  dependencies:
+    crypto-js: ^4.1.1
+    uuidv4: ^6.2.13
+  checksum: 45d871848119923c20c7b7fff4eb995c6f654ab9146b50dd915b83db5fdce05c2179fb7f24d64f2083a3cde2f1926ba37bf217483806ef296f0914a64c9c78a9
+  languageName: node
+  linkType: hard
+
+"@particle-network/provider@npm:>=1.2.1, @particle-network/provider@npm:^1.3.2":
   version: 1.3.2
   resolution: "@particle-network/provider@npm:1.3.2"
   dependencies:
@@ -2157,6 +2208,18 @@ __metadata:
   peerDependencies:
     "@particle-network/auth": "*"
   checksum: cacaadfe433b8eabd8be479e62316fd58e9af175d9294a260e12f2b1d3b07de6b010ea7158631a5f1f8b83bb02f7997caa5b0cd9dd2c3aab0d94fa35ed2c8086
+  languageName: node
+  linkType: hard
+
+"@particle-network/solana-wallet@npm:>=1.2.1":
+  version: 1.3.2
+  resolution: "@particle-network/solana-wallet@npm:1.3.2"
+  dependencies:
+    "@particle-network/auth": ^1.3.1
+  peerDependencies:
+    "@solana/web3.js": ^1.50.1
+    bs58: ^4.0.1
+  checksum: 5571f926e41684eeb11380d8b89e6fb39cf74bcb118edbf8180281a548d78b4a457479c643fa03b3ec0fe79efcdf438c03fe7a7bd3f8793c4e1a3496d6bcdedd
   languageName: node
   linkType: hard
 
@@ -2472,6 +2535,7 @@ __metadata:
     "@heroicons/react": ^2.0.11
     "@particle-network/aa": ^1.3.3
     "@particle-network/chains": ^1.3.17
+    "@particle-network/connect-react-ui": ^1.2.1
     "@particle-network/connectkit": ^1.3.5
     "@particle-network/connectors": ^1.3.2
     "@particle-network/provider": ^1.3.2

@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { ConnectWallet } from "./ConnectWallet";
+import { useConnectKit } from "@particle-network/connect-react-ui";
+import { ConnectButton, useAccountInfo, useParticleConnect } from "@particle-network/connectkit";
 import {
   ArrowLeftOnRectangleIcon,
   Bars3Icon,
@@ -106,8 +108,12 @@ export const Header = () => {
     // Add any other cleanup logic if needed
 
     // Redirect to the root of the app
+    disconnect();
     router.push("/");
   };
+
+  const { disconnect } = useParticleConnect();
+  const { account } = useAccountInfo();
 
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
@@ -148,11 +154,17 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
-        <button className="btn btn-ghost" onClick={handleLogout} title="Logout">
-          {logoutLink.icon}
-          <span>{logoutLink.label}</span>
-        </button>
         <ConnectWallet />
+        {!account ? (
+          <div className="connect-button ml-3">
+            <ConnectButton />
+          </div>
+        ) : (
+          <button className="ml-2 btn btn-ghost" onClick={handleLogout} title="Disconnect">
+            {logoutLink.icon}
+            <span>{logoutLink.label}</span>
+          </button>
+        )}
       </div>
     </div>
   );

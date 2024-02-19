@@ -138,6 +138,8 @@ const LoginPage: NextPage = () => {
     }
   }
 
+  const handleConnect = async () => {};
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
@@ -263,7 +265,9 @@ const LoginPage: NextPage = () => {
         </div>
         {!account ? (
           <div className="connect-button mt-5">
-            <ConnectButton />
+            <button onClick={handleConnect}>
+              <ConnectButton />
+            </button>
           </div>
         ) : (
           <div>
