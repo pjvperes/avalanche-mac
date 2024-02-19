@@ -113,7 +113,7 @@ export const Header = () => {
   };
 
   const connectKit = useConnectKit();
-  const userInfo = connectKit.particle.auth.getUserInfo();
+  const userInfo = connectKit?.particle?.auth.getUserInfo();
 
   const { disconnect } = useParticleConnect();
   const { account } = useAccountInfo();

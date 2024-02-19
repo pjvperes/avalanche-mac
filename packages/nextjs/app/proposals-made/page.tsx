@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import PayPerClickABI from "../../abis/PayPerClick_abi.json";
+import MacMainJSON from "../../abis/MacMain.json";
 import type { NextPage } from "next";
 import { Contract } from "starknet";
 import { StarIcon } from "@heroicons/react/20/solid";
