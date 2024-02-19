@@ -5,12 +5,11 @@ import Link from "next/link";
 import MacMainJSON from "../../abis/MacMain.json";
 import TokenJSON from "../../abis/Token.json";
 import type { NextPage } from "next";
+import { useAuthCore, useConnect, useEthereum } from "@particle-network/auth-core-modal";
 import { ethers } from "ethers";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
-import { useAccountInfo, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
-import Web3 from 'web3'; // Importing Web3
+import { useAccountInfo, useConnectKit, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
 
 interface Creator {
   _id: string;
@@ -49,6 +48,8 @@ const Home: NextPage = () => {
   const TOKEN_ADDRESS = "0xC070394CBB261eA11a0A82AC552b581f6EDbB039";
   const CREATOR_ADDRESS = "0xdbA1F60551E6f3CF567aB2cb930517870aCbaD75";
 
+  const connectKit = useConnectKit();
+  const [isConnected, setIsConnected] = useState(false);
 
   async function createCampaign(
     descricao: string,
@@ -111,8 +112,15 @@ const Home: NextPage = () => {
       }
     };
 
+    // Check if the user is connected and update the state
+    const userInfo = connectKit.particle.auth.getUserInfo();
+    if (userInfo) {
+      setIsConnected(true);
+      console.log("User is connected:", userInfo);
+    }
+
     fetchCreators();
-  }, []);
+  }, [connectKit]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: string) => {
     setFormValues({ ...formValues, [field]: e.target.value });
@@ -221,8 +229,6 @@ const Home: NextPage = () => {
       createReference(formValues.link, reference, idCampanha);
 
       setIsFormSubmitted(true); // Set the form submission status to true
-
-      // await MacMainContract.createAdvertisment(creator.walletAddress, totalDollarsBlockchainAmount,  creator.paymentToken, advertisementMilestone, cpmBlockchainAmount);
     } catch (error) {
       console.error("Error creating campaign:", error);
     }
@@ -372,6 +378,7 @@ const Home: NextPage = () => {
                             Submit
                           </button>
                         </form>
+
                       </div>
                     )}
                   </div>

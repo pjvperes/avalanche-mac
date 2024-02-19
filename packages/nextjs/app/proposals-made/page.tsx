@@ -125,12 +125,7 @@ const ProposalsMade: NextPage = () => {
   }
 
   const handleCancelProposal = async (campaignId: string) => {
-    const payPerClickAddress = "0x05da0fc073db1c6659cbb5c288157a4d33334b65386919bdd1c295a37f3bd308";
-    //const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
-
     try {
-      const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
-
       console.log("Provider:", provider); // Adiciona o console.log para o provider
 
       //Send a PATCH request to update the campaign
@@ -157,17 +152,6 @@ const ProposalsMade: NextPage = () => {
           }
           return campaign;
         }),
-      );
-
-      // const creator = await checkCreator(campaignCriadorConteudo);
-      // const creatorWalletAddress = creator?.walletAddress;
-
-      // const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
-
-      await PPCContract.endPartnership(
-        "0x0386d2a70fb9a5c816eea4eec900a6f1aa56a8ea1246edd1e99565a4d2dc407e",
-        "0x0684e73232a2a3c66f8678ff9450c8d8cf1fe17bf73b45a8db21a5a2eff9e51a",
-        1,
       );
     } catch (error) {
       console.error("Error updating campaign:", error);
