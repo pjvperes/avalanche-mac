@@ -51,11 +51,11 @@ Ever wondered how the MAC platform can transform the advertising world? Dive dee
 - **Token**: [`0xC070394CBB261eA11a0A82AC552b581f6EDbB039`](https://subnets-test.avax.network/c-chain/address/0xC070394CBB261eA11a0A82AC552b581f6EDbB039)
   - Used to mint tokens for your wallet and test our solution.
 
-### Chainlink Services
+### Chainlink Keepers
 
-- **Daily Active Ads Keeper**: [Link](https://automation.chain.link/fuji/3646668707667596729200555341527389313365931653295780104494029805417725006916)
-- **Update Active ADS Keeper**: [Link](https://automation.chain.link/fuji/0x1a987bcf208d324bf59313750283de87cc4f1e723adbb3b7e8f1874c9b52467d)
-- **Milestone Reached Payment Keeper**: [Link](https://automation.chain.link/fuji/0xdd203a4a37cbe5d1ec7671c1a8e2df628aa6cee30bcbc780cfdfb5caf1603a78)
+- [Daily Active Ads Keeper](https://automation.chain.link/fuji/3646668707667596729200555341527389313365931653295780104494029805417725006916)
+- [Update Active ADS Keeper](https://automation.chain.link/fuji/0x1a987bcf208d324bf59313750283de87cc4f1e723adbb3b7e8f1874c9b52467d)
+- [Milestone Reached Payment Keeper](https://automation.chain.link/fuji/0xdd203a4a37cbe5d1ec7671c1a8e2df628aa6cee30bcbc780cfdfb5caf1603a78)
 
 ## 🌍 Particle Connect
 
