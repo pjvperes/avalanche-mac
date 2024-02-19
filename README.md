@@ -34,21 +34,21 @@ Ever wondered how the MAC platform can transform the advertising world? Dive dee
 
 ### Main Contracts
 
-- **MACPlatformManager**: `0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28`
+- **MACPlatformManager**: [`0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28`](https://subnets-test.avax.network/c-chain/address/0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28)
   - Manages all MAC Operations.
-- **Advertisement**: `0x4348Ce4487dAbEFF94d463cf0ea855DF8c23B360`
+- **Advertisement**: [`0x4348Ce4487dAbEFF94d463cf0ea855DF8c23B360`](https://subnets-test.avax.network/c-chain/address/0x4348Ce4487dAbEFF94d463cf0ea855DF8c23B360)
   - Stores and manages advertisement information.
-- **Payment**: `0xD4Ac9Ed02e0EDb4a7738BC3e0F3e36EcD47D11C8`
+- **Payment**: [`0xD4Ac9Ed02e0EDb4a7738BC3e0F3e36EcD47D11C8`](https://subnets-test.avax.network/c-chain/address/0xD4Ac9Ed02e0EDb4a7738BC3e0F3e36EcD47D11C8)
   - Handles creation and execution of payments using ERC-20 tokens.
-- **AccessControl**: `0x625Ff644c4f99C8d859532117bdb6142cCC43EF2`
+- **AccessControl**: [`0x625Ff644c4f99C8d859532117bdb6142cCC43EF2`](https://subnets-test.avax.network/c-chain/address/0x625Ff644c4f99C8d859532117bdb6142cCC43EF2)
   - Manages access control within the MAC context.
-- **ClickCountFunction**: `0x40d0F2e0d93d519FBF71A9b0c89D92ce6CB2Efdf`
+- **ClickCountFunction**: [`0x40d0F2e0d93d519FBF71A9b0c89D92ce6CB2Efdf`](https://subnets-test.avax.network/c-chain/address/0x40d0F2e0d93d519FBF71A9b0c89D92ce6CB2Efdf)
   - Chainlink function for tracking advertisement clicks.
-- **ActiveAdsKeeper**: `0x41E933DF2ca46B97A0731292A3Ff24bF3707A66f`
+- **ActiveAdsKeeper**: [`0x41E933DF2ca46B97A0731292A3Ff24bF3707A66f`](https://subnets-test.avax.network/c-chain/address/0x41E933DF2ca46B97A0731292A3Ff24bF3707A66f)
   - Chainlink keeper for active advertisements, updating click counts and milestones.
-- **MilestoneKeeper**: `0xce22d0e8027C4604d468B94656530bf50825A059`
+- **MilestoneKeeper**: [`0xce22d0e8027C4604d468B94656530bf50825A059`](https://subnets-test.avax.network/c-chain/address/0xce22d0e8027C4604d468B94656530bf50825A059)
   - Manages milestones and executes payments based on Chainlink logs.
-- **Token**: `0xC070394CBB261eA11a0A82AC552b581f6EDbB039`
+- **Token**: [`0xC070394CBB261eA11a0A82AC552b581f6EDbB039`](https://subnets-test.avax.network/c-chain/address/0xC070394CBB261eA11a0A82AC552b581f6EDbB039)
   - Used to mint tokens for your wallet and test our solution.
 
 ### Chainlink Services
