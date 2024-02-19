@@ -25,6 +25,13 @@ Ever wondered how the MAC platform can transform the advertising world? Dive dee
 
 ## 🚀 Smart Contracts on Avalanche Blockchain
 
+### Architecture
+![MAC](https://github.com/pjvperes/avalanche-mac/assets/70733914/d3eba9b4-906e-4602-b0df-90086f5c06f6)
+
+![MAC_R](https://github.com/pjvperes/avalanche-mac/assets/70733914/658e2185-a93f-4c5d-92f0-2eb759af0e69)
+
+![CHAINLINK](https://github.com/pjvperes/avalanche-mac/assets/70733914/2a1fb615-19c4-4514-bd71-b96c6db5a9c3)
+
 ### Main Contracts
 
 - **MACPlatformManager**: `0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28`
@@ -51,6 +58,8 @@ Ever wondered how the MAC platform can transform the advertising world? Dive dee
 ## 🌍 Particle Connect
 
 Particle Connect allows seamless onboarding into our Web3 application, offering an easy way for users to register and manage their wallet through a simplified social login - perfect for social media content creators.
+
+
 
 ## 🖱️ Links
 
