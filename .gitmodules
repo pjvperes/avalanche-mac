@@ -1,3 +1,6 @@
 [submodule "mac-r"]
 	path = mac-r
 	url = git@github.com:ryanviana/avalanche-mac-r.git
+[submodule "blockchain-mac"]
+	path = blockchain-mac
+	url = git@github.com:ryanviana/blockchain-mac.git
