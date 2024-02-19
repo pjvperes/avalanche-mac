@@ -38,19 +38,17 @@ const LoginPage: NextPage = () => {
     });
 
     const walletKey = process.env.WALLET_PRIVATE_KEY; // Nunca exponha sua chave privada em código de produção
-    console.log(walletKey);
 
-    // const provider = new ethers.providers.JsonRpcProvider("https://avalanche-fuji.infura.io/v3/84ad611c167b499ead05e7794fbd84a8");
-    // const wallet = new ethers.Wallet(walletKey!, provider);
+    const provider = new ethers.providers.JsonRpcProvider("https://avalanche-fuji.infura.io/v3/84ad611c167b499ead05e7794fbd84a8");
+    const wallet = new ethers.Wallet(walletKey!, provider);
 
-    // const MacMainABI = MacMainJSON.abi;
-    // const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
+    const MacMainABI = MacMainJSON.abi;
+    const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
 
-    // const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, wallet);
+    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, wallet);
+    const transaction = await MacMainContract.grantCreatorRole(walletAddress);
 
-    // const transaction = await MacMainContract.grantCreatorRole(walletAddress);
-
-    // await transaction.wait();
+    await transaction.wait();
 
     try {
       const response = await fetch("https://backend-mac.vercel.app/creators", {
@@ -108,15 +106,15 @@ const LoginPage: NextPage = () => {
       walletAddress: walletAddress,
     });
 
-    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+    const walletKey = process.env.WALLET_PRIVATE_KEY; // Nunca exponha sua chave privada em código de produção
 
-    const signer = customProvider.getSigner();
+    const provider = new ethers.providers.JsonRpcProvider("https://avalanche-fuji.infura.io/v3/84ad611c167b499ead05e7794fbd84a8");
+    const wallet = new ethers.Wallet(walletKey!, provider);
 
     const MacMainABI = MacMainJSON.abi;
     const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
 
-    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
-
+    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, wallet);
     const transaction = await MacMainContract.grantAdvertiserRole(walletAddress);
 
     await transaction.wait();
@@ -231,13 +229,6 @@ const LoginPage: NextPage = () => {
     }
   };
 
-  // const handleTest = async () => {
-  //   try {
-  //     console.log("teste");
-  //   } catch (error) {
-  //     console.error("An error occurred during the login process: ", error);
-  //   }
-  // };
 
   return (
     <div className="flex flex-col h-screen bg-base-200">
@@ -275,13 +266,6 @@ const LoginPage: NextPage = () => {
           >
             Enter
           </button>
-
-          {/* <button
-            className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={handleTest}
-          >
-            Enter
-          </button> */}
         </div>
       </div>
     </div>
