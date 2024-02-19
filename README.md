@@ -11,7 +11,7 @@ MAC is a decentralized marketplace designed for Advertisers and Creators to come
 
 ### Features
 
-- **MAC Platform**: A marketplace for advertisers and creators to interact and forge meaningful deals. Explore it [here](https://avalanche-mac.vercel.app/).
+- **MAC Platform**: A marketplace for advertisers and creators to interact and forge meaningful deals. Explore it [here](https://avalanche-mac.vercel.app/). **Just don't forget to mint tokens to your wallet, the contract address is just below**!
 - **MAC-R Service**: Our proprietary service for creating custom & trackable advertisements. Try our [test custom url](https://avalanche-mac-url.vercel.app/test) which redirects to Google.
 - **Comprehensive Backend**: A fully deployed, [documented](https://backend-mac.vercel.app/swagger) (Swagger) backend application that supports the MAC platform. 
 - **Avalanche Blockchain**: Ensuring decentralized operation with automated daily payments and reliable campaign management.
