@@ -48,6 +48,8 @@ Ever wondered how the MAC platform can transform the advertising world? Dive dee
   - Chainlink keeper for active advertisements, updating click counts and milestones.
 - **MilestoneKeeper**: `0xce22d0e8027C4604d468B94656530bf50825A059`
   - Manages milestones and executes payments based on Chainlink logs.
+- **Token**: `0xC070394CBB261eA11a0A82AC552b581f6EDbB039`
+  - Used to mint tokens for your wallet and test our solution.
 
 ### Chainlink Services
 
