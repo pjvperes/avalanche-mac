@@ -2,13 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AAWrapProvider, SendTransactionMode, SmartAccount } from "@particle-network/aa";
-import { Avalanche } from "@particle-network/chains";
-import { ConnectButton, useAccountInfo, useParticleConnect } from "@particle-network/connectkit";
-import { isEVMProvider } from "@particle-network/connectors";
-import { notification } from "antd";
-import { ethers } from "ethers";
+import { ConnectButton, useConnectKit } from "@particle-network/connect-react-ui";
+import "@particle-network/connect-react-ui/dist/index.css";
 import type { NextPage } from "next";
+import { ChartBarIcon } from "@heroicons/react/24/outline";
 import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
 
@@ -19,11 +16,9 @@ const LoginPage: NextPage = () => {
   const [selectedType, setSelectedType] = useState("none");
   const { setUser } = useUser();
   const [isLoading, setIsLoading] = useState(false);
+  const connectKit = useConnectKit();
 
   const router = useRouter();
-
-  const { account } = useAccountInfo();
-  const { disconnect } = useParticleConnect();
 
   async function createNewCreator(email: string) {
     const body = JSON.stringify({
@@ -36,6 +31,7 @@ const LoginPage: NextPage = () => {
       email: email,
       CPM: 0,
       walletAddress: "define",
+      paymentToken: "define",
     });
 
     try {
@@ -138,7 +134,57 @@ const LoginPage: NextPage = () => {
     }
   }
 
-  const handleConnect = async () => {};
+  const handleConnect = async () => {
+    try {
+      let foundUser;
+
+      const userInfo = connectKit.particle.auth.getUserInfo();
+      if (userInfo) {
+        console.log(userInfo);
+      }
+
+      const userEmail =
+        userInfo?.google_email ||
+        userInfo?.email ||
+        userInfo?.facebook_email ||
+        userInfo?.apple_email ||
+        userInfo?.twitter_email ||
+        userInfo?.github_email ||
+        userInfo?.linkedin_email ||
+        userInfo?.discord_email ||
+        userInfo?.microsoft_email;
+
+      if (selectedType === "advertiser" && userEmail) {
+        foundUser = await checkAdvertiser(userEmail);
+      } else if (selectedType === "creator" && userEmail) {
+        foundUser = await checkCreator(userEmail);
+      } else {
+        throw new Error("Invalid user type");
+      }
+      if (foundUser) {
+        setUser({ id: foundUser._id, type: selectedType, email: foundUser.email }); // Update global user state
+        console.log("User id:", foundUser._id);
+      }
+      // Proceed with login if user exists or a new user has been created
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, type: selectedType }),
+      });
+      if (!response.ok) {
+        throw new Error("Login request failed");
+      }
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      router.push("/home");
+    } catch (error) {
+      console.error("An error occurred during the login process: ", error);
+    } finally {
+      setIsLoading(false); // Reset loading status
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -208,73 +254,18 @@ const LoginPage: NextPage = () => {
           </div>
         </div>
 
-        <div className="border border-blue-700 w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-4/12 2xl:w-3/12 sm:px-10 sm:py-6 bg-base-100 rounded-xl shadow-lg">
-          <h2 className="text-center mt-8 font-semibold text-3xl lg:text-4xl">
+        <div className=" flex flex-col border border-blue-700 w-11/12 p-6 sm:w-8/12 md:w-6/12 lg:w-4/12 2xl:w-3/12 sm:px-10 sm:py-6 bg-base-100 rounded-xl shadow-lg items-center">
+          <h2 className="text-center font-semibold text-3xl lg:text-4xl mb-6">
             Login {selectedType === "advertiser" ? "as Advertiser" : selectedType === "creator" ? "as Creator" : ""}
           </h2>
-          <form className="mt-10" onSubmit={handleSubmit}>
-            <label htmlFor="email" className="block text-xs font-semibold uppercase">
-              E-mail
-            </label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Type your e-mail"
-              autoComplete="email"
-              className="block w-full py-3 px-2 mt-2 appearance-none 
-                border-b-2 border-gray-300
-                focus:text-gray-500 focus:outline-none focus:border-indigo-300"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-            <label htmlFor="password" className="block mt-10 text-xs font-semibold uppercase">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Type your password"
-              autoComplete="current-password"
-              className="block w-full py-3 px-2 mt-2 mb-4 appearance-none 
-                border-b-2 border-gray-300
-                focus:text-gray-500 focus:outline-none focus:border-indigo-300"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            />
-            <button
-              type="submit"
-              className={`w-full py-3 mt-10 ${isLoading ? "bg-indigo-300" : "bg-indigo-600"} rounded-md
-              font-medium text-white uppercase
-              focus:outline-none hover:bg-indigo-700 hover:shadow-none`}
-              disabled={isLoading} // Disable button when loading
-            >
-              {isLoading ? "LOADING..." : "Login"}
-            </button>
-            <div className="sm:flex sm:flex-wrap mt-8 sm:mb-4 text-sm text-center">
-              <div className="flex-2 underline text-indigo-600 hover:text-indigo-800">Forgot password</div>
-
-              <p className="flex-1 text-gray-700 text-md mx-4 my-1 sm:my-auto">or</p>
-
-              <div className="flex-2 underline text-indigo-600 hover:text-indigo-800">Register</div>
-            </div>
-          </form>
+          <ConnectButton />
+          <button
+            className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={handleConnect}
+          >
+            Enter
+          </button>
         </div>
-        {!account ? (
-          <div className="connect-button mt-5">
-            <button onClick={handleConnect}>
-              <ConnectButton />
-            </button>
-          </div>
-        ) : (
-          <div>
-            <p>Connected as: {account}</p>
-            <button onClick={disconnect}>Disconnect Wallet</button>
-          </div>
-        )}
       </div>
     </div>
   );

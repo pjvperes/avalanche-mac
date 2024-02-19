@@ -13122,6 +13122,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "se-2@workspace:."
   dependencies:
+    "@particle-network/connect-react-ui": ^1.2.1
     "@types/bcryptjs": ^2.4.6
     "@types/jsonwebtoken": ^9.0.5
     bcryptjs: ^2.4.3

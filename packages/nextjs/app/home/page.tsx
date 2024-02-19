@@ -58,7 +58,7 @@ const Home: NextPage = () => {
       status: "pending", // Assuming this is always "pending" initially
       concluido: false, // Assuming this is always "false" initially
       linkParametrizado,
-      starknetIndex: "-1", // Placeholder value
+      proposalId: "-1", // Placeholder value
       totalAmount,
       advertiserWalletAddress,
       creatorWalletAddress,
