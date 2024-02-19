@@ -140,7 +140,7 @@ const ProposalsMade: NextPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          status: "finished",
+          status: "canceled",
           concluido: true,
         }),
       });
@@ -153,7 +153,7 @@ const ProposalsMade: NextPage = () => {
       setCampaigns(
         campaigns.map(campaign => {
           if (campaign._id === campaignId) {
-            return { ...campaign, status: "finished", concluido: true };
+            return { ...campaign, status: "canceled", concluido: true };
           }
           return campaign;
         }),
