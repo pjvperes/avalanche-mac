@@ -10,12 +10,8 @@ import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
 
 const LoginPage: NextPage = () => {
-  // State to store email and password input
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [selectedType, setSelectedType] = useState("none");
   const { setUser } = useUser();
-  const [isLoading, setIsLoading] = useState(false);
   const connectKit = useConnectKit();
 
   const router = useRouter();
@@ -171,7 +167,7 @@ const LoginPage: NextPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, type: selectedType }),
+        body: JSON.stringify({ userEmail, type: selectedType }),
       });
       if (!response.ok) {
         throw new Error("Login request failed");
@@ -181,51 +177,6 @@ const LoginPage: NextPage = () => {
       router.push("/home");
     } catch (error) {
       console.error("An error occurred during the login process: ", error);
-    } finally {
-      setIsLoading(false); // Reset loading status
-    }
-  };
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setIsLoading(true);
-
-    try {
-      let foundUser;
-
-      if (selectedType === "advertiser") {
-        foundUser = await checkAdvertiser(email);
-      } else if (selectedType === "creator") {
-        foundUser = await checkCreator(email);
-      } else {
-        throw new Error("Invalid user type");
-      }
-
-      if (foundUser) {
-        setUser({ id: foundUser._id, type: selectedType, email: foundUser.email }); // Update global user state
-        console.log("User id:", foundUser._id);
-      }
-
-      // Proceed with login if user exists or a new user has been created
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, type: selectedType }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Login request failed");
-      }
-
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      router.push("/home");
-    } catch (error) {
-      console.error("An error occurred during the login process: ", error);
-    } finally {
-      setIsLoading(false); // Reset loading status
     }
   };
 
