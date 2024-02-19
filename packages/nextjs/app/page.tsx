@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ConnectButton, useConnectKit } from "@particle-network/connect-react-ui";
 import "@particle-network/connect-react-ui/dist/index.css";
 import type { NextPage } from "next";
-import { ChartBarIcon } from "@heroicons/react/24/outline";
 import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
 
@@ -16,7 +15,7 @@ const LoginPage: NextPage = () => {
 
   const router = useRouter();
 
-  async function createNewCreator(email: string) {
+  async function createNewCreator(email: string, walletAddress: string) {
     const body = JSON.stringify({
       name: "define",
       biography: "define",
@@ -26,7 +25,7 @@ const LoginPage: NextPage = () => {
       link: "define",
       email: email,
       CPM: 0,
-      walletAddress: "define",
+      walletAddress: walletAddress,
       paymentToken: "define",
     });
 
@@ -47,7 +46,7 @@ const LoginPage: NextPage = () => {
     }
   }
 
-  async function checkCreator(email: string) {
+  async function checkCreator(email: string, walletAddress: string) {
     try {
       const response = await fetch("https://backend-mac.vercel.app/creators", {
         method: "GET",
@@ -64,7 +63,7 @@ const LoginPage: NextPage = () => {
         return filteredCreators[0];
       } else {
         console.log("No creator found with that email.");
-        const newCreator = createNewCreator(email);
+        const newCreator = createNewCreator(email, walletAddress);
         console.log("New Creator:", newCreator);
         return newCreator;
       }
@@ -74,14 +73,14 @@ const LoginPage: NextPage = () => {
     }
   }
 
-  async function createNewAdvertiser(email: string) {
+  async function createNewAdvertiser(email: string, walletAddress: string) {
     const body = JSON.stringify({
       razaoSocial: "define",
       quantidadeAnunciosFeitos: 0,
       stars: 0,
       link: "define",
       email: email,
-      walletAddress: "0xTeste",
+      walletAddress: walletAddress,
     });
 
     try {
@@ -101,7 +100,7 @@ const LoginPage: NextPage = () => {
     }
   }
 
-  async function checkAdvertiser(companyEmail: string) {
+  async function checkAdvertiser(companyEmail: string, walletAddress: string) {
     try {
       const response = await fetch("https://backend-mac.vercel.app/announcers", {
         method: "GET",
@@ -120,7 +119,7 @@ const LoginPage: NextPage = () => {
         return filteredAdvertisers[0];
       } else {
         console.log("No advertiser found with that email.");
-        const newAdvertiser = createNewAdvertiser(companyEmail);
+        const newAdvertiser = createNewAdvertiser(companyEmail, walletAddress);
         console.log("New Advertiser:", newAdvertiser);
         return newAdvertiser;
       }
@@ -150,10 +149,12 @@ const LoginPage: NextPage = () => {
         userInfo?.discord_email ||
         userInfo?.microsoft_email;
 
-      if (selectedType === "advertiser" && userEmail) {
-        foundUser = await checkAdvertiser(userEmail);
-      } else if (selectedType === "creator" && userEmail) {
-        foundUser = await checkCreator(userEmail);
+      const userAddress = userInfo?.wallets?.[0]?.public_address;
+
+      if (selectedType === "advertiser" && userEmail && userAddress) {
+        foundUser = await checkAdvertiser(userEmail, userAddress);
+      } else if (selectedType === "creator" && userEmail && userAddress) {
+        foundUser = await checkCreator(userEmail, userAddress);
       } else {
         throw new Error("Invalid user type");
       }
