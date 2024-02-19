@@ -66,6 +66,7 @@ Particle Connect allows seamless onboarding into our Web3 application, offering 
 ## 🖱️ Links
 
 #### MAC
+(Just don't forget to mint tokens to your wallet, the contract address is just above!)
 https://avalanche-mac.vercel.app/
 
 #### MAC-R
