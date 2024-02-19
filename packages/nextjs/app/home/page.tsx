@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import PayPerClickABI from "../../abis/PayPerClick_abi.json";
+import MacMainJSON from "../../abis/MacMain.json";
+import contractJSON from "../../abis/teste.json";
 import type { NextPage } from "next";
-import { Contract } from "starknet";
+import { ethers } from "ethers";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
+import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
+import { useParticleProvider } from '@particle-network/connect-react-ui';
+import Web3 from 'web3'; // Importing Web3
 
 interface Creator {
   _id: string;
@@ -25,6 +29,7 @@ interface Creator {
 const Home: NextPage = () => {
   const [creators, setCreators] = useState<Creator[]>([]);
   const { user } = useUser();
+  const ParticleProvider = useParticleProvider();
   const [visibleDropdown, setVisibleDropdown] = useState<number | null>(null);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +41,8 @@ const Home: NextPage = () => {
     link: "",
     parameter: "",
   });
+
+  const web3 = new Web3(Web3.givenProvider || "https://localhost:8545" ); //Colocar um Provider
 
   const { provider } = useUser(); // Call useUser at the top level
 
@@ -156,28 +163,36 @@ const Home: NextPage = () => {
     }
   }
 
+  const handleTesteContratos = async () => {
+
+    const accounts = await web3.eth.getAccounts().then(console.log);
+
+    const contractABI = contractJSON.abi;
+    const contractAddress = "0x15E87529692a92473C596fF4bB09476E9EF96433";
+
+    const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+    const numberToSet = 123; // Exemplo: definindo o número 123
+
+
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, creator: Creator) => {
     e.preventDefault();
     const anunciante = user.email; // Assuming the user's email is the advertiser's name
 
-    const cpmBlockchainAmount = Math.round(parseFloat(formValues.cpm) * 100);
-    const totalDollarsBlockchainAmount = Math.round(parseFloat(formValues.totalDollars) * 100);
-
     //const paymentTokenAddress = "0x049e5c0e9fbb072d7f908e77e117c76d026b8daf9720fe1d74fa3309645eabce"; //Insert the address according to CC Token
-    const payPerClickAddress = "0x02aa201c09f47146f54f1ab593f520a6b66672b6a99b6f2f082a148e7e9b1483";
+    // const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28"; // Adaptar o endereço
 
-    const PPCContract = new Contract(PayPerClickABI, payPerClickAddress, provider);
+    // const cpmBlockchainAmount = Math.round(parseFloat(formValues.cpm) * 100);
+    // const totalDollarsBlockchainAmount = Math.round(parseFloat(formValues.totalDollars) * 100);
+    // const advertisementMilestone = formValues.milestone;
 
-    // const call = {
-    //   contractAddress: payPerClickAddress,
-    //   entrypoint: 'createPartnership',
-    //   calldata: [
-    //     creator.walletAddress,
-    //     3,
-    //     cpmBlockchainAmount,
-    //     totalDollarsBlockchainAmount
-    //   ]
-    // };
+    // const MacMainABI = MacMainJSON.abi;
+    const contractABI = contractJSON.abi;
+    const contractAddress = "0x15E87529692a92473C596fF4bB09476E9EF96433";
+
+    // const MacMainContract = new ethers.Contract(contractAddress, contractABI, ParticleProvider);
 
     const linkParametrizado = `https://mac-url.vercel.app/${formValues.parameter}`;
 
@@ -205,8 +220,7 @@ const Home: NextPage = () => {
 
       setIsFormSubmitted(true); // Set the form submission status to true
 
-      await PPCContract.createPartnership(creator.walletAddress, 1, cpmBlockchainAmount, totalDollarsBlockchainAmount);
-      //  await PPCContract.createPartnership("0x0684e73232a2a3C66f8678Ff9450C8D8CF1Fe17BF73B45a8Db21a5a2EfF9e51a", 3, 20, 40);
+      // await MacMainContract.createAdvertisment(creator.walletAddress, totalDollarsBlockchainAmount,  creator.paymentToken, advertisementMilestone, cpmBlockchainAmount);
     } catch (error) {
       console.error("Error creating campaign:", error);
     }
@@ -356,6 +370,9 @@ const Home: NextPage = () => {
                             Submit
                           </button>
                         </form>
+                        <button onClick={handleTesteContratos}>
+                          Teste
+                        </button>
                       </div>
                     )}
                   </div>
