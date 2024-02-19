@@ -77,6 +77,14 @@ export class Announcement {
   })
   @Prop({ required: true })
   creatorWalletAddress: string;
+
+  @ApiProperty({
+    description:
+      'Clicks milestone to be completed. Each clicks milestone the creator is paid.',
+    example: 1000,
+  })
+  @Prop({ required: true })
+  milestone: number;
 }
 
 export const AnnouncementSchema = SchemaFactory.createForClass(Announcement);

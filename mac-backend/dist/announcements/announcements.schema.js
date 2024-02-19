@@ -103,6 +103,14 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Announcement.prototype, "creatorWalletAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Clicks milestone to be completed. Each clicks milestone the creator is paid.',
+        example: 1000,
+    }),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], Announcement.prototype, "milestone", void 0);
 exports.Announcement = Announcement = __decorate([
     (0, mongoose_1.Schema)()
 ], Announcement);
