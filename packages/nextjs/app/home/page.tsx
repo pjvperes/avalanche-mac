@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import MacMainJSON from "../../abis/MacMain.json";
 import contractJSON from "../../abis/teste.json";
-import type { NextPage } from "next";
+import { useAuthCore, useConnect, useEthereum } from "@particle-network/auth-core-modal";
+import { useConnectKit, useParticleProvider } from "@particle-network/connect-react-ui";
 import { ethers } from "ethers";
+import type { NextPage } from "next";
+import Web3 from "web3";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
-import { useParticleProvider } from '@particle-network/connect-react-ui';
-import Web3 from 'web3'; // Importing Web3
+
+// Importing Web3
 
 interface Creator {
   _id: string;
@@ -41,10 +43,8 @@ const Home: NextPage = () => {
     link: "",
     parameter: "",
   });
-
-  const web3 = new Web3(Web3.givenProvider || "https://localhost:8545" ); //Colocar um Provider
-
-  const { provider } = useUser(); // Call useUser at the top level
+  const connectKit = useConnectKit();
+  const [isConnected, setIsConnected] = useState(false);
 
   async function createCampaign(
     descricao: string,
@@ -107,8 +107,15 @@ const Home: NextPage = () => {
       }
     };
 
+    // Check if the user is connected and update the state
+    const userInfo = connectKit.particle.auth.getUserInfo();
+    if (userInfo) {
+      setIsConnected(true);
+      console.log("User is connected:", userInfo);
+    }
+
     fetchCreators();
-  }, []);
+  }, [connectKit]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: string) => {
     setFormValues({ ...formValues, [field]: e.target.value });
@@ -164,18 +171,26 @@ const Home: NextPage = () => {
   }
 
   const handleTesteContratos = async () => {
+    console.log("Teste Contratos");
 
-    const accounts = await web3.eth.getAccounts().then(console.log);
+    if (isConnected) {
+      // Use ParticleProvider only if the user is connected
+      if (ParticleProvider) {
+        const compatibleProvider = ParticleProvider as
+          | ethers.providers.ExternalProvider
+          | ethers.providers.JsonRpcFetchFunc;
+        const customProvider = new ethers.providers.Web3Provider(compatibleProvider);
 
-    const contractABI = contractJSON.abi;
-    const contractAddress = "0x15E87529692a92473C596fF4bB09476E9EF96433";
-
-    const contract = new web3.eth.Contract(contractABI, contractAddress);
-
-    const numberToSet = 123; // Exemplo: definindo o número 123
-
-
-  }
+        // Now you can use customProvider for your contract interactions
+        // Example: const contract = new ethers.Contract(contractAddress, contractABI, customProvider);
+        // ... your contract interaction logic ...
+      } else {
+        console.error("ParticleProvider is undefined");
+      }
+    } else {
+      console.error("User is not connected");
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, creator: Creator) => {
     e.preventDefault();
@@ -370,9 +385,7 @@ const Home: NextPage = () => {
                             Submit
                           </button>
                         </form>
-                        <button onClick={handleTesteContratos}>
-                          Teste
-                        </button>
+                        <button onClick={handleTesteContratos}>Teste</button>
                       </div>
                     )}
                   </div>
