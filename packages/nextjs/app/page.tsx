@@ -8,12 +8,17 @@ import type { NextPage } from "next";
 import { set } from "nprogress";
 import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
+import { ethers } from "ethers";
+import { useAccountInfo, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
+import MacMainJSON from "../abis/MacMain.json";
+
 
 const LoginPage: NextPage = () => {
   const [selectedType, setSelectedType] = useState("none");
   const [isNewProfile, setIsNewProfile] = useState(false);
   const { setUser } = useUser();
   const connectKit = useConnectKit();
+  const ParticleProvider = useParticleProvider();
 
   const router = useRouter();
 
@@ -30,6 +35,19 @@ const LoginPage: NextPage = () => {
       walletAddress: walletAddress,
       paymentToken: "define",
     });
+
+    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+
+    const signer = customProvider.getSigner();
+
+    const MacMainABI = MacMainJSON.abi;
+    const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
+
+    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
+
+    const transaction = await MacMainContract.grantCreatorRole(walletAddress);
+
+    await transaction.wait();
 
     try {
       const response = await fetch("https://backend-mac.vercel.app/creators", {
@@ -87,6 +105,19 @@ const LoginPage: NextPage = () => {
       walletAddress: walletAddress,
     });
 
+    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+
+    const signer = customProvider.getSigner();
+
+    const MacMainABI = MacMainJSON.abi;
+    const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
+
+    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
+
+    const transaction = await MacMainContract.grantAdvertiserRole(walletAddress);
+
+    await transaction.wait();
+
     try {
       const response = await fetch("https://backend-mac.vercel.app/announcers", {
         method: "POST",
@@ -127,6 +158,7 @@ const LoginPage: NextPage = () => {
         console.log("No advertiser found with that email.");
         const newAdvertiser = createNewAdvertiser(companyEmail, walletAddress);
         console.log("New Advertiser:", newAdvertiser);
+        
         return newAdvertiser;
       }
     } catch (error) {

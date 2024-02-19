@@ -5,6 +5,10 @@ import Link from "next/link";
 import type { NextPage } from "next";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
+import { ethers } from "ethers";
+import { useAccountInfo, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
+import MacMainJSON from "../../abis/MacMain.json";
+
 
 interface Campaign {
   _id: string;
@@ -33,6 +37,8 @@ const ProposalsReceived: NextPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [clickCounts, setClickCounts] = useState<{ [key: string]: number | "loading" | null }>({});
+  const ParticleProvider = useParticleProvider();
+
 
   const [expandedProposals, setExpandedProposals] = useState<{ [key: string]: boolean }>({});
   const [advertiserDetails, setAdvertiserDetails] = useState<{ [key: string]: Advertiser }>({});
@@ -118,6 +124,20 @@ const ProposalsReceived: NextPage = () => {
   };
 
   const handleAcceptProposal = async (campaignId: string) => {
+
+    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+
+    const signer = customProvider.getSigner();
+
+    const MacMainABI = MacMainJSON.abi;
+    const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
+
+    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
+
+    const transaction = await MacMainContract.acceptAdvertisment(3); // TODO: Index logic here
+
+    await transaction.wait();
+
     try {
       // Send a PATCH request to update the campaign
       const response = await fetch(`https://backend-mac.vercel.app/announcements/${campaignId}`, {
@@ -150,6 +170,20 @@ const ProposalsReceived: NextPage = () => {
   };
 
   const handleDenyProposal = async (campaignId: string) => {
+
+    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+
+    const signer = customProvider.getSigner();
+
+    const MacMainABI = MacMainJSON.abi;
+    const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
+
+    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
+
+    const transaction = await MacMainContract.rejectAdvertisment(4); // TODO: Index logic here
+
+    await transaction.wait();
+
     try {
       // Send a PATCH request to update the campaign
       const response = await fetch(`https://backend-mac.vercel.app/announcements/${campaignId}`, {

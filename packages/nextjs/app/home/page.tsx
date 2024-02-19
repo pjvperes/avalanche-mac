@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import MacMainJSON from "../../abis/MacMain.json";
-import contractJSON from "../../abis/teste.json";
+import TokenJSON from "../../abis/Token.json";
 import type { NextPage } from "next";
 import { ethers } from "ethers";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
 import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
-import { useParticleProvider } from '@particle-network/connect-react-ui';
+import { useAccountInfo, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
 import Web3 from 'web3'; // Importing Web3
 
 interface Creator {
@@ -42,9 +42,13 @@ const Home: NextPage = () => {
     parameter: "",
   });
 
-  const web3 = new Web3(Web3.givenProvider || "https://localhost:8545" ); //Colocar um Provider
-
   const { provider } = useUser(); // Call useUser at the top level
+  const { account, particleProvider } = useAccountInfo();
+  const { disconnect } = useParticleConnect();
+  const [address, setAddress] = useState();
+  const TOKEN_ADDRESS = "0xC070394CBB261eA11a0A82AC552b581f6EDbB039";
+  const CREATOR_ADDRESS = "0xdbA1F60551E6f3CF567aB2cb930517870aCbaD75";
+
 
   async function createCampaign(
     descricao: string,
@@ -163,36 +167,34 @@ const Home: NextPage = () => {
     }
   }
 
-  const handleTesteContratos = async () => {
-
-    const accounts = await web3.eth.getAccounts().then(console.log);
-
-    const contractABI = contractJSON.abi;
-    const contractAddress = "0x15E87529692a92473C596fF4bB09476E9EF96433";
-
-    const contract = new web3.eth.Contract(contractABI, contractAddress);
-
-    const numberToSet = 123; // Exemplo: definindo o número 123
-
-
-  }
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, creator: Creator) => {
     e.preventDefault();
     const anunciante = user.email; // Assuming the user's email is the advertiser's name
 
-    //const paymentTokenAddress = "0x049e5c0e9fbb072d7f908e77e117c76d026b8daf9720fe1d74fa3309645eabce"; //Insert the address according to CC Token
-    // const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28"; // Adaptar o endereço
+    const cpmBlockchainAmount = Math.round(parseFloat(formValues.cpm) * 100);
+    const totalDollarsBlockchainAmount = Math.round(parseFloat(formValues.totalDollars) * 100);
+    const advertisementMilestone = formValues.milestone;
 
-    // const cpmBlockchainAmount = Math.round(parseFloat(formValues.cpm) * 100);
-    // const totalDollarsBlockchainAmount = Math.round(parseFloat(formValues.totalDollars) * 100);
-    // const advertisementMilestone = formValues.milestone;
+    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+    const signer = customProvider.getSigner();
 
-    // const MacMainABI = MacMainJSON.abi;
-    const contractABI = contractJSON.abi;
-    const contractAddress = "0x15E87529692a92473C596fF4bB09476E9EF96433";
+    const TokenABI = TokenJSON.abi;
+    const TokenAddress = "0xC070394CBB261eA11a0A82AC552b581f6EDbB039"
 
-    // const MacMainContract = new ethers.Contract(contractAddress, contractABI, ParticleProvider);
+    const TokenContract = new ethers.Contract(TokenAddress, TokenABI, signer);
+
+    const tokenTransaction = await TokenContract.transfer("0xD4Ac9Ed02e0EDb4a7738BC3e0F3e36EcD47D11C8", totalDollarsBlockchainAmount);
+
+    await tokenTransaction.wait();
+
+    const MacMainABI = MacMainJSON.abi;
+    const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
+
+    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
+
+    const transaction = await MacMainContract.createAdvertisment(CREATOR_ADDRESS, totalDollarsBlockchainAmount,  TOKEN_ADDRESS, advertisementMilestone, cpmBlockchainAmount);
+
+    await transaction.wait();
 
     const linkParametrizado = `https://mac-url.vercel.app/${formValues.parameter}`;
 
@@ -370,9 +372,6 @@ const Home: NextPage = () => {
                             Submit
                           </button>
                         </form>
-                        <button onClick={handleTesteContratos}>
-                          Teste
-                        </button>
                       </div>
                     )}
                   </div>
