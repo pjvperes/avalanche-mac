@@ -30,6 +30,7 @@ const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     description: "",
+    milestone: "",
     cpm: "",
     totalDollars: "",
     link: "",
@@ -41,6 +42,7 @@ const Home: NextPage = () => {
   async function createCampaign(
     descricao: string,
     token: string,
+    milestone: number,
     CPM: number,
     anunciante: string,
     criadorConteudo: string,
@@ -52,6 +54,7 @@ const Home: NextPage = () => {
     const body = JSON.stringify({
       descricao,
       token,
+      milestone,
       CPM,
       anunciante,
       criadorConteudo,
@@ -63,9 +66,6 @@ const Home: NextPage = () => {
       advertiserWalletAddress,
       creatorWalletAddress,
     });
-
-    console.log("Creating campaign with body:", body);
-    console.log("Anunciante:", anunciante); // Check the user type (optional)
 
     try {
       const response = await fetch("https://backend-mac.vercel.app/announcements", {
@@ -187,6 +187,7 @@ const Home: NextPage = () => {
       const idCampanha = await createCampaign(
         formValues.description,
         creator.paymentToken,
+        parseInt(formValues.milestone),
         parseFloat(formValues.cpm),
         anunciante,
         creator.email,
@@ -298,6 +299,18 @@ const Home: NextPage = () => {
                               type="text"
                               value={formValues.totalDollars}
                               onChange={e => handleInputChange(e, "totalDollars")}
+                            />
+                          </div>
+                          <div className="mb-2">
+                            <label className="block text-gray-700 text-sm font-bold" htmlFor="milestone">
+                              Milestone
+                            </label>
+                            <input
+                              id="milestone"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              type="text"
+                              value={formValues.milestone}
+                              onChange={e => handleInputChange(e, "milestone")}
                             />
                           </div>
                           <div className="mb-2">
