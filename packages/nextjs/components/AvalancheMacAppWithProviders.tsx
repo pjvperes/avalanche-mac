@@ -1,7 +1,7 @@
 "use client";
 
 import { WalletEntryPosition } from "@particle-network/auth";
-import { Avalanche } from "@particle-network/chains";
+import { AvalancheTestnet } from "@particle-network/chains";
 import { evmWallets } from "@particle-network/connect";
 import { ModalProvider } from "@particle-network/connect-react-ui";
 import "@particle-network/connectkit/dist/index.css";
@@ -30,11 +30,11 @@ export const AvalancheMacAppWithProviders = ({ children }: { children: React.Rea
         projectId: process.env.NEXT_PUBLIC_PARTICLE_PROJECT_ID as string,
         clientKey: process.env.NEXT_PUBLIC_PARTICLE_CLIENT_KEY as string,
         appId: process.env.NEXT_PUBLIC_PARTICLE_APP_ID as string,
-        chains: [Avalanche],
+        chains: [AvalancheTestnet],
         particleWalletEntry: {
           displayWalletEntry: true, //display wallet button when connect particle success.
-          defaultWalletEntryPosition: WalletEntryPosition.BR, // BR = Circle opens on bottom right
-          supportChains: [Avalanche],
+          defaultWalletEntryPosition: WalletEntryPosition.BR // BR = Circle opens on bottom right
+          // supportChains: [AvalancheTestnet],
         },
       }}
       theme={"auto"}
