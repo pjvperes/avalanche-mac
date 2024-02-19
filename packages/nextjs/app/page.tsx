@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import { ConnectButton, useConnectKit } from "@particle-network/connect-react-ui";
 import "@particle-network/connect-react-ui/dist/index.css";
 import type { NextPage } from "next";
+import { set } from "nprogress";
 import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
 
 const LoginPage: NextPage = () => {
   const [selectedType, setSelectedType] = useState("none");
+  const [isNewProfile, setIsNewProfile] = useState(false);
   const { setUser } = useUser();
   const connectKit = useConnectKit();
 
@@ -37,6 +39,8 @@ const LoginPage: NextPage = () => {
         },
         body,
       });
+
+      setIsNewProfile(true);
 
       const data = await response.json();
       console.log("Creator created:", data);
@@ -91,6 +95,8 @@ const LoginPage: NextPage = () => {
         },
         body,
       });
+
+      setIsNewProfile(true);
 
       const data = await response.json();
       console.log("Advertiser created:", data);
@@ -175,7 +181,16 @@ const LoginPage: NextPage = () => {
       }
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      router.push("/home");
+
+      if (isNewProfile && selectedType === "advertiser") {
+        router.push("/advertiser-profile");
+        setIsNewProfile(false);
+      } else if (isNewProfile && selectedType === "creator") {
+        router.push("/creator-profile");
+        setIsNewProfile(false);
+      } else {
+        router.push("/home");
+      }
     } catch (error) {
       console.error("An error occurred during the login process: ", error);
     }
