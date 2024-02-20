@@ -3,10 +3,9 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ConnectWallet } from "./ConnectWallet";
-import { ConnectButton, useAccountInfo, useConnectKit, useParticleConnect } from "@particle-network/connect-react-ui";
+import { useAccountInfo, useParticleConnect } from "@particle-network/connect-react-ui";
 import "@particle-network/connect-react-ui/dist/index.css";
 import {
   ArrowLeftOnRectangleIcon,
@@ -112,8 +111,8 @@ export const Header = () => {
     router.push("/");
   };
 
-  const connectKit = useConnectKit();
-  const userInfo = connectKit?.particle?.auth.getUserInfo();
+  // const connectKit = useConnectKit();
+  // const userInfo = connectKit?.particle?.auth.getUserInfo();
 
   const { disconnect } = useParticleConnect();
   const { account } = useAccountInfo();

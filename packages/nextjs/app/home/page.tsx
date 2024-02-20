@@ -1,16 +1,15 @@
 "use client";
 
-import { StarIcon } from "@heroicons/react/20/solid";
-import { useAccountInfo, useConnectKit, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
-import { ethers } from "ethers";
-import type { NextPage } from "next";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useUser } from "~~/context/globalState";
+import Link from "next/link";
 import MacMainJSON from "../../abis/MacMain.json";
 import TokenJSON from "../../abis/Token.json";
-import { getContractEvents } from "viem/_types/actions/public/getContractEvents";
+import { useConnectKit, useParticleProvider } from "@particle-network/connect-react-ui";
+import { ethers } from "ethers";
+import type { NextPage } from "next";
 import { hexToNumber } from "viem";
+import { StarIcon } from "@heroicons/react/20/solid";
+import { useUser } from "~~/context/globalState";
 
 interface Creator {
   _id: string;
@@ -42,17 +41,16 @@ const Home: NextPage = () => {
     parameter: "",
   });
 
-  const { provider } = useUser(); // Call useUser at the top level
-  const { account, particleProvider } = useAccountInfo();
-  const { disconnect } = useParticleConnect();
-  const [address, setAddress] = useState();
+  // const { provider } = useUser(); // Call useUser at the top level
+  // const { account, particleProvider } = useAccountInfo();
+  // const { disconnect } = useParticleConnect();
+  // const [address, setAddress] = useState();
   const TOKEN_ADDRESS = "0xC070394CBB261eA11a0A82AC552b581f6EDbB039";
   const CREATOR_ADDRESS = "0xdbA1F60551E6f3CF567aB2cb930517870aCbaD75";
 
   const connectKit = useConnectKit();
   const [isConnected, setIsConnected] = useState(false);
-
-
+  console.log(isConnected);
 
   async function createCampaign(
     descricao: string,
@@ -65,7 +63,7 @@ const Home: NextPage = () => {
     totalAmount: number,
     advertiserWalletAddress: string,
     creatorWalletAddress: string,
-    proposalId: string
+    proposalId: string,
   ) {
     const body = JSON.stringify({
       descricao,
@@ -192,19 +190,29 @@ const Home: NextPage = () => {
 
     const TokenABI = TokenJSON.abi;
 
-    // const TokenContract = new ethers.Contract(TOKEN_ADDRESS, TokenABI, signer);
-    // const tokenTransaction = await TokenContract.transfer(process.env.NEXT_PUBLIC_PAYMENT_CONTRACT, totalDollarsBlockchainAmount, { gasLimit: 5000000 });
-    // await tokenTransaction.wait();
+    const TokenContract = new ethers.Contract(TOKEN_ADDRESS, TokenABI, signer);
+    const tokenTransaction = await TokenContract.transfer(
+      process.env.NEXT_PUBLIC_PAYMENT_CONTRACT,
+      totalDollarsBlockchainAmount,
+      { gasLimit: 5000000 },
+    );
+    await tokenTransaction.wait();
 
     const MacMainABI = MacMainJSON.abi;
 
     const MacMainContract = new ethers.Contract(process.env.NEXT_PUBLIC_MAC_MAIN_ADDRESS!, MacMainABI, signer);
 
-    const transaction = await MacMainContract.createAdvertisment(CREATOR_ADDRESS, totalDollarsBlockchainAmount, TOKEN_ADDRESS, advertisementMilestone, cpmBlockchainAmount);
+    const transaction = await MacMainContract.createAdvertisment(
+      CREATOR_ADDRESS,
+      totalDollarsBlockchainAmount,
+      TOKEN_ADDRESS,
+      advertisementMilestone,
+      cpmBlockchainAmount,
+    );
     await transaction.wait();
     let proposalId = 0;
 
-    MacMainContract.on("ReturnId", (id) => {
+    MacMainContract.on("ReturnId", id => {
       proposalId = hexToNumber(id);
     });
 
@@ -224,7 +232,7 @@ const Home: NextPage = () => {
         parseInt(formValues.totalDollars),
         advertiserData.walletAddress,
         creator.walletAddress,
-        proposalId.toString()
+        proposalId.toString(),
       );
 
       console.log("Form submitted with values:", formValues);
@@ -383,7 +391,6 @@ const Home: NextPage = () => {
                             Submit
                           </button>
                         </form>
-
                       </div>
                     )}
                   </div>

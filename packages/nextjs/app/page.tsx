@@ -1,23 +1,22 @@
 "use client";
-require('dotenv').config();
 
-import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
-import { ConnectButton, useConnectKit, useParticleProvider } from "@particle-network/connect-react-ui";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import MacMainJSON from "../abis/MacMain.json";
+import { ConnectButton, useConnectKit } from "@particle-network/connect-react-ui";
 import "@particle-network/connect-react-ui/dist/index.css";
+import "dotenv/config";
 import { ethers } from "ethers";
 import type { NextPage } from "next";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { BuildingStorefrontIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
-import MacMainJSON from "../abis/MacMain.json";
-
 
 const LoginPage: NextPage = () => {
   const [selectedType, setSelectedType] = useState("none");
   const [isNewProfile, setIsNewProfile] = useState(false);
   const { setUser } = useUser();
   const connectKit = useConnectKit();
-  const ParticleProvider = useParticleProvider();
+  // const ParticleProvider = useParticleProvider();
 
   const router = useRouter();
 
@@ -37,7 +36,9 @@ const LoginPage: NextPage = () => {
 
     const walletKey = process.env.NEXT_PUBLIC_ADMIN_KEY; // Nunca exponha sua chave privada em código de produção
 
-    const provider = new ethers.providers.JsonRpcProvider("https://avalanche-fuji.infura.io/v3/84ad611c167b499ead05e7794fbd84a8");
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://avalanche-fuji.infura.io/v3/84ad611c167b499ead05e7794fbd84a8",
+    );
     const wallet = new ethers.Wallet(walletKey!, provider);
 
     const MacMainABI = MacMainJSON.abi;
@@ -76,8 +77,6 @@ const LoginPage: NextPage = () => {
         },
       });
 
-
-
       const creators = await response.json();
       const filteredCreators = creators.filter((creator: { email: string }) => creator.email === email);
 
@@ -108,7 +107,9 @@ const LoginPage: NextPage = () => {
 
     const walletKey = process.env.NEXT_PUBLIC_ADMIN_KEY; // Nunca exponha sua chave privada em código de produção
 
-    const provider = new ethers.providers.JsonRpcProvider("https://avalanche-fuji.infura.io/v3/84ad611c167b499ead05e7794fbd84a8");
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://avalanche-fuji.infura.io/v3/84ad611c167b499ead05e7794fbd84a8",
+    );
     const wallet = new ethers.Wallet(walletKey!, provider);
 
     const MacMainABI = MacMainJSON.abi;
@@ -229,14 +230,14 @@ const LoginPage: NextPage = () => {
     }
   };
 
-
   return (
     <div className="flex flex-col h-screen bg-base-200">
       <div className="grid place-items-center mx-2 my-5 sm:my-auto">
         <div className="flex flex-row justify-around font-semibold text-lg w-11/12 sm:w-8/12 md:w-6/12 lg:w-4/12 2xl:w-3/12 bg-base-100 border border-blue-700 rounded-xl shadow-lg mb-10">
           <div
-            className={`flex flex-col items-center justify-center flex-grow rounded-l-xl border-r border-blue-700 p-12 sm:p-6 ${selectedType === "advertiser" ? "bg-base-300" : ""
-              }`}
+            className={`flex flex-col items-center justify-center flex-grow rounded-l-xl border-r border-blue-700 p-12 sm:p-6 ${
+              selectedType === "advertiser" ? "bg-base-300" : ""
+            }`}
             onClick={() => setSelectedType("advertiser")}
           >
             <BuildingStorefrontIcon className="w-4 h-4" />
@@ -244,8 +245,9 @@ const LoginPage: NextPage = () => {
           </div>
 
           <div
-            className={`flex flex-col items-center justify-center flex-grow rounded-r-xl p-12 sm:p-6 ${selectedType === "creator" ? "bg-base-300" : ""
-              }`}
+            className={`flex flex-col items-center justify-center flex-grow rounded-r-xl p-12 sm:p-6 ${
+              selectedType === "creator" ? "bg-base-300" : ""
+            }`}
             onClick={() => setSelectedType("creator")}
           >
             <UserIcon className="w-4 h-4" />

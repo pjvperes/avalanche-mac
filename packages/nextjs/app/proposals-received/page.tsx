@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import MacMainJSON from "../../abis/MacMain.json";
+import { useParticleProvider } from "@particle-network/connect-react-ui";
+import { ethers } from "ethers";
 import type { NextPage } from "next";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { useUser } from "~~/context/globalState";
-import { ethers } from "ethers";
-import { useAccountInfo, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
-import MacMainJSON from "../../abis/MacMain.json";
-
 
 interface Campaign {
   _id: string;
@@ -38,7 +37,6 @@ const ProposalsReceived: NextPage = () => {
   const [error, setError] = useState("");
   const [clickCounts, setClickCounts] = useState<{ [key: string]: number | "loading" | null }>({});
   const ParticleProvider = useParticleProvider();
-
 
   const [expandedProposals, setExpandedProposals] = useState<{ [key: string]: boolean }>({});
   const [advertiserDetails, setAdvertiserDetails] = useState<{ [key: string]: Advertiser }>({});
@@ -124,7 +122,6 @@ const ProposalsReceived: NextPage = () => {
   };
 
   const handleAcceptProposal = async (campaignId: string) => {
-
     const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
 
     const signer = customProvider.getSigner();
@@ -170,7 +167,6 @@ const ProposalsReceived: NextPage = () => {
   };
 
   const handleDenyProposal = async (campaignId: string) => {
-
     const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
 
     const signer = customProvider.getSigner();

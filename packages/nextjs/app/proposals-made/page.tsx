@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import MacMainJSON from "../../abis/MacMain.json";
 import type { NextPage } from "next";
-import { Contract } from "starknet";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useUser } from "~~/context/globalState";
 

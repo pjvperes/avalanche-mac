@@ -2,7 +2,6 @@
 
 import { WalletEntryPosition } from "@particle-network/auth";
 import { AvalancheTestnet } from "@particle-network/chains";
-import { evmWallets } from "@particle-network/connect";
 import { ModalProvider } from "@particle-network/connect-react-ui";
 import "@particle-network/connectkit/dist/index.css";
 import { Toaster } from "react-hot-toast";
@@ -33,7 +32,7 @@ export const AvalancheMacAppWithProviders = ({ children }: { children: React.Rea
         chains: [AvalancheTestnet],
         particleWalletEntry: {
           displayWalletEntry: true, //display wallet button when connect particle success.
-          defaultWalletEntryPosition: WalletEntryPosition.BR // BR = Circle opens on bottom right
+          defaultWalletEntryPosition: WalletEntryPosition.BR, // BR = Circle opens on bottom right
           // supportChains: [AvalancheTestnet],
         },
       }}
