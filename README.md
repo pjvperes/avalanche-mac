@@ -20,7 +20,7 @@ MAC is a decentralized marketplace designed for Advertisers and Creators to come
 
 Ever wondered how the MAC platform can transform the advertising world? Dive deep into our vision and discover the innovative features of MAC with our engaging pitch presentation. 🚀🎥
 
-👉 [Watch our pitch and see MAC in action!](https://youtube.com/)
+👉 [Watch our pitch and see MAC in action!]([https://youtube.com/](https://youtu.be/Ay8OJkFNwkg))
 
 
 👉 [Check MAC's slideshow presentation!](https://drive.google.com/file/d/1X24HTvm-QEDjLwpmm2w6y5RLPzAmGFSI/view?usp=sharing)
