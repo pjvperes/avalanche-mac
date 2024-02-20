@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import MacMainJSON from "../../abis/MacMain.json";
+import { ExternalProvider, JsonRpcFetchFunc } from "@ethersproject/providers";
 import { useParticleProvider } from "@particle-network/connect-react-ui";
 import { ethers } from "ethers";
 import type { NextPage } from "next";
@@ -122,7 +123,7 @@ const ProposalsReceived: NextPage = () => {
   };
 
   const handleAcceptProposal = async (campaignId: string) => {
-    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+    const customProvider = new ethers.providers.Web3Provider(ParticleProvider as ExternalProvider | JsonRpcFetchFunc);
 
     const signer = customProvider.getSigner();
 
@@ -167,18 +168,20 @@ const ProposalsReceived: NextPage = () => {
   };
 
   const handleDenyProposal = async (campaignId: string) => {
-    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+    if (ParticleProvider) {
+      const customProvider = new ethers.providers.Web3Provider(ParticleProvider as ExternalProvider | JsonRpcFetchFunc);
 
-    const signer = customProvider.getSigner();
+      const signer = customProvider.getSigner();
 
-    const MacMainABI = MacMainJSON.abi;
-    const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
+      const MacMainABI = MacMainJSON.abi;
+      const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
 
-    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
+      const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
 
-    const transaction = await MacMainContract.rejectAdvertisment(4); // TODO: Index logic here
+      const transaction = await MacMainContract.rejectAdvertisment(4); // TODO: Index logic here
 
-    await transaction.wait();
+      await transaction.wait();
+    }
 
     try {
       // Send a PATCH request to update the campaign

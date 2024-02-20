@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import MacMainJSON from "../../abis/MacMain.json";
-import TokenJSON from "../../abis/Token.json";
+import { ExternalProvider, JsonRpcFetchFunc } from "@ethersproject/providers";
 import { useConnectKit, useParticleProvider } from "@particle-network/connect-react-ui";
 import { ethers } from "ethers";
 import type { NextPage } from "next";
@@ -185,18 +185,17 @@ const Home: NextPage = () => {
     const totalDollarsBlockchainAmount = Math.round(parseFloat(formValues.totalDollars) * 100);
     const advertisementMilestone = formValues.milestone;
 
-    const customProvider = new ethers.providers.Web3Provider(ParticleProvider!);
+    const customProvider = new ethers.providers.Web3Provider(ParticleProvider as ExternalProvider | JsonRpcFetchFunc);
     const signer = customProvider.getSigner();
 
-    const TokenABI = TokenJSON.abi;
+    // const TokenABI = TokenJSON.abi;
 
-    const TokenContract = new ethers.Contract(TOKEN_ADDRESS, TokenABI, signer);
-    const tokenTransaction = await TokenContract.transfer(
-      process.env.NEXT_PUBLIC_PAYMENT_CONTRACT,
-      totalDollarsBlockchainAmount,
-      { gasLimit: 5000000 },
-    );
-    await tokenTransaction.wait();
+    // const TokenContract = new ethers.Contract(TOKEN_ADDRESS, TokenABI, signer);
+    // const tokenTransaction = await TokenContract.transfer(
+    //   process.env.NEXT_PUBLIC_PAYMENT_CONTRACT,
+    //   totalDollarsBlockchainAmount
+    // );
+    // await tokenTransaction.wait();
 
     const MacMainABI = MacMainJSON.abi;
 
