@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { StarIcon } from "@heroicons/react/20/solid";
+import { useAccountInfo, useConnectKit, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
+import { ethers } from "ethers";
+import type { NextPage } from "next";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useUser } from "~~/context/globalState";
 import MacMainJSON from "../../abis/MacMain.json";
 import TokenJSON from "../../abis/Token.json";
-import type { NextPage } from "next";
-import { useAuthCore, useConnect, useEthereum } from "@particle-network/auth-core-modal";
-import { ethers } from "ethers";
-import { StarIcon } from "@heroicons/react/20/solid";
-import { useUser } from "~~/context/globalState";
-import { useAccountInfo, useConnectKit, useParticleConnect, useParticleProvider } from '@particle-network/connect-react-ui';
+import { getContractEvents } from "viem/_types/actions/public/getContractEvents";
+import { hexToNumber } from "viem";
 
 interface Creator {
   _id: string;
@@ -51,6 +52,8 @@ const Home: NextPage = () => {
   const connectKit = useConnectKit();
   const [isConnected, setIsConnected] = useState(false);
 
+
+
   async function createCampaign(
     descricao: string,
     token: string,
@@ -62,6 +65,7 @@ const Home: NextPage = () => {
     totalAmount: number,
     advertiserWalletAddress: string,
     creatorWalletAddress: string,
+    proposalId: string
   ) {
     const body = JSON.stringify({
       descricao,
@@ -73,7 +77,7 @@ const Home: NextPage = () => {
       status: "pending", // Assuming this is always "pending" initially
       concluido: false, // Assuming this is always "false" initially
       linkParametrizado,
-      proposalId: "-1", // Placeholder value
+      proposalId, // Placeholder value
       totalAmount,
       advertiserWalletAddress,
       creatorWalletAddress,
@@ -183,26 +187,26 @@ const Home: NextPage = () => {
     const totalDollarsBlockchainAmount = Math.round(parseFloat(formValues.totalDollars) * 100);
     const advertisementMilestone = formValues.milestone;
 
-    const customProvider = new ethers.providers.Web3Provider(ParticleProvider);
+    const customProvider = new ethers.providers.Web3Provider(ParticleProvider!);
     const signer = customProvider.getSigner();
 
     const TokenABI = TokenJSON.abi;
-    const TokenAddress = "0xC070394CBB261eA11a0A82AC552b581f6EDbB039"
 
-    const TokenContract = new ethers.Contract(TokenAddress, TokenABI, signer);
-
-    const tokenTransaction = await TokenContract.transfer("0xD4Ac9Ed02e0EDb4a7738BC3e0F3e36EcD47D11C8", totalDollarsBlockchainAmount);
-
-    await tokenTransaction.wait();
+    // const TokenContract = new ethers.Contract(TOKEN_ADDRESS, TokenABI, signer);
+    // const tokenTransaction = await TokenContract.transfer(process.env.NEXT_PUBLIC_PAYMENT_CONTRACT, totalDollarsBlockchainAmount, { gasLimit: 5000000 });
+    // await tokenTransaction.wait();
 
     const MacMainABI = MacMainJSON.abi;
-    const MacMainAddress = "0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28";
 
-    const MacMainContract = new ethers.Contract(MacMainAddress, MacMainABI, signer);
+    const MacMainContract = new ethers.Contract(process.env.NEXT_PUBLIC_MAC_MAIN_ADDRESS!, MacMainABI, signer);
 
-    const transaction = await MacMainContract.createAdvertisment(CREATOR_ADDRESS, totalDollarsBlockchainAmount,  TOKEN_ADDRESS, advertisementMilestone, cpmBlockchainAmount);
-
+    const transaction = await MacMainContract.createAdvertisment(CREATOR_ADDRESS, totalDollarsBlockchainAmount, TOKEN_ADDRESS, advertisementMilestone, cpmBlockchainAmount);
     await transaction.wait();
+    let proposalId = 0;
+
+    MacMainContract.on("ReturnId", (id) => {
+      proposalId = hexToNumber(id);
+    });
 
     const linkParametrizado = `https://mac-url.vercel.app/${formValues.parameter}`;
 
@@ -220,6 +224,7 @@ const Home: NextPage = () => {
         parseInt(formValues.totalDollars),
         advertiserData.walletAddress,
         creator.walletAddress,
+        proposalId.toString()
       );
 
       console.log("Form submitted with values:", formValues);
