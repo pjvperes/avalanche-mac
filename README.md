@@ -34,7 +34,7 @@ Ever wondered how the MAC platform can transform the advertising world? Dive dee
 
 ### Main Contracts
 
-- **MACPlatformManager**: [`0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28`](https://subnets-test.avax.network/c-chain/address/0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28)
+- **MACPlatformManager**: [`0xCD1078a1F6C5ac82BB7eF6ABAb8BD69c581F93bE`](https://subnets-test.avax.network/c-chain/address/0x07c420C56BaeFc7cD6c4828d58d68e6ba23B1d28)
   - Manages all MAC Operations.
 - **Advertisement**: [`0x4348Ce4487dAbEFF94d463cf0ea855DF8c23B360`](https://subnets-test.avax.network/c-chain/address/0x4348Ce4487dAbEFF94d463cf0ea855DF8c23B360)
   - Stores and manages advertisement information.
