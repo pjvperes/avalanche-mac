@@ -23,6 +23,8 @@ Ever wondered how the MAC platform can transform the advertising world? Dive dee
 👉 [Watch our pitch and see MAC in action!](https://youtube.com/)
 
 
+👉 [Check MAC's slideshow presentation!](https://drive.google.com/file/d/1X24HTvm-QEDjLwpmm2w6y5RLPzAmGFSI/view?usp=sharing)
+
 ## 🚀 Smart Contracts on Avalanche Blockchain
 
 ### Architecture
@@ -84,6 +86,7 @@ https://automation.chain.link/fuji/0x1a987bcf208d324bf59313750283de87cc4f1e723ad
 
 #### Milestone Reached Payment Keeper
 https://automation.chain.link/fuji/0xdd203a4a37cbe5d1ec7671c1a8e2df628aa6cee30bcbc780cfdfb5caf1603a78
+
 
 
 ## 👨‍💻 Authors
